@@ -1,0 +1,15 @@
+---
+layout: archive
+title: "Projects"
+permalink: /projects/
+author_profile: true
+---
+
+{% include base_path %}
+
+<p class="wordwrap">此处展示个人创作、开源工具与公共资源等（与 <a href="{{ base_path }}/publications/">Publications</a> 中的学术发表区分）。在 <code>_projects/</code> 中为每个项目新增一个 Markdown 文件即可。</p>
+
+{% assign project_posts = site.projects | sort: 'date' | reverse %}
+{% for post in project_posts %}
+  {% include archive-single.html %}
+{% endfor %}

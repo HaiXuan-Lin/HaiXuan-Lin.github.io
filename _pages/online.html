@@ -1,0 +1,15 @@
+---
+layout: archive
+title: "Online Presence"
+permalink: /online/
+author_profile: true
+---
+
+{% include base_path %}
+
+<p class="wordwrap">汇总个人在各平台的公开主页与账号（与侧栏快捷链接互补，可写更长的说明）。在 <code>_online/</code> 中为每条记录新增一个 Markdown 文件。</p>
+
+{% assign online_posts = site.online | sort: 'date' | reverse %}
+{% for post in online_posts %}
+  {% include archive-single.html %}
+{% endfor %}
