@@ -94,3 +94,8 @@
     }
   }
 }
+
+/* Site override: page__footer HTML removed — reduce padding reserved for the old footer bar */
+body {
+  padding-bottom: 1em;
+}
