@@ -1,9 +1,5 @@
 # Haixuan Lin
 
-To build this project from raw code repository using `docker` locally, run:
-```bash
-docker compose up
-```
 
 
 ## About This Website Template
