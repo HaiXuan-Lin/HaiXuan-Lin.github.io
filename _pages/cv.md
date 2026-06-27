@@ -9,7 +9,9 @@ redirect_from:
 
 {% include base_path %}
 
-Education
+To download a formal PDF version of my CV, please visit <a href="https://www.overleaf.com/read/vjvnszxdjqmd#0362c7" target="_blank">this Overleaf link</a>.
+
+<!-- Education
 ======
 * Ph.D in Version Control Theory, GitHub University, 2018 (expected)
 * M.S. in Jekyll, GitHub University, 2014
@@ -61,4 +63,4 @@ Teaching
   
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
+* Currently signed in to 43 different slack teams -->
