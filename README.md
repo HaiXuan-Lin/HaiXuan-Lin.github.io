@@ -1,6 +1,14 @@
 # Haixuan Lin
 
 
+## Build with Docker
+
+To run this repository locally, run:
+```bash
+docker compose build
+docker compose up
+```
+then open `http://localhost:4000` and you can see the website.
 
 ## About This Website Template
 
