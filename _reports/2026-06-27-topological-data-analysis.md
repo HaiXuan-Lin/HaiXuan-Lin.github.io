@@ -5,6 +5,6 @@ date: 2026-06-27
 presence_type: "group meeting"
 link: "https://www.overleaf.com/read/pzffxkxrnbjp#b161d8"
 link_label: "View Overleaf Project"
-download_label: "View Pdf"
+download_label: "View PDF"
 download_link: "/files/topological-data-analysis.pdf"
 ---
