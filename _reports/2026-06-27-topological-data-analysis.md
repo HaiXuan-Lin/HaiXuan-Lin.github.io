@@ -8,3 +8,5 @@ link_label: "View Overleaf Project"
 download_label: "View PDF"
 download_link: "/files/topological-data-analysis.pdf"
 ---
+
+In this report, I discuss the main homology theories used in topological data analysis, especially persistent homology and GLMY theory.

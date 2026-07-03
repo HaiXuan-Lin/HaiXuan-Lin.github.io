@@ -1,6 +1,6 @@
 ---
 title: "Classical Variational Principle (in Chinese)"
-excerpt: "Lecture notes for seminar"
+excerpt: "Lecture notes for seminar."
 date: 2026-03-03
 project_type: "PDF"
 link: "/files/classical-variational-principle-cn.pdf"
