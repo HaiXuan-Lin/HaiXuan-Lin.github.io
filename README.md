@@ -1,13 +1,16 @@
 # Haixuan Lin
 
+This is the repository of my personal website. You can visit it at [https://haixuan-lin.github.io/](https://haixuan-lin.github.io/).
 
 ## Build with Docker
 
 To run this repository locally, run:
+
 ```bash
 docker compose build
 docker compose up
 ```
+
 then open `http://localhost:4000` and you can see the website.
 
 ## About This Website Template
