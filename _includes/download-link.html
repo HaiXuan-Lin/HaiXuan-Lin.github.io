@@ -1,0 +1,15 @@
+{% include base_path %}
+{% if include.href %}
+  {% assign dl = include.href | remove: "@" %}
+  {% if dl contains "://" %}
+    {% assign download_href = dl %}
+  {% else %}
+    {% assign dl_path = dl %}
+    {% assign dl_first = dl_path | slice: 0, 1 %}
+    {% unless dl_first == "/" %}
+      {% assign dl_path = dl_path | prepend: "/" %}
+    {% endunless %}
+    {% assign download_href = dl_path | prepend: base_path %}
+  {% endif %}
+  <a href="{{ download_href }}"{% if include.class %} class="{{ include.class }}"{% endif %} rel="noopener noreferrer">{% if include.label %}{{ include.label }}{% else %}Download{% endif %}</a>
+{% endif %}
