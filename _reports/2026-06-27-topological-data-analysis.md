@@ -4,5 +4,7 @@ excerpt: "In this report, I discuss the main homology theories used in topologic
 date: 2026-06-27
 presence_type: "group meeting"
 link: "https://www.overleaf.com/read/pzffxkxrnbjp#b161d8"
-link_label: "go to Overleaf project"
+link_label: "View Overleaf Project"
+download_label: "View Pdf"
+download_link: "/files/topological-data-analysis.pdf"
 ---
