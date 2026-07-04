@@ -37,7 +37,7 @@ layout: default
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.collection == 'projects' %}
-          <p>{% if page.project_type %}{{ page.project_type }}{% endif %}{% if page.date %}{% if page.project_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}</p>
+          <p>{% if page.project_type %}{{ page.project_type }}{% endif %}{% if page.date %}{% if page.project_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% if page.link %} · <a href="{{ page.link }}" rel="noopener noreferrer">{% if page.link_label %}{{ page.link_label }}{% else %}Link{% endif %}</a>{% endif %}{% if page.download_link %} · {% include download-link.html href=page.download_link label=page.download_label %}{% endif %}</p>
         {% elsif page.collection == 'reports' %}
           <p>{% if page.presence_type %}{{ page.presence_type }}{% endif %}{% if page.date %}{% if page.presence_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% if page.link %} · <a href="{{ page.link }}" rel="noopener noreferrer">{% if page.link_label %}{{ page.link_label }}{% else %}Link{% endif %}</a>{% endif %}{% if page.download_link %} · {% include download-link.html href=page.download_link label=page.download_label %}{% endif %}</p>
         {% elsif page.venue and page.date %}
