@@ -2,7 +2,7 @@
 title: "Group Theory Notebook (in Chinese)"
 excerpt: "My personal group theory notebook."
 date: 2025-11-23
-project_type: "open source notebook"
+project_type: "Open source notebook"
 link: "https://www.overleaf.com/read/vvgsfrsjmcgn#78f3aa"
 link_label: "View Overleaf Project"
 download_label: "View PDF"
