@@ -1,0 +1,10 @@
+---
+title: "LaTeXML Pipeline Demo"
+excerpt: "A short demonstration note showing LaTeX source rendered directly to browsable HTML via LaTeXML, instead of shipping a PDF."
+date: 2026-07-20
+presence_type: "demo"
+link: "/papers/demo-note/"
+link_label: "View HTML"
+---
+
+Source lives at `_tex/demo-note/main.tex` and is built with `scripts/build_latex.sh` into `papers/demo-note/index.html`, which Jekyll serves as a static page.

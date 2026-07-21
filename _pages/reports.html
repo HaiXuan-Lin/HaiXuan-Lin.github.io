@@ -13,5 +13,7 @@ author_profile: true
 
 {% assign reports_posts = site.reports | sort: 'date' | reverse %}
 {% for post in reports_posts %}
+  {% assign path_suffix = post.path | slice: -3, 3 %}
+  {% unless path_suffix == '.md' %}{% continue %}{% endunless %}
   {% include archive-single.html %}
 {% endfor %}
