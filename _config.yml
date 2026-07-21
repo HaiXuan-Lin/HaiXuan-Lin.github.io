@@ -164,6 +164,7 @@ include:
   - _pages
   - files
 exclude:
+  - "*.bak"
   - "*.sublime-project"
   - "*.sublime-workspace"
   - .asset-cache

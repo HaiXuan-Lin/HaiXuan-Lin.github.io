@@ -1,0 +1,414 @@
+\documentclass[lang=en, column=onecolumn, mathfont=times]{spArticle}
+\spTitle{Group-Theoretical Analysis of Raman Spectra}
+\spAuthor{Haixuan Lin: 23307110267}
+\spAffiliation{Department of Physics, Fudan University}
+\spDate{2025-12-24}
+\spAbstract{
+This paper systematically introduces the symmetry analysis of molecular vibrational modes in Raman spectroscopy from the perspective of group theory and molecular point group representation theory.
+Building on a review of the physical mechanism of Raman scattering and its selection rules, we derive a general construction formula for the representation of molecular normal modes using the action of molecular point groups on the atomic space, configuration space, and the spaces of overall translation and rotation.
+As a concrete example, the vibrational modes of the tetrahedral molecule $\ce{CCl4}$ are analyzed in detail: the irreducible decomposition of its representation is carried out in full, and the degeneracy of each vibrational mode together with its Raman and infrared activity is discussed with reference to the character table.
+Furthermore, through a discussion of polarization experiments, we explain the group-theoretical origin of the disappearance of the $A_1$ mode peak under specific polarization conditions.
+This paper aims to demonstrate the intuitive power and effectiveness of group-theoretical methods in molecular spectral analysis, providing a clear theoretical framework for understanding the connection between symmetry and experimental phenomena in Raman spectroscopy.
+}
+
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.1.0}
+
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+\section{Motivation for Group-Theoretical Analysis}
+
+In physics, symmetry implies conservation laws---its importance speaks for itself---and group theory provides a rigorous algebraic language for characterizing symmetry itself, making its introduction into physical research entirely natural. Today, group theory is widely applied across many branches of physics: condensed matter physics (the relationship between the symmetry of material structure and physical properties), modern theoretical physics (deriving physical laws purely from symmetry), and spectroscopy, which we shall discuss here. In a word, symmetry yields inequivalent irreducible eigenstates, which in turn give rise to spectral features.
+
+In 1928, the Indian physicist C.~V.~Raman first observed scattered spectral lines with a shifted frequency in liquids~\cite{RamanKrishnan1928Nature}, for which he was awarded the Nobel Prize in Physics in 1930. At the time, techniques for resolving molecular structure were not yet mature, meaning that molecular configurations could not easily be determined. However, quantum mechanics tells us that Raman spectra are entirely determined by the vibrational characteristics of a molecule, and that the molecular configuration is an important cause of those characteristics; thus, inferring molecular configuration from Raman spectra was at the time an inverse problem in mathematical physics.
+
+The present work, however, assumes that the configuration of the molecule of interest is already known, and applies group theory to analyze its spectrum---that is, it addresses the forward problem in mathematical physics. Although the forward problem is far less difficult than the inverse problem, it is highly instructive and directly connects theory to experiment, thereby deepening one's understanding of the physical phenomena.
+
+
+\section{Methodology}
+
+As shown below is a schematic of the Raman effect. It should be noted that the underlying process involves phonon resonance transitions rather than electronic ones. Because the molecule vibrates, the electronic energy levels of a polyatomic system split into multiple vibrational levels. On the electronic ground state, there exist many vibrational levels (phonon ground state, phonon excited states).
+
+% \begin{figure}[H]
+%     \centering
+%     \begin{minipage}[c]{0.45\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{1.png}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}[c]{0.45\textwidth}
+%         \centering
+%         \feynmandiagram [horizontal=a to b] {
+%               i1 [particle=$\gamma$]
+%                   -- [fermion, very thick] a
+%                   -- [fermion, opacity=0.45] i2 [particle=$\gamma \mp \Delta E$], 
+        
+%               a -- [red, photon, 
+%                     edge label=$\pm \Delta E$, 
+%                     momentum'={[arrow style=red]$\mathbf{k}$}] b, 
+        
+%               f1 [particle=$\mathrm{phonon}$]
+%                   -- [fermion, opacity=0.45] b
+%                   -- [fermion, very thick] f2 [particle=$\mathrm{phonon}\pm \Delta E$], 
+%           };
+%     \end{minipage}
+%     \caption{Left: virtual excited state in the Raman effect; Right: Feynman diagram for (anti-)Stokes scattering}
+% \end{figure}
+
+The Raman scattering process involves a beam of light incident on a sample. Since photons are electromagnetic fields, they induce polarization in the sample molecules. In Placzek's theory, this polarization is described as a virtual absorption, in which the electron transitions from the ground state to a virtual excited state~\cite{Placzek1934Handbuch}.
+
+For inelastic scattering:
+\begin{itemize}
+    \item Stokes: the initial state consists of the electronic ground state and the phonon ground state. During scattering, the photon loses energy, corresponding to a return to the electronic ground state and a phonon excited state; the photon energy is transferred to the phonon.
+    \item Anti-Stokes: the initial state consists of the electronic ground state and a phonon excited state. The system returns to the electronic ground state and the phonon ground state; the phonon energy is transferred to the photon.
+\end{itemize}
+
+Where do the discrete phonon energy levels come from? We know that phonons have modes, and these modes originate from inequivalent irreducible normal modes. Treating the chemical bonds as providing first-order force constants while viewing higher-order forces as nonlinear perturbations (which can account for some slight peak splitting), i.e.\ modeling chemical bonds as springs, the Hamiltonian in the normal coordinates of the entire molecular system,
+\begin{equation}
+    H=\sum_{i=1}^N{\left( \frac{\boldsymbol{p}_{i}^{2}}{2m_i}+\frac{1}{2}m_i\omega _i\boldsymbol{q}_{i}^{2} \right)}
+\end{equation}
+is diagonal, with each diagonal element corresponding to one normal mode. Some normal modes are, however, equivalent: by ``equivalent'' we mean that they can be related to one another by a symmetry operation furnished by the molecular point group. Physically, such modes are said to be necessarily degenerate; symmetry protects them from being distinguished unless a perturbation that lowers the symmetry is applied.
+
+% \begin{figure}[H]
+%     \centering
+    
+%     \setchemfig{arrow length=70mm}
+%     \setchemfig{compound sep=20em}
+    
+%     \schemestart
+%     \chemfig{
+%         C
+%         (-[:90]Cl)
+%         (<[:250, 1.1]Cl)
+%         (-[:340]Cl)
+%         (<:[:200, 1.1]Cl)
+%     }
+%     \chemmove{
+%         \draw[<->, >=stealth, very thick] (-1.1, 0.2) -- (-1.1, 1) node[left, midway, xshift=4.5em, yshift=1em] {$\text{vibration}$};
+%         }
+%     \arrow{<->[$\text{the two modes can be related by a rotation}$][$\text{necessary degeneracy}$]}
+%     \chemfig{
+%         C
+%         (-[:90]Cl)
+%         (<[:250, 1.1]Cl)
+%         (-[:340]Cl)
+%         (<:[:200, 1.1]Cl)
+%     }
+%     \chemmove{
+%         \draw[<->, >=stealth, very thick] (-1.2, 0.3) -- ++(340:0.8) node[left, midway, xshift=3.5em, yshift=1em] {$\text{vibration}$};
+%         }
+%     \schemestop
+    
+%     \caption{Schematic illustration of necessary degeneracy of vibrational modes in CCl$_4$}
+% \end{figure}
+
+Our goal is to find all inequivalent irreducible normal modes of a given molecule. The following theorem provides the means:
+\begin{theorem}
+    \label{thm}
+    Define the following linear spaces:
+    \begin{itemize}
+        \item $V^{\mathrm{a.s.}}=\mathrm{span}\left\{X_i\right\}_{i=1}^N$ is a linear space over $\mathbb{C}$, where $X_i$ denotes an atom and $N$ is the total number of atoms in the molecule;
+        \item $V_{\mathrm{vec}}=\left\{\left(x, y, z\right)\right\}$ is the linear space of configuration vectors;
+        \item $V_{\mathrm{trans}}$ is the space spanned by vectors describing translation;
+        \item $V_{\mathrm{rot}}$ is the space spanned by vectors describing rotation.
+    \end{itemize}
+    Let $\Gamma ^{\mathrm{a.s.}}, \Gamma _{\mathrm{vec}}, \Gamma _{\mathrm{trans}}, \Gamma _{\mathrm{rot}}$ denote the representations of the molecular point group on these spaces, respectively. Then the representation of molecular vibrations is
+    \begin{equation}
+        \Gamma _{\mathrm{mol}.\mathrm{vib}.}=\left( \Gamma ^{\mathrm{a}.\mathrm{s}.}\otimes \Gamma _{\mathrm{vec}} \right) \ominus \Gamma _{\mathrm{trans}}\ominus \Gamma _{\mathrm{rot}}.
+    \end{equation}
+\end{theorem}
+The proof is evident from the physical interpretation: the representation spanned by molecular vibrational modes should equal the representation spanned by all degrees of freedom, minus those spanned by overall translation and overall rotation. The total degrees of freedom of the molecule, in turn, are given by the tensor product of the atomic species and the three translational degrees of freedom in Euclidean space $E^3$.
+
+The rigorous proof is as follows. Let $\Gamma_{3N}$ be the representation on the configuration space in which all atoms move freely. We wish to show that $\Gamma_{3N} \simeq \Gamma^{\mathrm{a.s.}} \otimes \Gamma_{\mathrm{vec}}$, or equivalently, that $V_{3N} \simeq V^{\mathrm{a.s.}} \otimes V_{\mathrm{vec}}$. In terms of a commutative diagram:
+\[
+\begin{tikzcd}[
+        background color=white,      % 整个图背景（可选）
+        every label/.append style={  % 所有箭头标签样式追加
+            % text=white,                % 标签文字白色
+            % fill=white,                % 标签背景黑色
+            inner sep=2pt              % 标签内间距
+        }
+        ]
+        \Gamma_{3N} \arrow[r, "\simeq" description, no head, phantom]
+            & \Gamma^{\mathrm{a.s.}} \arrow[r, "\otimes" description, no head, phantom] & \Gamma_{\mathrm{vec}} \\
+        V_{3N} \arrow[u] \arrow[r, "\simeq" description, no head, phantom]
+            & V^{\mathrm{a.s.}} \arrow[u] \arrow[r, "\otimes" description, no head, phantom] & V_{\mathrm{vec}} \arrow[u]
+        \end{tikzcd}
+\]
+For any atom $X_i$ and any coordinate $\mu$, with $i=1,\cdots, N$ and $\mu=x,y,z$, one always has
+\begin{equation}
+    \left| X_i\mu \right> =\left| X_i \right> \otimes \left| \mu \right>,
+\end{equation}
+where the latter two factors are precisely bases of $V^{\mathrm{a.s.}}$ and $V_{\mathrm{vec}}$, respectively. This completes the proof.
+
+The following expression provides an interpretation of the theorem from the perspective of dimensions:
+\vspace{2em}
+\begin{equation}
+    \tikzmarknode{1}{\hlmath{gray}{\Gamma _{\mathrm{mol}.\mathrm{vib}.}}}
+    =
+    \left( \tikzmarknode{2}{\hlmath{gray}{\Gamma ^{\mathrm{a}.\mathrm{s}.}}}
+    \otimes
+    \tikzmarknode{3}{\hlmath{gray}{\Gamma _{\mathrm{vec}} }}\right)
+    \ominus
+    \tikzmarknode{4}{\hlmath{gray}{\Gamma _{\mathrm{trans}}}}
+    \ominus
+    \tikzmarknode{5}{\hlmath{gray}{\Gamma _{\mathrm{rot}}}}.
+\end{equation}
+\vspace{2em}
+\begin{tikzpicture}[overlay, remember picture, >=stealth, nodes={align=left, inner ysep=2pt}, <-]
+    \path (1.south) ++ (0, -0.8em) node[anchor=north east, color=gray!67] (1 node){$\mathrm{dim}=3N-6$};
+    \draw [color=gray!57](1.south) |- ([xshift=-0.3ex, color=gray]1 node.south west);
+\end{tikzpicture}
+\begin{tikzpicture}[overlay, remember picture, >=stealth, nodes={align=left, inner ysep=2pt}, <-]
+    \path (1.north) ++ (0, +1em) node[anchor=south west, color=gray!67] (1 node){total d.o.f.\ ($3N$) $-$ overall translation ($3$) $-$ overall rotation ($3$)};
+    \draw [color=gray!57](1.north) |- ([xshift=-0.3ex, color=gray]1 node.south east);
+\end{tikzpicture}
+\begin{tikzpicture}[overlay, remember picture, >=stealth, nodes={align=left, inner ysep=1pt}, <-]
+\node[anchor=north, color=gray!67, yshift=-2em] (jtext) at ($(2.south)!0.5!(3.south)$) {$\mathrm{dim}=N\times 3$};
+\draw[<->, color=gray!57] (2.south) |- (jtext.north) -| (3.south);
+\end{tikzpicture}
+\begin{tikzpicture}[overlay, remember picture, >=stealth, nodes={align=left, inner ysep=2pt}, <-]
+    \path (4.south) ++ (0, -1.8em) node[anchor=north west, color=gray!67] (4 node){$\mathrm{dim}=3$};
+    \draw [color=gray!57](4.south) |- ([xshift=+0.3ex, color=gray]4 node.south east);
+\end{tikzpicture}
+\begin{tikzpicture}[overlay, remember picture, >=stealth, nodes={align=left, inner ysep=2pt}, <-]
+    \path (5.south) ++ (0, -0.5em) node[anchor=north west, color=gray!67] (5 node){$\mathrm{dim}=3$};
+    \draw [color=gray!57](5.south) |- ([xshift=+0.3ex, color=gray]5 node.south east);
+\end{tikzpicture}
+
+In principle, this theorem can be used to analyze the normal modes of any molecule. For molecules with low symmetry, however, few point group operations are available, and nearly all of the resolved modes turn out to be one-dimensional. Physically, this can be understood as follows: because the molecular symmetry is low, any two vibrational modes can easily be distinguished.
+
+
+\section{An Illustrative Application: The Spectrum of \texorpdfstring{$\ce{CCl4}$}{CCl4}}
+
+\subsection{Finding the Inequivalent Irreducible Normal Modes}
+\label{subsec}
+
+The molecular structure of $\ce{CCl4}$ is shown below. The central carbon atom is $\mathrm{sp}^3$ hybridized, giving the molecule an overall tetrahedral geometry that belongs to the $T_\mathrm{d}$ point group, which has order 24.
+
+% \begin{figure}[H]
+%     \centering
+%     \chemfig{
+%         C
+%         (-[:90]Cl)
+%         (<[:250, 1.1]Cl)
+%         (-[:340]Cl)
+%         (<:[:200, 1.1]Cl)
+%     }
+%     \chemmove{
+%     \draw[<->, >=stealth] (-0.7, 0) arc[start angle=0, end angle=70, radius=0.8cm]
+%         node[right, xshift=5pt, yshift=-2pt] {\small $109.5^\circ$};
+%     }
+%     \caption{Structural formula of \texorpdfstring{$\ce{CCl_4}$}{CCl4}}
+% \end{figure}
+
+By \textbf{Burnside's theorem}, the 24-dimensional group algebra contains all irreducible representations in its left regular representation, and the multiplicity of each irreducible representation $\Gamma_i$ equals $\mathrm{dim}\,\Gamma_i$:
+\begin{equation}
+    \mathbb{C} \left[ T_{\mathrm{d}} \right] \simeq \bigotimes_i{\left( \mathrm{dim}\, \Gamma _i \right) \Gamma _i}.
+\end{equation}
+Taking the modulus on both sides gives the integer decomposition
+\begin{equation}
+    24 = 1^2 + 1^2 + 2^2 + 3^2 + 3^2,
+\end{equation}
+showing that $T_\mathrm{d}$ has exactly 5 inequivalent irreducible representations (one of which is the trivial representation). The character table is:
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        $T_d$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_d$
+            & \text{linear functions}
+            & \text{quadratic functions} \\
+        \hline
+        $A_1$ & +1 & +1 & +1 & +1 & +1
+            & --
+            & $x^2+y^2+z^2$ \\
+        \hline
+        $A_2$ & +1 & +1 & +1 & -1 & -1
+            & --
+            & -- \\
+        \hline
+        $E$   & +2 & -1 & +2 & 0  & 0
+            & --
+            & $(2z^2-x^2-y^2, \;x^2-y^2)$ \\
+        \hline
+        $T_1$ & +3 & 0  & -1 & +1 & -1
+            & $(R_x, R_y, R_z)$
+            & -- \\
+        \hline
+        $T_2$ & +3 & 0  & -1 & -1 & +1
+            & $(x, y, z)$
+            & $(xy, xz, yz)$ \\
+        \hline
+        \multicolumn{8}{c}{} \\
+        \hline
+        $\Gamma ^{\mathrm{a}.\mathrm{s}.}_{4\ce{Cl}}$ & 4 & 1 & 0 & 2 & 0 & \multicolumn{1}{c}{$\Rightarrow A_1\oplus T_2$} &   \\
+        \hline
+    \end{tabular}
+    \caption{Character table of the $T_\mathrm{d}$ group.}
+    \label{table}
+\end{table}
+
+We first compute $\Gamma ^{\mathrm{a.s.}}$. Since the symmetry permutations of the molecular point group act only among chemically equivalent atoms, the following decomposition holds:
+\begin{align*}
+        &\underbrace{
+            \mathrm{span}\left\{
+            \chemfig{
+                C
+                (-[:90]Cl)
+                (<[:250, 1.1]Cl)
+                (-[:340]Cl)
+                (<:[:200, 1.1]Cl)
+            }
+        \right\}
+        }{\tikzmarknode{a}{}}
+        &{\hspace{-1em}\scalebox{2}{$\simeq$}}\hphantom{-}
+        &\underbrace{\mathrm{span}\left\{
+            \chemfig{
+                \phantom{C}
+                (-[:90]Cl)
+                (<[:250, 1.1]Cl)
+                (-[:340]Cl)
+                (<:[:200, 1.1]Cl)
+            }
+        \right\}
+        }{\tikzmarknode{b}{}}
+        &\hspace{-1em}\bigoplus\hspace{1em}
+        &\underbrace{\mathrm{span}\left\{
+            \hphantom{\scalebox{0.3}{%
+            \chemfig{
+                C
+                (-[:90]Cl)
+                (<[:250, 1.1]Cl)
+                (-[:340]Cl)
+                (<:[:200, 1.1]Cl)
+            }
+            }}
+            \vphantom{\chemfig{
+                C
+                (-[:90]Cl)
+                (<[:250, 1.1]Cl)
+                (-[:340]Cl)
+                (<:[:200, 1.1]Cl)
+            }}
+            \ce{C}
+            \hphantom{\scalebox{0.3}{%
+            \chemfig{
+                C
+                (-[:90]Cl)
+                (<[:250, 1.1]Cl)
+                (-[:340]Cl)
+                (<:[:200, 1.1]Cl)
+            }
+            }}
+        \right\}, 
+        }{\tikzmarknode{c}{}}
+        \\
+        &\hspace{5em}\Gamma ^{\mathrm{a}.\mathrm{s}.}
+        &\phantom{\simeq}
+        &\hspace{5em}\Gamma ^{\mathrm{a}.\mathrm{s}.}_{4\ce{Cl}}
+        &\phantom{\oplus}
+        &\hspace{4em}\Gamma ^{\mathrm{a}.\mathrm{s}.}_{\ce{C}}.
+    \end{align*}
+    
+The linear space corresponding to the carbon atom is one-dimensional, so it must carry the trivial representation:
+\begin{equation}
+    \Gamma ^{\mathrm{a}.\mathrm{s}.}_{\ce{C}}\simeq A_1.
+    \label{eq: 6}
+\end{equation}
+
+We now compute $\Gamma ^{\mathrm{a}.\mathrm{s}.}_{4\ce{Cl}}$. We consider the representation of the four chlorine atoms under symmetry operations that preserve the configuration. Since any permutation of two chlorine atoms leaves the system invariant,
+$$
+T_{\mathrm{d}}\simeq S_4\quad \left( \text{symmetric group on 4 elements} \right).
+$$
+The generators of $S_4$ are $(12)$ and $(1234)$, whose matrix representations are
+$$
+    \left( \begin{matrix}
+    &		1&		&		\\
+    1&		&		&		\\
+    &		&		1&		\\
+    &		&		&		1\\
+\end{matrix} \right) , \qquad \left( \begin{matrix}
+    &		&		&		1\\
+    1&		&		&		\\
+    &		1&		&		\\
+    &		&		1&		\\
+\end{matrix} \right).
+$$
+From these, one can compute the character of each conjugacy class of $T_\mathrm{d}$ in the linear space of the four chlorine atoms. Applying the \textbf{orthogonality and completeness theorem for characters}, we look up the table and decompose $\Gamma ^{\mathrm{a.s.}}_{4\ce{Cl}}$:
+\begin{equation}
+    \Gamma ^{\mathrm{a}.\mathrm{s}.}_{4\ce{Cl}}\simeq A_1\oplus T_2.
+    \label{eq: 7}
+\end{equation}
+
+Combining \eqref{eq: 6} and \eqref{eq: 7}:
+\begin{equation*}
+    \Gamma ^{\mathrm{a}.\mathrm{s}.}\simeq
+    \Gamma ^{\mathrm{a}.\mathrm{s}.}_{4\ce{Cl}}\oplus \Gamma ^{\mathrm{a}.\mathrm{s}.}_{\ce{C}}\simeq \left( A_1\oplus T_2 \right) \oplus A_1\simeq 2A_1\oplus T_2.
+\end{equation*}
+To find $\Gamma _{\mathrm{trans}}$ and $\Gamma _{\mathrm{rot}}$, we use the symmetrized basis functions of the irreducible representations. The symmetry of $\Gamma _{\mathrm{trans}}$ matches that of $\left(x, y, z\right)$, while $\Gamma _{\mathrm{rot}}$ matches $\left( R_x, R_y, R_z \right)$, the axial vectors represented by the angular momentum vector, so
+\begin{equation}
+    {\Gamma _{\mathrm{trans}}\simeq T_2}, \qquad {\Gamma _{\mathrm{rot}}\simeq T_1}.
+    \label{eq: 8}
+\end{equation}
+
+Finally, applying Theorem~\ref{thm}:
+$$
+\begin{aligned}
+    \Gamma _{\mathrm{mol}.\mathrm{vib}.}&=\left( \Gamma ^{\mathrm{a}.\mathrm{s}.}\otimes \Gamma _{\mathrm{vec}} \right) \ominus \Gamma _{\mathrm{trans}}\ominus \Gamma _{\mathrm{rot}}
+    \\
+    &=\left[ \left( 2A_1\oplus T_2 \right) \otimes T_2 \right] \ominus T_2\ominus T_1
+    \\
+    &=2\underset{A_1\otimes T_2}{\underbrace{T_2}}\oplus \underset{T_2\otimes T_2}{\underbrace{T_1\oplus T_2\oplus E\oplus A_1}}\ominus T_2\ominus T_1
+    \\
+    &=A_1\oplus E\oplus 2T_2.
+\end{aligned}
+$$
+This is the irreducible decomposition of the normal-mode representation of $\ce{CCl4}$: there are four inequivalent irreducible modes, consisting of one $A_1$ mode, one $E$ mode, and two $T_2$ modes (both have $T_2$ symmetry, but they are not equivalent to each other).
+
+Group theory cannot provide the eigenenergy of each mode; that requires quantum mechanics (and modern first-principles calculations can indeed compute Raman shifts with high accuracy). This is not the focus of the present paper. The figure below directly shows the mode assignment for each peak, using $\nu_i$ to label the different modes\footnote{Labeling modes by their representation alone cannot distinguish the two $T_2$ modes, so an additional notation is necessary.}:
+
+% \begin{figure}[H]
+%     \centering
+%     \resizebox{0.85\linewidth}{!}{\input{CCl4-2 copy}}
+%     \caption{Raman spectrum of $\ce{CCl4}$ measured in the Raman laboratory, Physics Building, Fudan University}
+% \end{figure}
+
+The following website provides animated illustrations of all normal modes of $\ce{CH_4}$ and their associated representations: \href{https://www.chem.purdue.edu/jmol/vibs/ch4.html}{chem.purdue.edu/\allowbreak jmol/vibs/ch4.html}. This website provides a \texttt{Mathematica} animated demonstration: \href{https://demonstrations.wolfram.com/InfraredAndRamanVibrationalSpectraOfMethane/?utm_source}{demonstrations.wolfram.com/InfraredAndRamanVibrationalSpectraOfMethane}. These resources can help build an intuitive understanding of the vibrational modes of $\ce{CCl4}$; for instance, the degeneracy of a mode equals the value appearing in the first column of Table~\ref{table} for its corresponding representation.
+
+\subsection{Selection Rules, Infrared Activity, and Raman Activity}
+
+Having found the normal modes, it does not follow that phonons can freely transition between the states corresponding to these modes: transitions are constrained by \textbf{selection rules}. It is precisely because the symmetry of the perturbation Hamiltonian differs between infrared and Raman experiments that the selection rules permit different excitations in the two cases, giving the two spectra their fundamentally different characters.
+
+Continuing with the $\ce{CCl4}$ Raman experiment as our example: according to the theory of \textcite{Placzek1934Handbuch}, the transition matrix element is
+\begin{equation}
+    \left<\vphantom{\left[ -\frac{\left| \Delta \overset{\leftrightarrow}{\boldsymbol{\alpha}} \right|}{2}\cos \left( \omega \pm \omega _v \right) t \right] } \psi ^{\prime} \right|\left[ -\frac{\left| \Delta \overset{\leftrightarrow}{\boldsymbol{\alpha}} \right|}{2}\cos \left( \omega \pm \omega _v \right) t \right] \boldsymbol{E}_i\cdot \boldsymbol{E}_s\left| \psi \vphantom{\left[ -\frac{\left| \Delta \overset{\leftrightarrow}{\boldsymbol{\alpha}} \right|}{2}\cos \left( \omega \pm \omega _v \right) t \right] }\right>, 
+\end{equation}
+where $\Delta \overset{\leftrightarrow}{\boldsymbol{\alpha}}$ is the variation of the second-rank Raman polarizability tensor, which transforms as a quadratic quantity---in the same way as the symmetrized basis functions $x^2, y^2, z^2, xy, yz, zx$---so the irreducible representations found earlier must have the matching symmetry. We verify this against the character table.
+    
+For $\ce{CCl4}$, it turns out that $A_1$, $E$, and $T_2$ all possess quadratic symmetrized basis functions (see Table~\ref{table}), and therefore all are Raman active. In the infrared experiment, by contrast, the Hamiltonian is the dipole radiation interaction,
+$$
+H\sim \boldsymbol{l}, 
+$$
+which transforms linearly; the corresponding representations must therefore possess linear symmetrized basis functions. Among the vibrational modes of $\ce{CCl4}$, neither the $A_1$ nor the $E$ representation has linear symmetrized basis functions, so they are infrared inactive.
+
+\section{Further Discussion}
+
+\paragraph{Disappearance of the \texorpdfstring{$A_1$}{A₁} Peak in Polarization Experiments}
+
+In polarization experiments, one can observe that the $A_1$ peak of $\ce{CCl4}$ disappears under certain conditions, as shown in the figure below:
+% \begin{figure}[H]
+%     \centering
+%     \resizebox{0.75\linewidth}{!}{\input{A1}}
+% \end{figure}
+This is related to the fact that the $A_1$ representation is the trivial representation. For an $A_1$ vibrational mode, the polarizability tensor $\overset{\leftrightarrow}{\boldsymbol{\alpha }}\sim \overset{\leftrightarrow}{\boldsymbol{I}}$, the latter being the identity tensor. In other words, whatever polarization state $\psi$ is incident, the scattered light must emerge in the same state $\psi$; any experimental configuration that cannot receive the polarization state $\psi$ will cause the $A_1$ peak to disappear.
+
+This example inspires a more general observation: a necessary and sufficient condition for observing the disappearance of an $A_1$ peak in a polarization experiment on another substance is that the molecular vibrational modes include an $A_1$ representation---for example, $\ce{CO2}$.
+
+\paragraph{Similarities among Isostructural Molecules}
+
+Isostructural molecules will yield the same normal modes when analyzed by the method of Section~\ref{subsec}. For example, $\ce{CH4}$ will have the same modes as $\ce{CCl4}$. This does not, however, imply that the two spectra are similar: one must also consider the difference in first-order force constants between the two systems, which depends primarily on the masses of the atoms involved. Differing force constants will affect the magnitude of the Raman shifts and the signal intensities. Nevertheless, one can predict that $\ce{CH4}$ will also exhibit 4 Stokes peaks, and that one of them will disappear in a polarization experiment.
+
+
+\end{document}

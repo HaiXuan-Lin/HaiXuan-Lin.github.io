@@ -21,3 +21,6 @@ package-lock.json
 
 # Ignore files created by MacOS
 .DS_Store
+
+# Ignore LaTeXML build logs (papers/ output is committed, but logs are noise)
+_tex/**/*.latexml.log
