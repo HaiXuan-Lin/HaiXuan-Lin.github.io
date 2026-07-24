@@ -1,0 +1,40 @@
+{% comment %}
+  Renders a row of badges (Overleaf / PDF / arXiv / GitHub) for a post/page.
+  Output is a single inline <span> with no internal blank lines, so it is safe
+  to drop directly into a Markdown paragraph as well as a Liquid <p> — it just
+  flows like a normal hyperlink and only breaks the line where the text does.
+  Params (all optional):
+    link       - generic external link (auto-detected: overleaf.com -> Overleaf badge,
+                 *.pdf -> PDF badge, github.com -> GitHub badge, otherwise a plain fallback link)
+    link_label - label for the generic fallback link / GitHub badge
+    overleaf   - explicit Overleaf project url (skips auto-detection)
+    pdf        - explicit pdf url/path
+    pdf_label  - label for the PDF badge (default "PDF")
+    github     - explicit GitHub repo url (skips auto-detection)
+    arxiv      - arXiv id (e.g. "2607.03226")
+    sep        - text printed right before the badges, only if there is anything to show
+                 (e.g. " · ", to continue an existing meta line)
+  Usage: {% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link arxiv=page.arxiv sep=" · " %}
+{% endcomment %}
+{%- assign _overleaf = include.overleaf -%}
+{%- assign _pdf = include.pdf -%}
+{%- assign _github = include.github -%}
+{%- assign _arxiv = include.arxiv -%}
+{%- assign _pdf_label = include.pdf_label -%}
+{%- assign _generic_url = include.link -%}
+{%- assign _generic_label = include.link_label -%}
+{%- if _generic_url -%}
+  {%- if _generic_url contains "overleaf.com" -%}
+    {%- unless _overleaf -%}{%- assign _overleaf = _generic_url -%}{%- endunless -%}
+    {%- assign _generic_url = nil -%}
+  {%- elsif _generic_url contains ".pdf" -%}
+    {%- unless _pdf -%}{%- assign _pdf = _generic_url -%}{%- assign _pdf_label = _pdf_label | default: _generic_label -%}{%- endunless -%}
+    {%- assign _generic_url = nil -%}
+  {%- elsif _generic_url contains "github.com" -%}
+    {%- unless _github -%}{%- assign _github = _generic_url -%}{%- endunless -%}
+    {%- assign _generic_url = nil -%}
+  {%- endif -%}
+{%- endif -%}
+{%- if _overleaf or _pdf or _github or _arxiv or _generic_url -%}
+  {%- if include.sep -%}{{ include.sep }}{%- endif -%}<span class="badge-row">{%- if _overleaf -%}{% include badges/overleaf.html url=_overleaf %}{%- endif -%}{%- if _pdf -%}{% include badges/pdf.html url=_pdf label=_pdf_label %}{%- endif -%}{%- if _github -%}{% include badges/github.html url=_github label=_generic_label %}{%- endif -%}{%- if _arxiv -%}{% include badges/arxiv.html id=_arxiv %}{%- endif -%}{%- if _generic_url -%}<a class="badge-link badge-link--plain btn btn--small" href="{{ _generic_url }}" rel="noopener noreferrer">{{ _generic_label | default: "Link" }}</a>{%- endif -%}</span>
+{%- endif -%}

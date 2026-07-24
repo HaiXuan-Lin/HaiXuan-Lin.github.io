@@ -41,11 +41,11 @@
         {% if post.collection == 'teaching' %}
           <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif post.collection == 'publications' %}
-          <p><i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
+          <p><i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}{% include badges/row.html link=post.link link_label=post.link_label pdf=post.download_link pdf_label=post.download_label arxiv=post.arxiv sep=" · " %}</p>
         {% elsif post.collection == 'projects' %}
-          <p>{% if post.project_type %}{{ post.project_type }}{% endif %}{% if post.date %}{% if post.project_type %} · {% endif %}{{ post.date | date: "%Y" }}{% endif %}{% if post.link %} · <a href="{{ post.link }}" rel="noopener noreferrer">{% if post.link_label %}{{ post.link_label }}{% else %}Link{% endif %}</a>{% endif %}{% if post.download_link %} · {% include download-link.html href=post.download_link label=post.download_label %}{% endif %}</p>
+          <p>{% if post.project_type %}{{ post.project_type }}{% endif %}{% if post.date %}{% if post.project_type %} · {% endif %}{{ post.date | date: "%Y" }}{% endif %}{% include badges/row.html link=post.link link_label=post.link_label pdf=post.download_link pdf_label=post.download_label arxiv=post.arxiv sep=" · " %}</p>
         {% elsif post.collection == 'reports' %}
-          <p>{% if post.presence_type %}{{ post.presence_type }}{% endif %}{% if post.date %}{% if post.presence_type %} · {% endif %}{{ post.date | date: "%Y" }}{% endif %}{% if post.link %} · <a href="{{ post.link }}" rel="noopener noreferrer">{% if post.link_label %}{{ post.link_label }}{% else %}Link{% endif %}</a>{% endif %}{% if post.download_link %} · {% include download-link.html href=post.download_link label=post.download_label %}{% endif %}</p>
+          <p>{% if post.presence_type %}{{ post.presence_type }}{% endif %}{% if post.date %}{% if post.presence_type %} · {% endif %}{{ post.date | date: "%Y" }}{% endif %}{% include badges/row.html link=post.link link_label=post.link_label pdf=post.download_link pdf_label=post.download_label arxiv=post.arxiv sep=" · " %}</p>
         {% elsif post.date %}
          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}

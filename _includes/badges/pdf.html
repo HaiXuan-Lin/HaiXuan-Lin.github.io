@@ -1,0 +1,20 @@
+{% comment %}
+  Renders a shields.io-flat-square-style PDF preview badge.
+  Usage: {% include badges/pdf.html url="/files/paper.pdf" label="PDF" %}
+{% endcomment %}
+{%- if include.url -%}
+  {%- assign _url = include.url -%}
+  {%- unless _url contains "://" -%}
+    {%- if site.url -%}
+      {%- assign _base_path = site.url | append: site.baseurl -%}
+    {%- else -%}
+      {%- assign _base_path = site.github.url -%}
+    {%- endif -%}
+    {%- assign _first = _url | slice: 0, 1 -%}
+    {%- unless _first == "/" -%}
+      {%- assign _url = _url | prepend: "/" -%}
+    {%- endunless -%}
+    {%- assign _url = _url | prepend: _base_path -%}
+  {%- endunless -%}
+<a class="badge-link" href="{{ _url }}" target="_blank" rel="noopener noreferrer" aria-label="Open PDF"><span class="badge badge--solid" style="background:#EC1C24"><span class="badge__icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>PDF</title><path d="M6 2c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h4v1.5H8V10z"/></svg></span><span class="badge__text">{{ include.label | default: "PDF" }}</span></span></a>
+{%- endif -%}
