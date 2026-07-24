@@ -1,0 +1,15 @@
+{% comment %}
+  Renders a shields.io-flat-square-style arXiv badge: grey "arXiv" label + red id segment.
+  Usage: {% include badges/arxiv.html id="2607.03226" %}
+     or: {% include badges/arxiv.html url="https://arxiv.org/abs/2607.03226" %}
+{% endcomment %}
+{%- if include.id or include.url -%}
+  {%- if include.id -%}
+    {%- assign _id = include.id -%}
+    {%- assign _url = "https://arxiv.org/abs/" | append: _id -%}
+  {%- else -%}
+    {%- assign _url = include.url -%}
+    {%- assign _id = _url | split: "/abs/" | last -%}
+  {%- endif -%}
+<a class="badge-link" href="{{ _url }}" target="_blank" rel="noopener noreferrer" aria-label="View on arXiv"><span class="badge badge--split"><span class="badge__seg badge__seg--label">arXiv</span><span class="badge__seg" style="background:#b31b1b">{{ _id }}</span></span></a>
+{%- endif -%}

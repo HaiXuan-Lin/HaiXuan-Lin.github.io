@@ -37,9 +37,11 @@ layout: default
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.collection == 'projects' %}
-          <p>{% if page.project_type %}{{ page.project_type }}{% endif %}{% if page.date %}{% if page.project_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% if page.link %} · <a href="{{ page.link }}" rel="noopener noreferrer">{% if page.link_label %}{{ page.link_label }}{% else %}Link{% endif %}</a>{% endif %}{% if page.download_link %} · {% include download-link.html href=page.download_link label=page.download_label %}{% endif %}</p>
+          <p>{% if page.project_type %}{{ page.project_type }}{% endif %}{% if page.date %}{% if page.project_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link pdf_label=page.download_label arxiv=page.arxiv sep=" · " %}</p>
         {% elsif page.collection == 'reports' %}
-          <p>{% if page.presence_type %}{{ page.presence_type }}{% endif %}{% if page.date %}{% if page.presence_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% if page.link %} · <a href="{{ page.link }}" rel="noopener noreferrer">{% if page.link_label %}{{ page.link_label }}{% else %}Link{% endif %}</a>{% endif %}{% if page.download_link %} · {% include download-link.html href=page.download_link label=page.download_label %}{% endif %}</p>
+          <p>{% if page.presence_type %}{{ page.presence_type }}{% endif %}{% if page.date %}{% if page.presence_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link pdf_label=page.download_label arxiv=page.arxiv sep=" · " %}</p>
+        {% elsif page.collection == 'publications' %}
+          <p><i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }}{% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link pdf_label=page.download_label arxiv=page.arxiv sep=" · " %}</p>
         {% elsif page.venue and page.date %}
           <p><i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.date %}
@@ -77,8 +79,10 @@ layout: default
           <p style="font-size: smaller"><a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
         {% endif %}
 
-        {% if page.link %}<div><a href="{{ page.link }}" class="btn">{% if page.link_label %}{{ page.link_label }}{% else %}{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}{% endif %}</a></div>{% endif %}
-        {% if page.download_link %}<div>{% include download-link.html href=page.download_link label=page.download_label class="btn" %}</div>{% endif %}
+        {% unless page.collection == 'projects' or page.collection == 'reports' %}
+          {% if page.link %}<div><a href="{{ page.link }}" class="btn">{% if page.link_label %}{{ page.link_label }}{% else %}{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}{% endif %}</a></div>{% endif %}
+          {% if page.download_link %}<div>{% include download-link.html href=page.download_link label=page.download_label class="btn" %}</div>{% endif %}
+        {% endunless %}
       </section>
 
       <footer class="page__meta">

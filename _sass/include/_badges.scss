@@ -1,0 +1,72 @@
+/*
+ * Shields.io "flat-square" style badge buttons (Overleaf / PDF / arXiv).
+ * Self-contained: colors are set inline per-badge via _includes/badges/*.html,
+ * this partial only defines shape, type, and layout.
+ */
+
+.badge-row {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em;
+  vertical-align: middle;
+}
+
+.badge-link {
+  display: inline-flex;
+  text-decoration: none;
+  line-height: 0;
+
+  &:hover .badge {
+    filter: brightness(1.08);
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: stretch;
+  height: 20px;
+  border-radius: 0; // flat-square: sharp corners
+  overflow: hidden;
+  font-family: Verdana, Geneva, DejaVu Sans, sans-serif;
+  font-size: 11px;
+  font-weight: normal;
+  color: #fff;
+}
+
+.badge__seg {
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  white-space: nowrap;
+  background: #555;
+}
+
+.badge__seg--label {
+  background: #555;
+}
+
+.badge__icon {
+  display: flex;
+  align-items: center;
+  padding: 0 4px 0 6px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+}
+
+.badge__text {
+  display: flex;
+  align-items: center;
+  padding: 0 6px 0 2px;
+}
+
+// single-segment (icon + text) badges, e.g. Overleaf / PDF
+.badge--solid {
+  .badge__icon {
+    padding-left: 6px;
+  }
+}
