@@ -22,5 +22,52 @@ package-lock.json
 # Ignore files created by MacOS
 .DS_Store
 
-# Ignore LaTeXML build logs (papers/ output is committed, but logs are noise)
+# _tex/ — LaTeX / LaTeXML source build artifacts (keep .tex, .bib, figures, .cls, etc.)
+_tex/**/*.aux
+_tex/**/*.log
+_tex/**/*.out
+_tex/**/*.toc
+_tex/**/*.lof
+_tex/**/*.lot
+_tex/**/*.bbl
+_tex/**/*.blg
+_tex/**/*.fls
+_tex/**/*.fdb_latexmk
+_tex/**/*.synctex.gz
+_tex/**/*.nav
+_tex/**/*.snm
+_tex/**/*.vrb
+_tex/**/*.xdv
+_tex/**/*.dvi
+_tex/**/*.ilg
+_tex/**/*.ind
+_tex/**/*.idx
+_tex/**/*.bcf
+_tex/**/*.run.xml
+_tex/**/*.pdf
 _tex/**/*.latexml.log
+_tex/**/*.latexml
+
+# papers/ — LaTeXML HTML output (commit index.html, CSS, and extracted figures)
+papers/**/LaTeXML.cache
+papers/**/*.latexml.log
+papers/**/*.latexml
+# Safety net if pdflatex is run inside papers/ by mistake
+papers/**/*.aux
+papers/**/*.log
+papers/**/*.out
+papers/**/*.toc
+papers/**/*.lof
+papers/**/*.lot
+papers/**/*.bbl
+papers/**/*.blg
+papers/**/*.fls
+papers/**/*.fdb_latexmk
+papers/**/*.synctex.gz
+papers/**/*.nav
+papers/**/*.snm
+papers/**/*.vrb
+papers/**/*.xdv
+papers/**/*.ilg
+papers/**/*.ind
+papers/**/*.idx

@@ -1,0 +1,29 @@
+\begin{definition}
+    \emph{Principal fiber bundle} consists of a \emph{bundle manifold} $P$, a \emph{base manifold} $M$ and a \emph{structure Lie group} $G$. They satisfy the following conditions:
+    \begin{enumerate}
+        \item $G$ acts freely on $P$ from the right via the action $R: P \times G \to P$;
+        \item There exists a smooth projection map $\pi: P \to M$ such that for $\forall p \in P$, the fiber over $\pi(p)$ is given by $\pi^{-1}\left[\pi(p)\right] = \left\{ p g \mid g \in G \right\}$;
+        \item $\forall x \in M$, there exists an open neighborhood $U$ of $x$ in $M$ and a diffeomorphism $T_U:\pi ^{-1}\left[ U \right] \rightarrow U\times G$, $T_U\left( p \right) =\left( \pi \left( p \right) ,S_U\left( p \right) \right)$, $\forall p\in \pi ^{-1}\left[ U \right]$, where $S_U:\pi ^{-1}\left[ U \right] \rightarrow G$ satisfies $S_U\left( pg \right) =S_U\left( p \right) g$, $\forall g\in G$.
+    \end{enumerate}
+\end{definition}
+
+
+\begin{definition}
+    Let $R_p:G\rightarrow P$, $R_p\left( g \right) \coloneq R_g\left( p \right)$, then we can define a fundamental vector field 
+\end{definition}
+
+The definition of a \emph{connection} on a principal fiber bundle has three equivalent forms:
+\begin{definition}
+    A connection on a principal fiber bundle $P\left(M,G\right)$ assigns to each point $p \in P$ a \emph{horizontal subspace} $H_p\subseteq T_pP$ such that:
+    \begin{enumerate}
+        \item $T_pP=V_p\oplus H_p$, $\forall p\in P$, where $V_p\coloneqq \left\{ X\in T_pP\mid \pi _*\left( X \right) =0 \right\}$ is \emph{vertical subspace;}
+        \item $R_{g*}\left[ H_p \right] =H_{pg}$, $\forall p\in P$, $\forall g\in G$;
+        \item $H_p$ is $C^\infty$ with respect to $p$.
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    A connection on a principal fiber bundle $P\left(M,G\right)$ is a $C^\infty$ $\mathfrak{g}$-valued 1-form on $P$, denoted by $\tilde{{\omega}}$, such that:
+    \begin{enumerate}
+        \item $\tilde{\omega}_p\left( A_{p}^{*} \right) =A$, $\forall A\in \mathfrak{g}$, $\forall p\in P$;
+    \end{enumerate}
+\end{definition}

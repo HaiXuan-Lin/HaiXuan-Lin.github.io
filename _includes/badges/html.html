@@ -1,0 +1,21 @@
+{% comment %}
+  Renders a shields.io-flat-square-style "View HTML" badge (Material Design
+  "code" glyph, amber) for LaTeXML-rendered pages under /papers/.
+  Usage: {% include badges/html.html url="/papers/fiber-bundle/" label="View HTML" %}
+{% endcomment %}
+{%- if include.url -%}
+  {%- assign _url = include.url -%}
+  {%- unless _url contains "://" -%}
+    {%- if site.url -%}
+      {%- assign _base_path = site.url | append: site.baseurl -%}
+    {%- else -%}
+      {%- assign _base_path = site.github.url -%}
+    {%- endif -%}
+    {%- assign _first = _url | slice: 0, 1 -%}
+    {%- unless _first == "/" -%}
+      {%- assign _url = _url | prepend: "/" -%}
+    {%- endunless -%}
+    {%- assign _url = _url | prepend: _base_path -%}
+  {%- endunless -%}
+<a class="badge-link" href="{{ _url }}" target="_blank" rel="noopener noreferrer" aria-label="View HTML"><span class="badge badge--solid" style="background:#FFA000"><span class="badge__icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><title>HTML</title><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></span><span class="badge__text">{{ include.label | default: "View HTML" }}</span></span></a>
+{%- endif -%}
