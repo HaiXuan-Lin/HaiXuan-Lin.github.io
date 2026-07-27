@@ -114,22 +114,32 @@ if "paper-topbar" not in html:
         'border-radius:999px;border:1px solid var(--border-color,#ccc);background:transparent;'
         'color:inherit;text-decoration:none;font:inherit;cursor:pointer;line-height:1.4;}\n'
         '.paper-topbar__btn:hover{background:rgba(128,128,128,0.15);}\n'
-        '.paper-topbar__icon-btn{padding:0.25em 0.55em;}\n'
         '.paper-topbar__pdf-icon{width:14px;height:14px;margin-right:0.35em;fill:#EC1C24;}\n'
+        '.paper-topbar__theme-btn{display:inline-flex;align-items:center;justify-content:center;'
+        'width:1.8em;height:1.8em;padding:0;border:0;border-radius:4px;background:transparent;'
+        'color:inherit;font-size:1em;line-height:1;cursor:pointer;}\n'
+        '.paper-topbar__theme-btn:hover{background:rgba(128,128,128,0.15);}\n'
+        '.paper-topbar__theme-btn svg{width:1.1em;height:1.1em;fill:none;stroke:currentColor;'
+        'stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}\n'
         '</style>\n'
         '<div class="paper-topbar">\n'
         '<a href="/" class="paper-topbar__btn" title="Back" '
         'onclick="if(document.referrer){history.back();return false;}">&larr; Back</a>\n'
         '<div class="paper-topbar__group">\n'
         f'{pdf_button}'
-        '<button type="button" id="paper-theme-toggle" class="paper-topbar__btn paper-topbar__icon-btn" '
-        'aria-label="Toggle color theme" title="Toggle color theme">\U0001F319</button>\n'
+        '<button type="button" id="paper-theme-toggle" class="paper-topbar__theme-btn" '
+        'aria-label="Toggle color theme" title="Toggle color theme"></button>\n'
         '</div>\n'
         '</div>\n'
         '<script>(function(){'
         'var btn=document.getElementById("paper-theme-toggle");'
-        'function icon(){return document.documentElement.getAttribute("data-theme")==="dark"?"☀️":"\U0001F319";}'
-        'function sync(){if(btn){btn.textContent=icon();}}'
+        'var SUN=\'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/>'
+        '<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2'
+        'M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>\';'
+        'var MOON=\'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none">'
+        '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>\';'
+        'function icon(){return document.documentElement.getAttribute("data-theme")==="dark"?MOON:SUN;}'
+        'function sync(){if(btn){btn.innerHTML=icon();}}'
         'sync();'
         'if(btn){btn.addEventListener("click",function(){'
         'var d=document.documentElement;'
@@ -150,6 +160,44 @@ html = re.sub(
     count=1,
     flags=re.DOTALL,
 )
+
+# Drop the "Cited by: ..." backlink LaTeXML adds to each bibliography entry.
+# This is an ar5iv/HTML-only artifact of MakeBibliography (it lists in-document
+# citation sites) with no equivalent in the plain BibTeX/amsplain-rendered PDF,
+# so strip it to keep the two outputs' bibliography content consistent.
+# The block contains nested <span>s (e.g. ltx_ref_self / ltx_ref_title), so a
+# non-greedy regex up to the first "</span>" would truncate mid-block; walk
+# span open/close tags instead to find the actual matching close tag.
+def _strip_cited_by(html):
+    marker = '<span class="ltx_bibblock ltx_bib_cited">'
+    out = []
+    pos = 0
+    while True:
+        start = html.find(marker, pos)
+        if start == -1:
+            out.append(html[pos:])
+            break
+        out.append(html[pos:start])
+        depth = 0
+        i = start
+        end = None
+        for m in re.finditer(r'<span\b[^>]*>|</span>', html[start:]):
+            if m.group(0) == '</span>':
+                depth -= 1
+            else:
+                depth += 1
+            if depth == 0:
+                end = start + m.end()
+                break
+        if end is None:
+            out.append(html[start:])
+            break
+        pos = end
+        while pos < len(html) and html[pos] in ' \t\n\r':
+            pos += 1
+    return "".join(out)
+
+html = _strip_cited_by(html)
 
 with open(path, "w", encoding="utf-8") as f:
     f.write(html)
