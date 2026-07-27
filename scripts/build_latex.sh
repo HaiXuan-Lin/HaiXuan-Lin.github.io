@@ -11,6 +11,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TEX_DIR="$ROOT_DIR/_tex"
 OUT_DIR="$ROOT_DIR/papers"
+FILES_DIR="$ROOT_DIR/files"
 AR5IV_CSS="$ROOT_DIR/scripts/latexml-assets/ar5iv.css"
 AR5IV_FONTS_CSS="$ROOT_DIR/scripts/latexml-assets/ar5iv-fonts.css"
 
@@ -56,11 +57,15 @@ for slug in "${targets[@]}"; do
   # the ar5iv CSS above fully replaces them.
   rm -f "$dest_dir/LaTeXML.css" "$dest_dir/ltx-article.css" "$dest_dir/ltx-amsart.css"
 
-  # PDF companion, if the LaTeX source also builds one (see _tex/README.md's
-  # `download_link` convention: /_tex/<slug>/main.pdf).
+  # PDF companion, if the LaTeX source also builds one. _tex/ is excluded
+  # from the Jekyll build (and its *.pdf is gitignored), so copy it into
+  # files/, the tracked+included directory every other downloadable PDF on
+  # the site lives in.
   pdf_href=""
   if [ -f "$src_dir/main.pdf" ]; then
-    pdf_href="/_tex/$slug/main.pdf"
+    mkdir -p "$FILES_DIR"
+    cp "$src_dir/main.pdf" "$FILES_DIR/$slug.pdf"
+    pdf_href="/files/$slug.pdf"
   fi
 
   # Add a top bar (back / PDF / theme toggle) and wire the color theme to the
@@ -113,7 +118,8 @@ if "paper-topbar" not in html:
         '.paper-topbar__pdf-icon{width:14px;height:14px;margin-right:0.35em;fill:#EC1C24;}\n'
         '</style>\n'
         '<div class="paper-topbar">\n'
-        '<a href="/" class="paper-topbar__btn" title="Back to haixuan-lin.github.io">&larr; Back</a>\n'
+        '<a href="/" class="paper-topbar__btn" title="Back" '
+        'onclick="if(document.referrer){history.back();return false;}">&larr; Back</a>\n'
         '<div class="paper-topbar__group">\n'
         f'{pdf_button}'
         '<button type="button" id="paper-theme-toggle" class="paper-topbar__btn paper-topbar__icon-btn" '

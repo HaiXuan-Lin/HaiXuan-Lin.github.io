@@ -14,7 +14,7 @@
 
 .badge-link {
   display: inline-flex;
-  text-decoration: none;
+  text-decoration: none !important;
   line-height: 0;
 
   &:hover .badge {

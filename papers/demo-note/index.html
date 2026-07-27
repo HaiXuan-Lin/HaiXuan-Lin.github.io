@@ -21,7 +21,7 @@ html[data-theme="dark"] .paper-topbar{background:#161b22;box-shadow:0 1px 3px rg
 .paper-topbar__pdf-icon{width:14px;height:14px;margin-right:0.35em;fill:#EC1C24;}
 </style>
 <div class="paper-topbar">
-<a href="/" class="paper-topbar__btn" title="Back to haixuan-lin.github.io">&larr; Back</a>
+<a href="/" class="paper-topbar__btn" title="Back" onclick="if(document.referrer){history.back();return false;}">&larr; Back</a>
 <div class="paper-topbar__group">
 <button type="button" id="paper-theme-toggle" class="paper-topbar__btn paper-topbar__icon-btn" aria-label="Toggle color theme" title="Toggle color theme">🌙</button>
 </div>
