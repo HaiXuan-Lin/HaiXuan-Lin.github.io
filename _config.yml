@@ -238,6 +238,9 @@ collections:
   reports:
     output: true
     permalink: /:collection/:path/
+  blogs:
+    output: true
+    permalink: /:collection/:path/
 
 
 # These settings control how pages and collections are included in the site
@@ -308,6 +311,15 @@ defaults:
   - scope:
       path: ""
       type: reports
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: false
+  # _blogs
+  - scope:
+      path: ""
+      type: blogs
     values:
       layout: single
       author_profile: true

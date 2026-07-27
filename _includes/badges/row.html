@@ -5,12 +5,15 @@
   flows like a normal hyperlink and only breaks the line where the text does.
   Params (all optional):
     link       - generic external link (auto-detected: overleaf.com -> Overleaf badge,
-                 *.pdf -> PDF badge, github.com -> GitHub badge, otherwise a plain fallback link)
-    link_label - label for the generic fallback link / GitHub badge
+                 *.pdf -> PDF badge, github.com -> GitHub badge, /papers/ -> View HTML badge,
+                 otherwise a plain fallback link)
+    link_label - label for the generic fallback link / GitHub / View HTML badge
     overleaf   - explicit Overleaf project url (skips auto-detection)
     pdf        - explicit pdf url/path
     pdf_label  - label for the PDF badge (default "PDF")
     github     - explicit GitHub repo url (skips auto-detection)
+    html       - explicit LaTeXML HTML page url/path (skips auto-detection)
+    html_label - label for the View HTML badge (default "View HTML")
     arxiv      - arXiv id (e.g. "2607.03226")
     sep        - text printed right before the badges, only if there is anything to show
                  (e.g. " · ", to continue an existing meta line)
@@ -19,8 +22,10 @@
 {%- assign _overleaf = include.overleaf -%}
 {%- assign _pdf = include.pdf -%}
 {%- assign _github = include.github -%}
+{%- assign _html = include.html -%}
 {%- assign _arxiv = include.arxiv -%}
 {%- assign _pdf_label = include.pdf_label -%}
+{%- assign _html_label = include.html_label -%}
 {%- assign _generic_url = include.link -%}
 {%- assign _generic_label = include.link_label -%}
 {%- if _generic_url -%}
@@ -33,8 +38,11 @@
   {%- elsif _generic_url contains "github.com" -%}
     {%- unless _github -%}{%- assign _github = _generic_url -%}{%- endunless -%}
     {%- assign _generic_url = nil -%}
+  {%- elsif _generic_url contains "/papers/" -%}
+    {%- unless _html -%}{%- assign _html = _generic_url -%}{%- assign _html_label = _html_label | default: _generic_label -%}{%- endunless -%}
+    {%- assign _generic_url = nil -%}
   {%- endif -%}
 {%- endif -%}
-{%- if _overleaf or _pdf or _github or _arxiv or _generic_url -%}
-  {%- if include.sep -%}{{ include.sep }}{%- endif -%}<span class="badge-row">{%- if _overleaf -%}{% include badges/overleaf.html url=_overleaf %}{%- endif -%}{%- if _pdf -%}{% include badges/pdf.html url=_pdf label=_pdf_label %}{%- endif -%}{%- if _github -%}{% include badges/github.html url=_github label=_generic_label %}{%- endif -%}{%- if _arxiv -%}{% include badges/arxiv.html id=_arxiv %}{%- endif -%}{%- if _generic_url -%}<a class="badge-link badge-link--plain btn btn--small" href="{{ _generic_url }}" rel="noopener noreferrer">{{ _generic_label | default: "Link" }}</a>{%- endif -%}</span>
+{%- if _overleaf or _pdf or _github or _html or _arxiv or _generic_url -%}
+  {%- if include.sep -%}{{ include.sep }}{%- endif -%}<span class="badge-row">{%- if _overleaf -%}{% include badges/overleaf.html url=_overleaf %}{%- endif -%}{%- if _pdf -%}{% include badges/pdf.html url=_pdf label=_pdf_label %}{%- endif -%}{%- if _html -%}{% include badges/html.html url=_html label=_html_label %}{%- endif -%}{%- if _github -%}{% include badges/github.html url=_github label=_generic_label %}{%- endif -%}{%- if _arxiv -%}{% include badges/arxiv.html id=_arxiv %}{%- endif -%}{%- if _generic_url -%}<a class="badge-link badge-link--plain btn btn--small" href="{{ _generic_url }}" rel="noopener noreferrer">{{ _generic_label | default: "Link" }}</a>{%- endif -%}</span>
 {%- endif -%}
