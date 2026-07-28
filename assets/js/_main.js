@@ -92,6 +92,17 @@ $(document).ready(function () {
 
   // If the user hasn't chosen a theme, follow the OS preference
   setTheme();
+
+  // Re-sync when the page is restored from the back-forward cache (e.g. navigating
+  // back from a standalone paper page after toggling the theme there) - bfcache
+  // restores the DOM as it was on unload, so the toggle made elsewhere wouldn't
+  // otherwise be reflected until a full reload.
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) {
+      setTheme();
+    }
+  });
+
   window.matchMedia('(prefers-color-scheme: dark)')
         .addEventListener("change", (e) => {
           if (!localStorage.getItem("theme")) {

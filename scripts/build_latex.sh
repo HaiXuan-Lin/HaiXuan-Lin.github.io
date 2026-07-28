@@ -148,6 +148,18 @@ if "paper-topbar" not in html:
         'if(next==="dark"){d.setAttribute("data-theme","dark");}else{d.removeAttribute("data-theme");}'
         'sync();'
         '});}'
+        # Re-sync when this page is restored from the back-forward cache (e.g.
+        # navigating forward again after the theme was toggled elsewhere while
+        # this page was cached) - bfcache restores the DOM as it was on unload.
+        'window.addEventListener("pageshow",function(e){'
+        'if(!e.persisted){return;}'
+        'var d=document.documentElement;'
+        'var t=localStorage.getItem("theme");'
+        'var theme=(t==="dark"||t==="light")?t:'
+        '((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");'
+        'if(theme==="dark"){d.setAttribute("data-theme","dark");}else{d.removeAttribute("data-theme");}'
+        'sync();'
+        '});'
         '})();</script>\n'
     )
     html = html.replace("<body>", "<body>\n" + topbar, 1)
