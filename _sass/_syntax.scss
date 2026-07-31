@@ -2,29 +2,49 @@
    Syntax highlighting
    ========================================================================== */
 
+/* Token color roles, shared by both div.highlighter-rouge (fenced ``` blocks)
+   and figure.highlight ({% highlight %} tag). Light values are Solarized Light;
+   dark values are an "Atom One Dark"-inspired palette tuned for readability on
+   a dark background. Overriding these under html[data-theme="dark"] is what
+   makes code blocks follow the site-wide light/dark toggle. */
+:root {
+  --syntax-bg               : #fafafa;
+  --syntax-border            : var(--global-border-color);
+  --syntax-fg               : #586e75;
+  --syntax-comment          : #93a1a1;
+  --syntax-keyword          : #859900;
+  --syntax-accent           : #cb4b16;
+  --syntax-string           : #2aa198;
+  --syntax-declaration      : #22b3eb;
+  --syntax-type             : #dc322f;
+  --syntax-builtin          : #b58900;
+  --syntax-marker-bg        : mix(#fff, #7a8288, 90%);
+}
+
+html[data-theme="dark"] {
+  --syntax-bg               : #282c34;
+  --syntax-border            : #3b4048;
+  --syntax-fg               : #abb2bf;
+  --syntax-comment          : #5c6370;
+  --syntax-keyword          : #c678dd;
+  --syntax-accent           : #d19a66;
+  --syntax-string           : #98c379;
+  --syntax-declaration      : #61afef;
+  --syntax-type             : #e06c75;
+  --syntax-builtin          : #e5c07b;
+  --syntax-marker-bg        : #21252b;
+}
+
 div.highlighter-rouge, figure.highlight {
   position: relative;
   margin-bottom: 1em;
   padding: 1em;
-  border: 1px solid var(--global-border-color);
+  border: 1px solid var(--syntax-border);
   border-radius: $border-radius;
-  background-color: var(--global-code-background-color);
+  background-color: var(--syntax-bg);
   box-shadow: $box-shadow;
   font-size: $type-size-4;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.5em;
-    background-color: mix(#fff, #7a8288, 90%);
-    content: "\f121";
-    font-family: "Font Awesome 6 Free" !important;
-    font-size: $type-size-6;
-    line-height: 1;
-    text-transform: none;
-    speak: none;
-  }
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 
   .highlight {
     margin: 0;
@@ -32,93 +52,185 @@ div.highlighter-rouge, figure.highlight {
     font-size: $type-size-6;
     line-height: 1.8;
   }
+
+  pre > code {
+    color: var(--syntax-fg);
+  }
+
+  /* Copy-to-clipboard button, injected by assets/js/_main.js */
+  .code-copy-btn {
+    position: absolute;
+    top: 0.6em;
+    right: 0.6em;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    border: 1px solid var(--syntax-border);
+    border-radius: $border-radius;
+    background-color: var(--syntax-bg);
+    color: var(--syntax-fg);
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+
+    i {
+      font-size: $type-size-6;
+      pointer-events: none;
+    }
+
+    .code-copy-btn__check {
+      display: none;
+      color: $success-color;
+    }
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+      background-color: var(--syntax-marker-bg);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--global-base-color);
+      outline-offset: 2px;
+    }
+
+    /* Tooltip */
+    &::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: 130%;
+      right: 0;
+      padding: 0.3em 0.6em;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-family: $sans-serif;
+      font-size: $type-size-8;
+      line-height: 1.4;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    &:hover::after,
+    &:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &.is-copied {
+      opacity: 1;
+      color: $success-color;
+      border-color: $success-color;
+
+      .code-copy-btn__copy {
+        display: none;
+      }
+
+      .code-copy-btn__check {
+        display: inline-flex;
+      }
+    }
+  }
+
+  &:hover .code-copy-btn,
+  .code-copy-btn:focus-visible,
+  .code-copy-btn.is-copied {
+    opacity: 1;
+  }
+
+  /* Touch devices have no hover state, so keep the button discoverable */
+  @media (hover: none) {
+    .code-copy-btn {
+      opacity: 0.65;
+    }
+  }
 }
 
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 
 
-/*
-   Solarized Light
-   http://ethanschoonover.com/solarized
-
-   SOLARIZED HEX      ROLE
-   --------- -------- ------------------------------------------
-   base01    #586e75  body text / default code / primary content
-   base1     #93a1a1  comments / secondary content
-   base3     #fdf6e3  background
-   orange    #cb4b16  constants
-   red       #dc322f  regex, special keywords
-   blue      #22b3eb  reserved keywords
-   cyan      #2aa198  strings, numbers
-   green     #859900  operators, other keywords
+/* ==========================================================================
+   Token colors — mapped through the CSS custom properties defined above so
+   the palette swaps automatically with html[data-theme="dark"].
    ========================================================================== */
 
-.highlight .c { color: #93a1a1 } /* Comment */
-.highlight .err { color: #586e75 } /* Error */
-.highlight .g { color: #586e75 } /* Generic */
-.highlight .k { color: #859900 } /* Keyword */
-.highlight .l { color: #586e75 } /* Literal */
-.highlight .n { color: #586e75 } /* Name */
-.highlight .o { color: #859900 } /* Operator */
-.highlight .x { color: #cb4b16 } /* Other */
-.highlight .p { color: #586e75 } /* Punctuation */
-.highlight .cm { color: #93a1a1 } /* Comment.Multiline */
-.highlight .cp { color: #859900 } /* Comment.Preproc */
-.highlight .c1 { color: #93a1a1 } /* Comment.Single */
-.highlight .cs { color: #859900 } /* Comment.Special */
-.highlight .gd { color: #2aa198 } /* Generic.Deleted */
-.highlight .ge { color: #586e75; font-style: italic } /* Generic.Emph */
-.highlight .gr { color: #dc322f } /* Generic.Error */
-.highlight .gh { color: #cb4b16 } /* Generic.Heading */
-.highlight .gi { color: #859900 } /* Generic.Inserted */
-.highlight .go { color: #586e75 } /* Generic.Output */
-.highlight .gp { color: #586e75 } /* Generic.Prompt */
-.highlight .gs { color: #586e75; font-weight: bold } /* Generic.Strong */
-.highlight .gu { color: #cb4b16 } /* Generic.Subheading */
-.highlight .gt { color: #586e75 } /* Generic.Traceback */
-.highlight .kc { color: #cb4b16 } /* Keyword.Constant */
-.highlight .kd { color: #22b3eb } /* Keyword.Declaration */
-.highlight .kn { color: #859900 } /* Keyword.Namespace */
-.highlight .kp { color: #859900 } /* Keyword.Pseudo */
-.highlight .kr { color: #22b3eb } /* Keyword.Reserved */
-.highlight .kt { color: #dc322f } /* Keyword.Type */
-.highlight .ld { color: #586e75 } /* Literal.Date */
-.highlight .m { color: #2aa198 } /* Literal.Number */
-.highlight .s { color: #2aa198 } /* Literal.String */
-.highlight .na { color: #586e75 } /* Name.Attribute */
-.highlight .nb { color: #B58900 } /* Name.Builtin */
-.highlight .nc { color: #22b3eb } /* Name.Class */
-.highlight .no { color: #cb4b16 } /* Name.Constant */
-.highlight .nd { color: #22b3eb } /* Name.Decorator */
-.highlight .ni { color: #cb4b16 } /* Name.Entity */
-.highlight .ne { color: #cb4b16 } /* Name.Exception */
-.highlight .nf { color: #22b3eb } /* Name.Function */
-.highlight .nl { color: #586e75 } /* Name.Label */
-.highlight .nn { color: #586e75 } /* Name.Namespace */
-.highlight .nx { color: #586e75 } /* Name.Other */
-.highlight .py { color: #586e75 } /* Name.Property */
-.highlight .nt { color: #22b3eb } /* Name.Tag */
-.highlight .nv { color: #22b3eb } /* Name.Variable */
-.highlight .ow { color: #859900 } /* Operator.Word */
-.highlight .w { color: #586e75 } /* Text.Whitespace */
-.highlight .mf { color: #2aa198 } /* Literal.Number.Float */
-.highlight .mh { color: #2aa198 } /* Literal.Number.Hex */
-.highlight .mi { color: #2aa198 } /* Literal.Number.Integer */
-.highlight .mo { color: #2aa198 } /* Literal.Number.Oct */
-.highlight .sb { color: #93a1a1 } /* Literal.String.Backtick */
-.highlight .sc { color: #2aa198 } /* Literal.String.Char */
-.highlight .sd { color: #586e75 } /* Literal.String.Doc */
-.highlight .s2 { color: #2aa198 } /* Literal.String.Double */
-.highlight .se { color: #cb4b16 } /* Literal.String.Escape */
-.highlight .sh { color: #586e75 } /* Literal.String.Heredoc */
-.highlight .si { color: #2aa198 } /* Literal.String.Interpol */
-.highlight .sx { color: #2aa198 } /* Literal.String.Other */
-.highlight .sr { color: #dc322f } /* Literal.String.Regex */
-.highlight .s1 { color: #2aa198 } /* Literal.String.Single */
-.highlight .ss { color: #2aa198 } /* Literal.String.Symbol */
-.highlight .bp { color: #22b3eb } /* Name.Builtin.Pseudo */
-.highlight .vc { color: #22b3eb } /* Name.Variable.Class */
-.highlight .vg { color: #22b3eb } /* Name.Variable.Global */
-.highlight .vi { color: #22b3eb } /* Name.Variable.Instance */
-.highlight .il { color: #2aa198 } /* Literal.Number.Integer.Long */
+.highlight .c { color: var(--syntax-comment) } /* Comment */
+.highlight .err { color: var(--syntax-fg) } /* Error */
+.highlight .g { color: var(--syntax-fg) } /* Generic */
+.highlight .k { color: var(--syntax-keyword) } /* Keyword */
+.highlight .l { color: var(--syntax-fg) } /* Literal */
+.highlight .n { color: var(--syntax-fg) } /* Name */
+.highlight .o { color: var(--syntax-keyword) } /* Operator */
+.highlight .x { color: var(--syntax-accent) } /* Other */
+.highlight .p { color: var(--syntax-fg) } /* Punctuation */
+.highlight .cm { color: var(--syntax-comment) } /* Comment.Multiline */
+.highlight .cp { color: var(--syntax-keyword) } /* Comment.Preproc */
+.highlight .c1 { color: var(--syntax-comment) } /* Comment.Single */
+.highlight .cs { color: var(--syntax-keyword) } /* Comment.Special */
+.highlight .gd { color: var(--syntax-string) } /* Generic.Deleted */
+.highlight .ge { color: var(--syntax-fg); font-style: italic } /* Generic.Emph */
+.highlight .gr { color: var(--syntax-type) } /* Generic.Error */
+.highlight .gh { color: var(--syntax-accent) } /* Generic.Heading */
+.highlight .gi { color: var(--syntax-keyword) } /* Generic.Inserted */
+.highlight .go { color: var(--syntax-fg) } /* Generic.Output */
+.highlight .gp { color: var(--syntax-fg) } /* Generic.Prompt */
+.highlight .gs { color: var(--syntax-fg); font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: var(--syntax-accent) } /* Generic.Subheading */
+.highlight .gt { color: var(--syntax-fg) } /* Generic.Traceback */
+.highlight .kc { color: var(--syntax-accent) } /* Keyword.Constant */
+.highlight .kd { color: var(--syntax-declaration) } /* Keyword.Declaration */
+.highlight .kn { color: var(--syntax-keyword) } /* Keyword.Namespace */
+.highlight .kp { color: var(--syntax-keyword) } /* Keyword.Pseudo */
+.highlight .kr { color: var(--syntax-declaration) } /* Keyword.Reserved */
+.highlight .kt { color: var(--syntax-type) } /* Keyword.Type */
+.highlight .ld { color: var(--syntax-fg) } /* Literal.Date */
+.highlight .m { color: var(--syntax-string) } /* Literal.Number */
+.highlight .s { color: var(--syntax-string) } /* Literal.String */
+.highlight .na { color: var(--syntax-fg) } /* Name.Attribute */
+.highlight .nb { color: var(--syntax-builtin) } /* Name.Builtin */
+.highlight .nc { color: var(--syntax-declaration) } /* Name.Class */
+.highlight .no { color: var(--syntax-accent) } /* Name.Constant */
+.highlight .nd { color: var(--syntax-declaration) } /* Name.Decorator */
+.highlight .ni { color: var(--syntax-accent) } /* Name.Entity */
+.highlight .ne { color: var(--syntax-accent) } /* Name.Exception */
+.highlight .nf { color: var(--syntax-declaration) } /* Name.Function */
+.highlight .nl { color: var(--syntax-fg) } /* Name.Label */
+.highlight .nn { color: var(--syntax-fg) } /* Name.Namespace */
+.highlight .nx { color: var(--syntax-fg) } /* Name.Other */
+.highlight .py { color: var(--syntax-fg) } /* Name.Property */
+.highlight .nt { color: var(--syntax-declaration) } /* Name.Tag */
+.highlight .nv { color: var(--syntax-declaration) } /* Name.Variable */
+.highlight .ow { color: var(--syntax-keyword) } /* Operator.Word */
+.highlight .w { color: var(--syntax-fg) } /* Text.Whitespace */
+.highlight .mf { color: var(--syntax-string) } /* Literal.Number.Float */
+.highlight .mh { color: var(--syntax-string) } /* Literal.Number.Hex */
+.highlight .mi { color: var(--syntax-string) } /* Literal.Number.Integer */
+.highlight .mo { color: var(--syntax-string) } /* Literal.Number.Oct */
+.highlight .sb { color: var(--syntax-comment) } /* Literal.String.Backtick */
+.highlight .sc { color: var(--syntax-string) } /* Literal.String.Char */
+.highlight .sd { color: var(--syntax-fg) } /* Literal.String.Doc */
+.highlight .s2 { color: var(--syntax-string) } /* Literal.String.Double */
+.highlight .se { color: var(--syntax-accent) } /* Literal.String.Escape */
+.highlight .sh { color: var(--syntax-fg) } /* Literal.String.Heredoc */
+.highlight .si { color: var(--syntax-string) } /* Literal.String.Interpol */
+.highlight .sx { color: var(--syntax-string) } /* Literal.String.Other */
+.highlight .sr { color: var(--syntax-type) } /* Literal.String.Regex */
+.highlight .s1 { color: var(--syntax-string) } /* Literal.String.Single */
+.highlight .ss { color: var(--syntax-string) } /* Literal.String.Symbol */
+.highlight .bp { color: var(--syntax-declaration) } /* Name.Builtin.Pseudo */
+.highlight .vc { color: var(--syntax-declaration) } /* Name.Variable.Class */
+.highlight .vg { color: var(--syntax-declaration) } /* Name.Variable.Global */
+.highlight .vi { color: var(--syntax-declaration) } /* Name.Variable.Instance */
+.highlight .il { color: var(--syntax-string) } /* Literal.Number.Integer.Long */

@@ -1,0 +1,17 @@
+---
+layout: archive
+title: "Gadgets"
+permalink: /gadgets/
+author_profile: true
+---
+
+{% include base_path %}
+
+<p class="wordwrap">
+  Here I post gadgets I've built or find useful. Feel free to contact me if you have any questions or suggestions.
+</p>
+
+{% assign gadget_posts = site.gadgets | sort: 'date' | reverse %}
+{% for post in gadget_posts %}
+  {% include archive-single.html %}
+{% endfor %}

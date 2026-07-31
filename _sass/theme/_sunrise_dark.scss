@@ -47,6 +47,7 @@ html[data-theme="dark"] {
     --global-dark-border-color          : #{$background-light};
     --global-code-background-color      : #{$code-bg};
     --global-code-text-color            : #{$text};
+    --global-toc-bg-color               : #{$code-bg};
     --global-fig-caption-color          : #{$text-muted};
     --global-link-color                 : #{$link};
     --global-link-color-hover           : #{$link-hover};
