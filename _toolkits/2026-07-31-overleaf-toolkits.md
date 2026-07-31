@@ -59,6 +59,7 @@ bin/init --mac-texlive
 
 This won't touch an existing `config/docker-compose.override.yml` — delete it first if you want to regenerate it. What gets generated looks like:
 
+{% raw %}
 ```yaml
 ---
 services:
@@ -70,6 +71,7 @@ services:
         volumes:
             - "/usr/local/texlive/2026/texmf-dist:/opt/host-texmf:ro"
 ```
+{% endraw %}
 
 - `platform: linux/amd64` is only written on Apple Silicon; Intel Macs run the image natively and skip this line.
 - The `texmf-dist` mount, `TEXMFHOME`, and `TEXMF` are only written if a local TeX Live install is found. Only the plain-text package tree is mounted, read-only, into a path the container's own `scheme-basic` doesn't use.
@@ -219,6 +221,7 @@ bin/init --mac-texlive
 
 这个命令不会覆盖已经存在的 `config/docker-compose.override.yml`——想重新生成的话, 需要先手动删掉它. 生成的内容大概长这样：
 
+{% raw %}
 ```yaml
 ---
 services:
@@ -230,6 +233,7 @@ services:
         volumes:
             - "/usr/local/texlive/2026/texmf-dist:/opt/host-texmf:ro"
 ```
+{% endraw %}
 
 - `platform: linux/amd64` 只有在 Apple Silicon 上才会写；Intel Mac 本来就能原生跑这个镜像, 不会加这行. 
 - `texmf-dist` 挂载、`TEXMFHOME`、`TEXMF` 只有检测到本机装了 TeX Live 才会写. 挂进去的只是纯文本的宏包树, 只读, 挂载到容器自带 `scheme-basic` 不会用到的路径. 
