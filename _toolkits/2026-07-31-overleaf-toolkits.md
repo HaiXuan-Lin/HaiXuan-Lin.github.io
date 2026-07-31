@@ -59,6 +59,7 @@ bin/init --mac-texlive
 
 This won't touch an existing `config/docker-compose.override.yml` — delete it first if you want to regenerate it. What gets generated looks like:
 
+{% raw %}
 ```yaml
 ---
 services:
@@ -70,6 +71,7 @@ services:
         volumes:
             - "/usr/local/texlive/2026/texmf-dist:/opt/host-texmf:ro"
 ```
+{% endraw %}
 
 - `platform: linux/amd64` is only written on Apple Silicon; Intel Macs run the image natively and skip this line.
 - The `texmf-dist` mount, `TEXMFHOME`, and `TEXMF` are only written if a local TeX Live install is found. Only the plain-text package tree is mounted, read-only, into a path the container's own `scheme-basic` doesn't use.
@@ -171,8 +173,8 @@ This bakes the packages into the image itself (several GB heavier, and you'll re
 
 官方的 [`overleaf/toolkit`](https://github.com/overleaf/toolkit) 默认假设你在 Linux 上跑. 在 Mac 上（尤其是 Apple Silicon）, 原样使用会碰到两个问题：
 
-1. **脚本本身跑不通. ** `bin/init` 里用的是 GNU 专属的 `sed -i''`, `lib/shared-functions.sh` 里用的是 `sed -r`（GNU 扩展正则参数）. macOS 自带的是 BSD `sed`, 对这两种写法的解析方式都不一样, 结果就是生成配置时静默出错或者内容被破坏. 
-2. **镜像跟机器对不上. ** `sharelatex/sharelatex` 只发布了 `linux/amd64` 版本, 在 Apple Silicon 上直接 `bin/up` 会报 `no matching manifest for linux/arm64/v8`. 就算靠模拟跑起来了, 镜像里自带的也只是精简版 `scheme-basic` 的 TeX Live, 只要用到这个集合之外的宏包（比如 `\usepackage{setspace}`）, 编译就会报 `File 'xxx.sty' not found`. 
+1. **脚本本身跑不通.** `bin/init` 里用的是 GNU 专属的 `sed -i''`, `lib/shared-functions.sh` 里用的是 `sed -r`（GNU 扩展正则参数）. macOS 自带的是 BSD `sed`, 对这两种写法的解析方式都不一样, 结果就是生成配置时静默出错或者内容被破坏. 
+2. **镜像跟机器对不上.** `sharelatex/sharelatex` 只发布了 `linux/amd64` 版本, 在 Apple Silicon 上直接 `bin/up` 会报 `no matching manifest for linux/arm64/v8`. 就算靠模拟跑起来了, 镜像里自带的也只是精简版 `scheme-basic` 的 TeX Live, 只要用到这个集合之外的宏包（比如 `\usepackage{setspace}`）, 编译就会报 `File 'xxx.sty' not found`. 
 
 我 fork 了这个仓库, 修了这两处 shell 兼容性的 bug, 并且给 `bin/init` 加了一个 `--mac-texlive` 选项, 用来自动生成 `docker-compose.override.yml`, 同时解决架构和 TeX Live 精简版这两个问题——包括直接复用你本机已经装好的 MacTeX/TeX Live, 而不是在容器里重新下载一份完整版. 我的 fork 地址：**<https://github.com/HaiXuan-Lin/toolkit>**. 
 
@@ -219,6 +221,7 @@ bin/init --mac-texlive
 
 这个命令不会覆盖已经存在的 `config/docker-compose.override.yml`——想重新生成的话, 需要先手动删掉它. 生成的内容大概长这样：
 
+{% raw %}
 ```yaml
 ---
 services:
@@ -230,6 +233,7 @@ services:
         volumes:
             - "/usr/local/texlive/2026/texmf-dist:/opt/host-texmf:ro"
 ```
+{% endraw %}
 
 - `platform: linux/amd64` 只有在 Apple Silicon 上才会写；Intel Mac 本来就能原生跑这个镜像, 不会加这行. 
 - `texmf-dist` 挂载、`TEXMFHOME`、`TEXMF` 只有检测到本机装了 TeX Live 才会写. 挂进去的只是纯文本的宏包树, 只读, 挂载到容器自带 `scheme-basic` 不会用到的路径. 
