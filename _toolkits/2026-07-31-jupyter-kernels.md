@@ -39,19 +39,19 @@ python -m pip install jupyter-matlab-proxy
 
 Start `jupyter notebook` from the terminal, which opens a browser tab; create a new `.ipynb` notebook file. The first time, it will ask you to verify your license.
 
-![](https://files.mdnice.com/user/70385/e7bf37a9-d23f-4f20-8b32-023e2bda30fc.png)
+![](/images/toolkits/jupyter-kernels/e7bf37a9-d23f-4f20-8b32-023e2bda30fc.png)
 
 Now it's ready to use.
 
-![](https://files.mdnice.com/user/70385/453e8109-5b71-4fc3-8611-d16cca27b5cc.png)
+![](/images/toolkits/jupyter-kernels/453e8109-5b71-4fc3-8611-d16cca27b5cc.png)
 
 In VS Code, you can connect to the local server so you can use the proxy from within VS Code too. This extra step is needed because the package currently only supports the browser version of Jupyter, so after opening the browser you have to connect it to the local server.
 
-![](https://files.mdnice.com/user/70385/97d39d47-7287-4c37-8b85-003ef23d456a.png)
+![](/images/toolkits/jupyter-kernels/97d39d47-7287-4c37-8b85-003ef23d456a.png)
 
 This address is shown in your terminal.
 
-![](https://files.mdnice.com/user/70385/30ded035-dbe7-46e3-beba-c3ac25916af3.png)
+![](/images/toolkits/jupyter-kernels/30ded035-dbe7-46e3-beba-c3ac25916af3.png)
 
 ### matlab_kernel
 
@@ -110,14 +110,14 @@ InstallWolframLanguageForJupyter[]
 ## Arsenal Showcase
 
 Running Mathematica — unfortunately the interactivity isn't great.
-![](https://files.mdnice.com/user/70385/d19caf36-2136-4a28-9f51-3902df035c5d.png)
+![](/images/toolkits/jupyter-kernels/d19caf36-2136-4a28-9f51-3902df035c5d.png)
 
 Running multiple programming languages, and once you're done you can even export to PDF — truly the single greatest goddamn programming language on the face of the earth.
-![](https://files.mdnice.com/user/70385/221bf10f-6bb5-4ba7-b531-cfe38ba2d834.png)
+![](/images/toolkits/jupyter-kernels/221bf10f-6bb5-4ba7-b531-cfe38ba2d834.png)
 
 Here, I really couldn't get a C++ environment configured. Currently the only (interpreted) C++ Jupyter kernel seems to be xeus-cling, which only supports macOS and Linux. I happened to have a Mac M2 on hand, so I gave it a shot — and failed.
 
-![](https://files.mdnice.com/user/70385/bb6a6d2b-6491-4760-b3ef-dfe6aa9663d5.png)
+![](/images/toolkits/jupyter-kernels/bb6a6d2b-6491-4760-b3ef-dfe6aa9663d5.png)
 
 This is the list of available packages for xeus-cling on anaconda.org. Notice that macOS support here is limited strictly to osx-64, not osx-arm64. But — but! — the M2 chip is part of Apple's Apple Silicon lineup, which uses the ARM architecture, so it isn't supported! I then tried Apple's Rosetta 2 translator, which translates ARM machine code into x86-64 machine code. But, but, when downloading LLVM ("Low Level Virtual Machine") via bash on the Mac, it always insisted on grabbing the ARM-architecture build, so Rosetta 2 couldn't find an x86_64 build of LLVM, and in the end it was a failure.
 
@@ -159,21 +159,21 @@ python -m pip install jupyter-matlab-proxy
 
 终端命令启动 `jupyter notebook`, 跳转浏览器, 新建一个 .ipynb 的笔记本文件, 第一次会验证 license.
 
-![](https://files.mdnice.com/user/70385/e7bf37a9-d23f-4f20-8b32-023e2bda30fc.png)
+![](/images/toolkits/jupyter-kernels/e7bf37a9-d23f-4f20-8b32-023e2bda30fc.png)
 
 
 可以用了
 
-![](https://files.mdnice.com/user/70385/453e8109-5b71-4fc3-8611-d16cca27b5cc.png)
+![](/images/toolkits/jupyter-kernels/453e8109-5b71-4fc3-8611-d16cca27b5cc.png)
 
 在 vscode 中, 可以连接本地的服务器, 这样就可以在 vscode 中用代理了, 多此一举的原因是这个包目前只支持浏览器的 jupyter, 所以开浏览器后要接入本地服务器.
 
 
-![](https://files.mdnice.com/user/70385/97d39d47-7287-4c37-8b85-003ef23d456a.png)
+![](/images/toolkits/jupyter-kernels/97d39d47-7287-4c37-8b85-003ef23d456a.png)
 
 这个地址在你的终端里显示
 
-![](https://files.mdnice.com/user/70385/30ded035-dbe7-46e3-beba-c3ac25916af3.png)
+![](/images/toolkits/jupyter-kernels/30ded035-dbe7-46e3-beba-c3ac25916af3.png)
 
 ### matlab_kernel
 matlab 似乎也准备了成型的 jupyter 内核, 在虚拟环境中
@@ -231,14 +231,14 @@ InstallWolframLanguageForJupyter[]
 ## 军火库展示
 
 运行 mm, 可惜交互性不行
-![](https://files.mdnice.com/user/70385/d19caf36-2136-4a28-9f51-3902df035c5d.png)
+![](/images/toolkits/jupyter-kernels/d19caf36-2136-4a28-9f51-3902df035c5d.png)
 
 运行多门编程语言, 完事了还能导出 pdf, 真他妈是地表最强编程语言
-![](https://files.mdnice.com/user/70385/221bf10f-6bb5-4ba7-b531-cfe38ba2d834.png)
+![](/images/toolkits/jupyter-kernels/221bf10f-6bb5-4ba7-b531-cfe38ba2d834.png)
 
 这里, 我实在无法配置 C++ 的环境, 目前 C++ 的 jupyter kernel (解释性)似乎只有 xeus-cling, 只支持 MacOS 和 Linux 系统, 恰好手上有一台 Mac M2, 就捣鼓了起来, 结果没成功
 
-![](https://files.mdnice.com/user/70385/bb6a6d2b-6491-4760-b3ef-dfe6aa9663d5.png)
+![](/images/toolkits/jupyter-kernels/bb6a6d2b-6491-4760-b3ef-dfe6aa9663d5.png)
 
 此处是 anaconda.org 上关于 xeus-cling 的可用包, 注意看, 这里对 MacOS 操作系统的支持仅仅局限于 osx-64, 而不是 osx-arm64, 燃鹅燃鹅, M2 芯片属于 Apple Silicon 芯片系列, 采用的是 ARM 架构, 所以并不被支持! 后来我尝试了苹果公司推出的 Rosetta 2 转译器, 这玩意将 arm 架构的机器码转译为 x86-64 架构的机器码, 但是但是苹果电脑的 bash 命令下载 LLVM ("Low Level Virtual Machine") 时总是指定下载 ARM 架构的, 所以 Rosetta 2 找不到 x86_64 架构的 LLVM, 最终以失败告终.
 
