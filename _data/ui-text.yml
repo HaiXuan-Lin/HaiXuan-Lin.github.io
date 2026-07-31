@@ -294,7 +294,7 @@ zh: &DEFAULT_ZH
   email_label                : "电子邮件"
   recent_posts               : "最新文章"
   undefined_wpm              : "_config.yml中未定义words_per_minute参数"
-  comment_form_info          : "您的电子邮件地址不会被公开。（必填项已标注）"
+  comment_form_info          : "您的电子邮件地址不会被公开. （必填项已标注）"
   comment_form_comment_label : "评论"
   comment_form_md_info       : "支持Markdown格式"
   comment_form_name_label    : "姓名"
@@ -302,8 +302,8 @@ zh: &DEFAULT_ZH
   comment_form_website_label : "网站（可选）"
   comment_btn_submit         : "提交评论"
   comment_btn_submitted      : "已提交"
-  comment_success_msg        : "感谢您的评论！审核通过后会显示在网站上。"
-  comment_error_msg          : "抱歉，提交时出错。请确保所有必填项已完成，并重试。"
+  comment_success_msg        : "感谢您的评论！审核通过后会显示在网站上. "
+  comment_error_msg          : "抱歉, 提交时出错. 请确保所有必填项已完成, 并重试. "
   loading_label              : "加载中..."
 zh-CN:
   <<: *DEFAULT_ZH
@@ -336,7 +336,7 @@ zh-HK: &DEFAULT_ZH_HK
   email_label                : "電子郵件"
   recent_posts               : "最新文章"
   undefined_wpm              : "_config.yml中未定義words_per_minute參數"
-  comment_form_info          : "您的電子郵件地址不會被公開。（必填項已標註）"
+  comment_form_info          : "您的電子郵件地址不會被公開. （必填項已標註）"
   comment_form_comment_label : "評論"
   comment_form_md_info       : "支持Markdown格式"
   comment_form_name_label    : "姓名"
@@ -344,8 +344,8 @@ zh-HK: &DEFAULT_ZH_HK
   comment_form_website_label : "網站（可選）"
   comment_btn_submit         : "提交評論"
   comment_btn_submitted      : "已提交"
-  comment_success_msg        : "感謝您的評論！審核通過後會顯示在網站上。"
-  comment_error_msg          : "抱歉，提交時出錯。請確保所有必填項已完成，並重試。"
+  comment_success_msg        : "感謝您的評論！審核通過後會顯示在網站上. "
+  comment_error_msg          : "抱歉, 提交時出錯. 請確保所有必填項已完成, 並重試. "
   loading_label              : "加載中..."
 zh-TW:
   <<: *DEFAULT_ZH_HK
