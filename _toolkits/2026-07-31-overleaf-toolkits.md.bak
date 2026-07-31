@@ -1,0 +1,13 @@
+---
+title: "How to Set Up Overleaf Locally"
+excerpt: "Discover how to set up and run your own local Overleaf instance, complete with installation steps, configuration tips, and troubleshooting guidance."
+date: 2026-07-30
+presence_type: "Tutorial"
+---
+
+后台启动 `docker`, 安装并进入 `toolkit` 仓库:
+
+```bash
+git clone https://github.com/zhiqing0205/toolkit.git ./overleaf-toolkit && cd overleaf-toolkit
+```
+
