@@ -241,6 +241,12 @@ collections:
   blogs:
     output: true
     permalink: /:collection/:path/
+  toolkits:
+    output: true
+    permalink: /:collection/:path/
+  gadgets:
+    output: true
+    permalink: /:collection/:path/
 
 
 # These settings control how pages and collections are included in the site
@@ -325,6 +331,27 @@ defaults:
       author_profile: true
       share: true
       comments: false
+      toc: true
+  # _toolkits
+  - scope:
+      path: ""
+      type: toolkits
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: false
+      toc: true
+  # _gadgets
+  - scope:
+      path: ""
+      type: gadgets
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: false
+      toc: true
 
 
 # Sass/SCSS

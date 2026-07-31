@@ -23,6 +23,12 @@ main:
   - title: "Blogs"
     url: /blogs/
 
+  - title: "Toolkits"
+    url: /toolkits/
+
+  - title: "Gadgets"
+    url: /gadgets/
+
   # - title: "Talks"
   #   url: /talks/
 

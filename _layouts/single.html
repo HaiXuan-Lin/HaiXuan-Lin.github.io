@@ -15,7 +15,13 @@ layout: default
 {% endif %}
 
 <div id="main" role="main">
-  {% include sidebar.html %}
+  {% if page.toc %}
+    <div class="sidebar sticky toc-sidebar">
+      {% include toc icon=page.toc_icon title=page.toc_label %}
+    </div>
+  {% else %}
+    {% include sidebar.html %}
+  {% endif %}
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
@@ -41,6 +47,10 @@ layout: default
         {% elsif page.collection == 'reports' %}
           <p>{% if page.presence_type %}{{ page.presence_type }}{% endif %}{% if page.date %}{% if page.presence_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link pdf_label=page.download_label arxiv=page.arxiv sep=" · " %}</p>
         {% elsif page.collection == 'blogs' %}
+          <p>{% if page.presence_type %}{{ page.presence_type }}{% endif %}{% if page.date %}{% if page.presence_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link pdf_label=page.download_label arxiv=page.arxiv sep=" · " %}</p>
+        {% elsif page.collection == 'toolkits' %}
+          <p>{% if page.presence_type %}{{ page.presence_type }}{% endif %}{% if page.date %}{% if page.presence_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link pdf_label=page.download_label arxiv=page.arxiv sep=" · " %}</p>
+        {% elsif page.collection == 'gadgets' %}
           <p>{% if page.presence_type %}{{ page.presence_type }}{% endif %}{% if page.date %}{% if page.presence_type %} · {% endif %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y" }}</time>{% endif %}{% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link pdf_label=page.download_label arxiv=page.arxiv sep=" · " %}</p>
         {% elsif page.collection == 'publications' %}
           <p><i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }}{% include badges/row.html link=page.link link_label=page.link_label pdf=page.download_link pdf_label=page.download_label arxiv=page.arxiv sep=" · " %}</p>
@@ -81,7 +91,7 @@ layout: default
           <p style="font-size: smaller"><a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
         {% endif %}
 
-        {% unless page.collection == 'projects' or page.collection == 'reports' or page.collection == 'blogs' %}
+        {% unless page.collection == 'projects' or page.collection == 'reports' or page.collection == 'blogs' or page.collection == 'toolkits' or page.collection == 'gadgets' %}
           {% if page.link %}<div><a href="{{ page.link }}" class="btn">{% if page.link_label %}{{ page.link_label }}{% else %}{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}{% endif %}</a></div>{% endif %}
           {% if page.download_link %}<div>{% include download-link.html href=page.download_link label=page.download_label class="btn" %}</div>{% endif %}
         {% endunless %}
