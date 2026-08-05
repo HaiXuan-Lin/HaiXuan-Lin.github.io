@@ -1,0 +1,109 @@
+\documentclass[11pt, reqno]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title[Selection Rule]{The Selection Rule and Group Representation Method in Electron-Phonon Interaction}
+\author[H.X. Lin]{Haixuan Lin}
+\date{Aug 7, 2026}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\lhdeq}{\trianglelefteq}
+
+
+\begin{document}
+
+\begin{abstract}
+    It is well known that the group representation method can be used to determine whether a given transition is allowed. However, for electron-phonon interactions in a crystal --- an infinite system --- the symmetry group is not finite, and traditional representation theory is not a sufficiently powerful tool. In this work, we develop a rigorous and general method from the ground up to address this problem.
+\end{abstract}
+
+\maketitle
+
+
+
+\section{Introduction}
+
+The problem begins with the scattering amplitude for electron-phonon interaction:
+\begin{equation}\label{eq: electron-phonon interaction}
+    g_{\gamma \alpha}^{\nu}\left( \mathbf{k}, \mathbf{q} \right) \coloneqq \left< \psi_{\gamma \mathbf{k}+\mathbf{q}} \right|\hat V_{\nu \mathbf{q}} \left| \psi_{\alpha\mathbf{k}} \right> ,
+\end{equation}
+where $\mathbf{k}$ is the initial electron momentum, $\mathbf{q}$ is the phonon momentum, and $\alpha$, $\gamma$, and $\nu$ denote the initial and final electron band indices and the phonon mode, respectively. $\left| \psi_{\alpha \mathbf{k}} \right>$ and $\left| \psi_{\gamma \mathbf{k}+\mathbf{q}} \right>$ are the initial and final states of the electron before and after the phonon-induced Kohn--Sham perturbation potential. Our task is to determin whether \eqref{eq: electron-phonon interaction} is allowed by symmetry or not by using group representation method.
+
+
+
+\section{Precise definition of Our Problem}
+
+For further work, we need to give a precise definition of our problem, including to clarify what is "allowed by symmetry", and to find out concrete groups and their representation space and so on.
+
+By saying symmetry, we are discussing "something left invariant after doing some operations". The group is the collection of those operations, so we are supposed to find out those group left \eqref{eq: electron-phonon interaction} invariant.
+
+Let $\hat{H}$ be the single-body electron Hamiltonian, $\mathcal{H}$ the electron states Hilbert space and $SG\coloneqq \left\{ \left(\hat R\middle |\mathbf{w} \right) \right\}$ the space group with action on Hilbert space defined intrinsically by $\left( g\cdot \psi \right) \left( \mathbf{r} \right) \coloneqq \psi \left( g^{-1}\cdot \mathbf{r} \right)$ or more clearly by Dirac notation:
+\begin{equation}\label{eq: g acts on psi}
+    \left( g\cdot \psi \right) \left( \mathbf{r} \right) =\left< \mathbf{r} \right|g\cdot \left| \psi \right> =\left( \left< \mathbf{r} \right|\cdot g \right) \left| \psi \right> =\left( g^{-1}\cdot \left| \mathbf{r} \right> \right) ^{\dagger}\left| \psi \right>
+\end{equation}
+with $g\cdot \left| \mathbf{r} \right> =\left| g\cdot \mathbf{r} \right>$, giving definition of expression $g\cdot \left| \psi \right>$ by defined on general complete basis $\left\{ \left| \mathbf{r} \right> \right\}$, then according to Bloch's theorem, there is a direct sum decomposition:
+\begin{equation}
+    \mathcal{H} =\bigoplus_{\mathbf{k}}{\mathcal{H} _{\mathbf{k}}}
+\end{equation}
+where
+\begin{equation}
+    \mathcal{H} _{\mathbf{k}}\coloneqq \left\{ \left| \psi _{n\mathbf{k}} \right> :\hat{T}_{\mathbf{w}}\left| \psi _{n\mathbf{k}} \right> =\mathrm{e}^{-\mathrm{i}\mathbf{k}\cdot \mathbf{w}}\left| \psi _{n\mathbf{k}} \right> \right\} ,
+\end{equation}
+and the $n$ presents any other quantum numbers, $\hat{T}_{\mathbf{w}}$ is the translation operator of vector $\mathbf{w}$. Due to the electron states in \eqref{eq: electron-phonon interaction} are label by momentum as good quatum numbers, the proper representation space are some $\mathcal{H}_{\mathbf{k}}$'s and thus we need to find out the stabilizer group $G_\mathbf{k}\coloneqq \operatorname{Stab}_{SG}\left(\mathcal{H}_\mathbf{k}\right)$ (called little group) that leave $\mathcal{H}_{\mathbf{k}}$ be $G_\mathbf{k}$-invariant.
+
+The primitive definition of $SG$ naturally involves the group action on real space, but now we need to work under reciprocal space so it urges us to give a natural group action of $G$ on momentum. Let $L\coloneqq \left\{ \left( 1\middle|\mathbf{r} \right) \right\}\lhdeq SG$ be the latiice system in real space and $\widehat{L}\coloneqq \mathrm{Hom}\left( L,U\left(1\right) \right)$ the Pontryagin dual with modulo $2\pi$ equivalence --- physically speaking, the reciprocal space with modulo reciprocal lattice vector, and if you will, any element $\chi\in \widehat{L}$ can be express use Dirac notation of momentum by $\left| \chi \right> =\sqrt{2\pi}\left| \mathbf{k} \right>$, here $\sqrt{2\pi}$ aims to reconcile nomalization --- it is a 3 dimensional torus due to Born--von Karman boundary condition. Define conjugate action of $SG$ on $L$:
+\begin{equation}
+    \left( \hat{R} \middle| \mathbf{w} \right) \cdot \left( 1 \middle| \mathbf{r} \right) \coloneqq \left( \hat{R} \middle| \mathbf{w} \right) \left( 1 \middle| \mathbf{r} \right) \left( \hat{R} \middle| \mathbf{w} \right) ^{-1}=\left( 1 \middle| \hat{R}\mathbf{r} \right) ,
+\end{equation}
+and we notice $\mathbf{w}$ vanishes, which means this conjugate action is trivial on $L$ itself and thus go through quotient group $PG\coloneqq G/L$ --- the so-called point group. We thus can define the action of $SG$ on $L$ by defining so of $PG$ on $L$: $\forall g=\left( \hat{R} \middle| \mathbf{w} \right) \in SG$, or you can consider its quotient image $\hat{R}\in PG$, and $\forall \chi \in \widehat{L}$, we imitate \eqref{eq: g acts on psi} to define
+\begin{equation}
+    \left( g\cdot \chi \right) \left( \mathbf{r} \right) \coloneqq \chi \left( g^{-1}\mathbf{r}g \right) =\chi \left( g^{-1}\cdot \mathbf{r} \right) =\chi \left( \hat{R}^{-1}\mathbf{r} \right) .
+\end{equation}
+This is a contravariant operator. To avoid potential obfuscation of symbolic calculus system, one can use Dirac notation instead,
+\begin{equation}
+    \left( g\cdot \chi \right) \left( \mathbf{r} \right) =\left< \mathbf{r} \right|g\cdot \left| \chi \right> =\left( \left< \mathbf{r} \right|\cdot g \right) \left| \chi \right> =\left( g^{-1}\cdot \left| \mathbf{r} \right> \right) ^{\dagger}\left| \chi \right>
+\end{equation}
+and with $g\cdot \left| \mathbf{r} \right> =\left| g\cdot \mathbf{r} \right>$.
+
+As for $V_{\nu\mathbf{q}}$, in order to apply representation theory, we need to interpret it as a element in some linear space, which requires to be clarify by tensor operator concept. Phonons are quasi-particle after second-quantization, so from the moment space perspective, there is no need to distinguish $G_\mathbf{k}$ and $G_{\mathbf{q}}$ in the mathematics. By linear approximation, we can say $V_{\nu \mathbf{q}}$ is a function or functional of $\mathbf{q}$, henceforth we deem $V_{\nu\mathbf{q}}$ as similar as $\left| \psi _{n\mathbf{k}} \right>$ in representation theory level when calculating characters afterwards.
+
+We have got all basic concepts to define our problems rigorously. The \eqref{eq: electron-phonon interaction} is a element in 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\nocite{*}
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}

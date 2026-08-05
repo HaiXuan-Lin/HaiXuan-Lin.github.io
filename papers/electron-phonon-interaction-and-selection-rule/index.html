@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<script>(function(){var d=document.documentElement;var t=localStorage.getItem("theme");var theme=(t==="dark"||t==="light")?t:((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");if(theme==="dark"){d.setAttribute("data-theme","dark");}else{d.removeAttribute("data-theme");}})();</script>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>The Selection Rule and Group Representation Method in Electron-Phonon Interaction</title>
+<!--Generated on Wed Aug  5 16:03:05 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<!--Document created on Aug 7, 2026.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="ar5iv-fonts.css" type="text/css">
+<link rel="stylesheet" href="ar5iv.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js"></script>
+</head>
+<body>
+<style>
+.paper-topbar{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:0.5em;padding:0.5em 1em;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#eef0f2;color:var(--text-color,#292929);border-bottom:1px solid var(--border-color,#ddd);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+html[data-theme="dark"] .paper-topbar{background:#161b22;box-shadow:0 1px 3px rgba(0,0,0,0.5);}
+.paper-topbar__group{display:flex;align-items:center;gap:0.5em;}
+.paper-topbar__btn{display:inline-flex;align-items:center;padding:0.25em 0.75em;border-radius:999px;border:1px solid var(--border-color,#ccc);background:transparent;color:inherit;text-decoration:none;font:inherit;cursor:pointer;line-height:1.4;}
+.paper-topbar__btn:hover{background:rgba(128,128,128,0.15);}
+.paper-topbar__pdf-icon{width:14px;height:14px;margin-right:0.35em;fill:#EC1C24;}
+.paper-topbar__theme-btn{display:inline-flex;align-items:center;justify-content:center;width:1.8em;height:1.8em;padding:0;border:0;border-radius:4px;background:transparent;color:inherit;font-size:1em;line-height:1;cursor:pointer;}
+.paper-topbar__theme-btn:hover{background:rgba(128,128,128,0.15);}
+.paper-topbar__theme-btn svg{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<div class="paper-topbar">
+<a href="/" class="paper-topbar__btn" title="Back" onclick="if(document.referrer){history.back();return false;}">&larr; Back</a>
+<div class="paper-topbar__group">
+<button type="button" id="paper-theme-toggle" class="paper-topbar__theme-btn" aria-label="Toggle color theme" title="Toggle color theme"></button>
+</div>
+</div>
+<script>(function(){var btn=document.getElementById("paper-theme-toggle");var SUN='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';var MOON='<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" stroke="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';function icon(){return document.documentElement.getAttribute("data-theme")==="dark"?MOON:SUN;}function sync(){if(btn){btn.innerHTML=icon();}}sync();if(btn){btn.addEventListener("click",function(){var d=document.documentElement;var next=d.getAttribute("data-theme")==="dark"?"light":"dark";localStorage.setItem("theme",next);if(next==="dark"){d.setAttribute("data-theme","dark");}else{d.removeAttribute("data-theme");}sync();});}window.addEventListener("pageshow",function(e){if(!e.persisted){return;}var d=document.documentElement;var t=localStorage.getItem("theme");var theme=(t==="dark"||t==="light")?t:((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");if(theme==="dark"){d.setAttribute("data-theme","dark");}else{d.removeAttribute("data-theme");}sync();});})();</script>
+
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In The Selection Rule and Group Representation Method in Electron-Phonon Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In The Selection Rule and Group Representation Method in Electron-Phonon Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Precise definition of Our Problem</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">The Selection Rule and Group Representation Method in Electron-Phonon Interaction</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Haixuan Lin
+</span></span>
+</div>
+<div class="ltx_dates">(Date: Aug 7, 2026)</div>
+
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract.</h6>
+<p class="ltx_p">It is well known that the group representation method can be used to determine whether a given transition is allowed. However, for electron-phonon interactions in a crystal — an infinite system — the symmetry group is not finite, and traditional representation theory is not a sufficiently powerful tool. In this work, we develop a rigorous and general method from the ground up to address this problem.</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1. </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p class="ltx_p">The problem begins with the scattering amplitude for electron-phonon interaction:</p>
+<table id="S1.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.E1.m1" class="ltx_Math" alttext="g_{\gamma\alpha}^{\nu}\left(\mathbf{k},\mathbf{q}\right)\coloneqq\left&lt;\psi_{%
+\gamma\mathbf{k}+\mathbf{q}}\right|V_{\nu\mathbf{q}}\left|\psi_{\alpha\mathbf{%
+k}}\right&gt;," display="block"><mrow><mrow><mrow><msubsup><mi>g</mi><mrow><mi>γ</mi><mo>⁢</mo><mi>α</mi></mrow><mi>ν</mi></msubsup><mo>⁢</mo><mrow><mo>(</mo><mi>𝐤</mi><mo>,</mo><mi>𝐪</mi><mo>)</mo></mrow></mrow><mo>≔</mo><mrow><mo>⟨</mo><msub><mi>ψ</mi><mrow><mrow><mi>γ</mi><mo>⁢</mo><mi>𝐤</mi></mrow><mo>+</mo><mi>𝐪</mi></mrow></msub><mo>|</mo><msub><mi>V</mi><mrow><mi>ν</mi><mo>⁢</mo><mi>𝐪</mi></mrow></msub><mo>|</mo><msub><mi>ψ</mi><mrow><mi>α</mi><mo>⁢</mo><mi>𝐤</mi></mrow></msub><mo>⟩</mo></mrow></mrow><mo>,</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">where <math id="S1.p1.m1" class="ltx_Math" alttext="\mathbf{k}" display="inline"><mi>𝐤</mi></math> is the initial electron momentum, <math id="S1.p1.m2" class="ltx_Math" alttext="\mathbf{q}" display="inline"><mi>𝐪</mi></math> is the phonon momentum, and <math id="S1.p1.m3" class="ltx_Math" alttext="\alpha" display="inline"><mi>α</mi></math>, <math id="S1.p1.m4" class="ltx_Math" alttext="\gamma" display="inline"><mi>γ</mi></math>, and <math id="S1.p1.m5" class="ltx_Math" alttext="\nu" display="inline"><mi>ν</mi></math> denote the initial and final electron band indices and the phonon mode, respectively. <math id="S1.p1.m6" class="ltx_Math" alttext="\left|\psi_{\alpha\mathbf{k}}\right&gt;" display="inline"><mrow><mo>|</mo><msub><mi>ψ</mi><mrow><mi>α</mi><mo>⁢</mo><mi>𝐤</mi></mrow></msub><mo>⟩</mo></mrow></math> and <math id="S1.p1.m7" class="ltx_Math" alttext="\left|\psi_{\gamma\mathbf{k}+\mathbf{q}}\right&gt;" display="inline"><mrow><mo>|</mo><msub><mi>ψ</mi><mrow><mrow><mi>γ</mi><mo>⁢</mo><mi>𝐤</mi></mrow><mo>+</mo><mi>𝐪</mi></mrow></msub><mo>⟩</mo></mrow></math> are the initial and final states of the electron before and after the phonon-induced Kohn–Sham perturbation potential. Our task is to determin whether (<a href="#S1.E1" title="In 1. Introduction ‣ The Selection Rule and Group Representation Method in Electron-Phonon Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>) is allowed by symmetry or not by using group representation method.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2. </span>Precise definition of Our Problem</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p class="ltx_p">For further work, we need to give a precise definition of our problem, including to clarify what is ”allowed by symmetry”, and to find out concrete groups and their representation space and so on.</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p class="ltx_p">By saying symmetry, we are discussing ”something left invariant after doing some operations”. The group is the collection of those operations, so we are supposed to find out those group left (<a href="#S1.E1" title="In 1. Introduction ‣ The Selection Rule and Group Representation Method in Electron-Phonon Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>) invariant.</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p class="ltx_p">Let <math id="S2.p3.m1" class="ltx_Math" alttext="\hat{H}" display="inline"><mover accent="true"><mi>H</mi><mo>^</mo></mover></math> be the single-body electron Hamiltonian, <math id="S2.p3.m2" class="ltx_Math" alttext="\mathcal{H}" display="inline"><mi class="ltx_font_mathcaligraphic">ℋ</mi></math> the electron states Hilbert space and <math id="S2.p3.m3" class="ltx_math_unparsed" alttext="SG\coloneqq\left\{\left(\hat{R}\middle|\mathbf{w}\right)\right\}" display="inline"><mrow><mi>S</mi><mi>G</mi><mo>≔</mo><mrow><mo>{</mo><mrow><mo>(</mo><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mi>𝐰</mi><mo>)</mo></mrow><mo>}</mo></mrow></mrow></math> the space group with action on Hilbert space defined intrinsically by <math id="S2.p3.m4" class="ltx_Math" alttext="\left(g\cdot\psi\right)\left(\mathbf{r}\right)\coloneqq\psi\left(g^{-1}\cdot%
+\mathbf{r}\right)" display="inline"><mrow><mrow><mrow><mo>(</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>ψ</mi></mrow><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>(</mo><mi>𝐫</mi><mo>)</mo></mrow></mrow><mo>≔</mo><mrow><mi>ψ</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>𝐫</mi></mrow><mo>)</mo></mrow></mrow></mrow></math> or more clearly by Dirac notation:</p>
+<table id="S2.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E2.m1" class="ltx_Math" alttext="\left(g\cdot\psi\right)\left(\mathbf{r}\right)=\left&lt;\mathbf{r}\right|g\cdot%
+\left|\psi\right&gt;=\left(\left&lt;\mathbf{r}\right|\cdot g\right)\left|\psi\right&gt;%
+=\left(g^{-1}\cdot\left|\mathbf{r}\right&gt;\right)^{\dagger}\left|\psi\right&gt;" display="block"><mrow><mrow><mrow><mo>(</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>ψ</mi></mrow><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>(</mo><mi>𝐫</mi><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mo>⟨</mo><mi>𝐫</mi><mo>|</mo></mrow><mo>⁢</mo><mi>g</mi></mrow><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>|</mo><mi>ψ</mi><mo>⟩</mo></mrow></mrow><mo>=</mo><mrow><mrow><mo>(</mo><mrow><mrow><mo>⟨</mo><mi>𝐫</mi><mo rspace="0.055em">|</mo></mrow><mo rspace="0.222em">⋅</mo><mi>g</mi></mrow><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>|</mo><mi>ψ</mi><mo>⟩</mo></mrow></mrow><mo>=</mo><mrow><msup><mrow><mo>(</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>|</mo><mi>𝐫</mi><mo>⟩</mo></mrow></mrow><mo>)</mo></mrow><mo>†</mo></msup><mo>⁢</mo><mrow><mo>|</mo><mi>ψ</mi><mo>⟩</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">with <math id="S2.p3.m5" class="ltx_Math" alttext="g\cdot\left|\mathbf{r}\right&gt;=\left|g\cdot\mathbf{r}\right&gt;" display="inline"><mrow><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>|</mo><mi>𝐫</mi><mo>⟩</mo></mrow></mrow><mo>=</mo><mrow><mo>|</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>𝐫</mi></mrow><mo>⟩</mo></mrow></mrow></math>, giving definition of expression <math id="S2.p3.m6" class="ltx_Math" alttext="g\cdot\left|\psi\right&gt;" display="inline"><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>|</mo><mi>ψ</mi><mo>⟩</mo></mrow></mrow></math> by defined on general complete basis <math id="S2.p3.m7" class="ltx_Math" alttext="\left\{\left|\mathbf{r}\right&gt;\right\}" display="inline"><mrow><mo>{</mo><mrow><mo>|</mo><mi>𝐫</mi><mo>⟩</mo></mrow><mo>}</mo></mrow></math>, then according to Bloch’s theorem, there is a direct sum decomposition:</p>
+<table id="S2.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E3.m1" class="ltx_Math" alttext="\mathcal{H}=\bigoplus_{\mathbf{k}}{\mathcal{H}_{\mathbf{k}}}" display="block"><mrow><mi class="ltx_font_mathcaligraphic">ℋ</mi><mo rspace="0.111em">=</mo><mrow><munder><mo movablelimits="false">⨁</mo><mi>𝐤</mi></munder><msub><mi class="ltx_font_mathcaligraphic">ℋ</mi><mi>𝐤</mi></msub></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">where</p>
+<table id="S2.E4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(4)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E4.m1" class="ltx_math_unparsed" alttext="\mathcal{H}_{\mathbf{k}}\coloneqq\left\{\left|\psi_{n\mathbf{k}}\right&gt;:\hat{T%
+}_{\mathbf{w}}\left|\psi_{n\mathbf{k}}\right&gt;=\mathrm{e}^{-\mathrm{i}\mathbf{k%
+}\cdot\mathbf{w}}\left|\psi_{n\mathbf{k}}\right&gt;\right\}," display="block"><mrow><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">ℋ</mi><mi>𝐤</mi></msub><mo>≔</mo><mrow><mo>{</mo><mo fence="false" rspace="0.167em">|</mo><msub><mi>ψ</mi><mrow><mi>n</mi><mo>⁢</mo><mi>𝐤</mi></mrow></msub><mo rspace="0.278em">⟩</mo></mrow><mo rspace="0.278em">:</mo><msub><mover accent="true"><mi>T</mi><mo>^</mo></mover><mi>𝐰</mi></msub><mo fence="false" rspace="0.167em">|</mo><msub><mi>ψ</mi><mrow><mi>n</mi><mo>⁢</mo><mi>𝐤</mi></mrow></msub><mo>⟩</mo></mrow><mo>=</mo><msup><mi mathvariant="normal">e</mi><mrow><mo>−</mo><mrow><mrow><mi mathvariant="normal">i</mi><mo>⁢</mo><mi>𝐤</mi></mrow><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>𝐰</mi></mrow></mrow></msup><mo fence="false" rspace="0.167em">|</mo><msub><mi>ψ</mi><mrow><mi>n</mi><mo>⁢</mo><mi>𝐤</mi></mrow></msub><mo>⟩</mo></mrow><mo>}</mo><mo>,</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">and the <math id="S2.p3.m8" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math> presents any other quantum numbers. Due to the electron states in (<a href="#S1.E1" title="In 1. Introduction ‣ The Selection Rule and Group Representation Method in Electron-Phonon Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>) are label by momentum as good quatum numbers, the proper representation space are some <math id="S2.p3.m9" class="ltx_Math" alttext="\mathcal{H}_{\mathbf{k}}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℋ</mi><mi>𝐤</mi></msub></math>’s and thus we need to find out the stabilizer group <math id="S2.p3.m10" class="ltx_Math" alttext="G_{\mathbf{k}}\coloneqq\operatorname{Stab}_{SG}\left(\mathcal{H}_{\mathbf{k}}\right)" display="inline"><mrow><msub><mi>G</mi><mi>𝐤</mi></msub><mo>≔</mo><mrow><msub><mi>Stab</mi><mrow><mi>S</mi><mo>⁢</mo><mi>G</mi></mrow></msub><mo>⁡</mo><mrow><mo>(</mo><msub><mi class="ltx_font_mathcaligraphic">ℋ</mi><mi>𝐤</mi></msub><mo>)</mo></mrow></mrow></mrow></math> (called little group) that leave <math id="S2.p3.m11" class="ltx_Math" alttext="\mathcal{H}_{\mathbf{k}}" display="inline"><msub><mi class="ltx_font_mathcaligraphic">ℋ</mi><mi>𝐤</mi></msub></math> be <math id="S2.p3.m12" class="ltx_Math" alttext="G_{\mathbf{k}}" display="inline"><msub><mi>G</mi><mi>𝐤</mi></msub></math>-invariant.</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p class="ltx_p">The primitive definition of <math id="S2.p4.m1" class="ltx_Math" alttext="SG" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mi>G</mi></mrow></math> naturally involves the group action on real space, but now we need to work under reciprocal space so it urges us to give a natural group action of <math id="S2.p4.m2" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math> on momentum. Let <math id="S2.p4.m3" class="ltx_math_unparsed" alttext="L\coloneqq\left\{\left(1\middle|\mathbf{r}\right)\right\}\trianglelefteq SG" display="inline"><mrow><mi>L</mi><mo>≔</mo><mrow><mo>{</mo><mrow><mo>(</mo><mn>1</mn><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mi>𝐫</mi><mo>)</mo></mrow><mo>}</mo></mrow><mi mathvariant="normal">⊴</mi><mi>S</mi><mi>G</mi></mrow></math> be the latiice system in real space and <math id="S2.p4.m4" class="ltx_Math" alttext="\widehat{L}\coloneqq\mathrm{Hom}\left(L,U\left(1\right)\right)" display="inline"><mrow><mover accent="true"><mi>L</mi><mo>^</mo></mover><mo>≔</mo><mrow><mi>Hom</mi><mo>⁢</mo><mrow><mo>(</mo><mi>L</mi><mo>,</mo><mrow><mi>U</mi><mo>⁢</mo><mrow><mo>(</mo><mn>1</mn><mo>)</mo></mrow></mrow><mo>)</mo></mrow></mrow></mrow></math> the Pontryagin dual with modulo <math id="S2.p4.m5" class="ltx_Math" alttext="2\pi" display="inline"><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></math> equivalence — physically speaking, the reciprocal space with modulo reciprocal lattice vector, and if you will, any element <math id="S2.p4.m6" class="ltx_Math" alttext="\chi\in\widehat{L}" display="inline"><mrow><mi>χ</mi><mo>∈</mo><mover accent="true"><mi>L</mi><mo>^</mo></mover></mrow></math> can be express use Dirac notation of momentum by <math id="S2.p4.m7" class="ltx_Math" alttext="\left|\chi\right&gt;=\sqrt{2\pi}\left|\mathbf{k}\right&gt;" display="inline"><mrow><mrow><mo>|</mo><mi>χ</mi><mo>⟩</mo></mrow><mo>=</mo><mrow><msqrt><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></msqrt><mo>⁢</mo><mrow><mo>|</mo><mi>𝐤</mi><mo>⟩</mo></mrow></mrow></mrow></math>, here <math id="S2.p4.m8" class="ltx_Math" alttext="\sqrt{2\pi}" display="inline"><msqrt><mrow><mn>2</mn><mo>⁢</mo><mi>π</mi></mrow></msqrt></math> aims to reconcile nomalization — it is a 3 dimensional torus due to Born–von Karman boundary condition. Define conjugate action of <math id="S2.p4.m9" class="ltx_Math" alttext="SG" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mi>G</mi></mrow></math> on <math id="S2.p4.m10" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>:</p>
+<table id="S2.E5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(5)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E5.m1" class="ltx_math_unparsed" alttext="\left(\hat{R}\middle|\mathbf{w}\right)\cdot\left(1\middle|\mathbf{r}\right)%
+\coloneqq\left(\hat{R}\middle|\mathbf{w}\right)\left(1\middle|\mathbf{r}\right%
+)\left(\hat{R}\middle|\mathbf{w}\right)^{-1}=\left(1\middle|\hat{R}\mathbf{r}%
+\right)," display="block"><mrow><mrow><mo>(</mo><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mi>𝐰</mi><mo rspace="0.055em">)</mo></mrow><mo rspace="0.222em">⋅</mo><mrow><mo>(</mo><mn>1</mn><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mi>𝐫</mi><mo>)</mo></mrow><mo>≔</mo><mrow><mo>(</mo><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mi>𝐰</mi><mo>)</mo></mrow><mrow><mo>(</mo><mn>1</mn><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mi>𝐫</mi><mo>)</mo></mrow><msup><mrow><mo>(</mo><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mi>𝐰</mi><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mrow><mo>(</mo><mn>1</mn><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mover accent="true"><mi>R</mi><mo>^</mo></mover><mi>𝐫</mi><mo>)</mo></mrow><mo>,</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">and we notice <math id="S2.p4.m11" class="ltx_Math" alttext="\mathbf{w}" display="inline"><mi>𝐰</mi></math> vanishes, which means this conjugate action is trivial on <math id="S2.p4.m12" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math> itself and thus go through quotient group <math id="S2.p4.m13" class="ltx_Math" alttext="PG\coloneqq G/L" display="inline"><mrow><mrow><mi>P</mi><mo>⁢</mo><mi>G</mi></mrow><mo>≔</mo><mrow><mi>G</mi><mo>/</mo><mi>L</mi></mrow></mrow></math> — the so-called point group. We thus can define the action of <math id="S2.p4.m14" class="ltx_Math" alttext="SG" display="inline"><mrow><mi>S</mi><mo>⁢</mo><mi>G</mi></mrow></math> on <math id="S2.p4.m15" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math> by defining so of <math id="S2.p4.m16" class="ltx_Math" alttext="PG" display="inline"><mrow><mi>P</mi><mo>⁢</mo><mi>G</mi></mrow></math> on <math id="S2.p4.m17" class="ltx_Math" alttext="L" display="inline"><mi>L</mi></math>: <math id="S2.p4.m18" class="ltx_math_unparsed" alttext="\forall g=\left(\hat{R}\middle|\mathbf{w}\right)\in SG" display="inline"><mrow><mo rspace="0.167em">∀</mo><mi>g</mi><mo>=</mo><mrow><mo>(</mo><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo lspace="0em" rspace="0em" stretchy="true">|</mo><mi>𝐰</mi><mo>)</mo></mrow><mo>∈</mo><mi>S</mi><mi>G</mi></mrow></math>, or you can consider its quotient image <math id="S2.p4.m19" class="ltx_Math" alttext="\hat{R}\in PG" display="inline"><mrow><mover accent="true"><mi>R</mi><mo>^</mo></mover><mo>∈</mo><mrow><mi>P</mi><mo>⁢</mo><mi>G</mi></mrow></mrow></math>, and <math id="S2.p4.m20" class="ltx_Math" alttext="\forall\chi\in\widehat{L}" display="inline"><mrow><mrow><mo rspace="0.167em">∀</mo><mi>χ</mi></mrow><mo>∈</mo><mover accent="true"><mi>L</mi><mo>^</mo></mover></mrow></math>, we imitate (<a href="#S2.E2" title="In 2. Precise definition of Our Problem ‣ The Selection Rule and Group Representation Method in Electron-Phonon Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>) to define</p>
+<table id="S2.E6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(6)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E6.m1" class="ltx_Math" alttext="\left(g\cdot\chi\right)\left(\mathbf{r}\right)\coloneqq\chi\left(g^{-1}\mathbf%
+{r}g\right)=\chi\left(g^{-1}\cdot\mathbf{r}\right)=\chi\left(\hat{R}^{-1}%
+\mathbf{r}\right)." display="block"><mrow><mrow><mrow><mrow><mo>(</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>χ</mi></mrow><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>(</mo><mi>𝐫</mi><mo>)</mo></mrow></mrow><mo>≔</mo><mrow><mi>χ</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>𝐫</mi><mo>⁢</mo><mi>g</mi></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mi>χ</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>𝐫</mi></mrow><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mi>χ</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msup><mover accent="true"><mi>R</mi><mo>^</mo></mover><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>⁢</mo><mi>𝐫</mi></mrow><mo>)</mo></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">This is a contravariant operator. To avoid potential obfuscation of symbolic calculus system, one can use Dirac notation instead,</p>
+<table id="S2.E7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(7)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E7.m1" class="ltx_Math" alttext="\left(g\cdot\chi\right)\left(\mathbf{r}\right)=\left&lt;\mathbf{r}\right|g\cdot%
+\left|\chi\right&gt;=\left(\left&lt;\mathbf{r}\right|\cdot g\right)\left|\chi\right&gt;%
+=\left(g^{-1}\cdot\left|\mathbf{r}\right&gt;\right)^{\dagger}\left|\chi\right&gt;" display="block"><mrow><mrow><mrow><mo>(</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>χ</mi></mrow><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>(</mo><mi>𝐫</mi><mo>)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mo>⟨</mo><mi>𝐫</mi><mo>|</mo></mrow><mo>⁢</mo><mi>g</mi></mrow><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>|</mo><mi>χ</mi><mo>⟩</mo></mrow></mrow><mo>=</mo><mrow><mrow><mo>(</mo><mrow><mrow><mo>⟨</mo><mi>𝐫</mi><mo rspace="0.055em">|</mo></mrow><mo rspace="0.222em">⋅</mo><mi>g</mi></mrow><mo>)</mo></mrow><mo>⁢</mo><mrow><mo>|</mo><mi>χ</mi><mo>⟩</mo></mrow></mrow><mo>=</mo><mrow><msup><mrow><mo>(</mo><mrow><msup><mi>g</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>|</mo><mi>𝐫</mi><mo>⟩</mo></mrow></mrow><mo>)</mo></mrow><mo>†</mo></msup><mo>⁢</mo><mrow><mo>|</mo><mi>χ</mi><mo>⟩</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">and with <math id="S2.p4.m21" class="ltx_Math" alttext="g\cdot\left|\mathbf{r}\right&gt;=\left|g\cdot\mathbf{r}\right&gt;" display="inline"><mrow><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>|</mo><mi>𝐫</mi><mo>⟩</mo></mrow></mrow><mo>=</mo><mrow><mo>|</mo><mrow><mi>g</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>𝐫</mi></mrow><mo>⟩</mo></mrow></mrow></math>.</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+</ul>
+</section>
+<div id="p1" class="ltx_para">
+<p class="ltx_p"></p>
+</div>
+</article>
+</div>
+
+</div>
+</body>
+</html>
