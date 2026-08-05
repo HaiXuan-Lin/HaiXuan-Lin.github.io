@@ -20,6 +20,12 @@ if ! command -v latexmlc >/dev/null 2>&1; then
   exit 1
 fi
 
+have_latexmk=1
+if ! command -v latexmk >/dev/null 2>&1; then
+  have_latexmk=0
+  echo "warning: latexmk not found -- PDF companions will not be built (install a LaTeX distribution, e.g. 'brew install --cask mactex-no-gui')." >&2
+fi
+
 targets=("$@")
 if [ ${#targets[@]} -eq 0 ]; then
   for d in "$TEX_DIR"/*/; do
@@ -39,6 +45,19 @@ for slug in "${targets[@]}"; do
 
   echo "==> Building $slug"
   mkdir -p "$dest_dir"
+
+  # Compile the PDF companion ourselves so a single script run produces both
+  # outputs -- previously this relied on main.pdf already existing from a
+  # separate manual compile, and silently produced a page with no PDF button
+  # if that step had been skipped.
+  if [ "$have_latexmk" -eq 1 ]; then
+    (
+      cd "$src_dir"
+      if ! latexmk -pdf -interaction=nonstopmode -halt-on-error -silent main.tex >latexmk.log 2>&1; then
+        echo "    warning: latexmk failed to build $slug/main.pdf -- see $src_dir/latexmk.log" >&2
+      fi
+    )
+  fi
 
   (
     cd "$src_dir"
@@ -66,6 +85,8 @@ for slug in "${targets[@]}"; do
     mkdir -p "$FILES_DIR"
     cp "$src_dir/main.pdf" "$FILES_DIR/$slug.pdf"
     pdf_href="/files/$slug.pdf"
+  else
+    echo "    warning: $src_dir/main.pdf not found -- page will have no PDF button" >&2
   fi
 
   # Add a top bar (back / PDF / theme toggle) and wire the color theme to the
