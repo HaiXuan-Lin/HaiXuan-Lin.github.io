@@ -1,5 +1,5 @@
 ---
-title: "he Selection Rule and Group Representation Method in Electron-Phonon Interaction"
+title: "The Selection Rule and Group Representation Method in Electron-Phonon Interaction"
 excerpt: "From the representation theory's perspective to determine the forbiddenness of a transition."
 date: 2026-08-07
 presence_type: "theoretical derivation and group meeting"
