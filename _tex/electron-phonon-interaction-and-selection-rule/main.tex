@@ -38,9 +38,9 @@
 
 The problem begins with the scattering amplitude for electron-phonon interaction:
 \begin{equation}\label{eq: electron-phonon interaction}
-    g_{\gamma \alpha}^{\nu}\left( \mathbf{k}, \mathbf{q} \right) \coloneqq \left< \psi_{\gamma \mathbf{k}+\mathbf{q}} \right|\hat V_{\nu \mathbf{q}} \left| \psi_{\alpha\mathbf{k}} \right> ,
+    g_{fi}^{\nu}\left( \mathbf{k},\mathbf{q} \right) \coloneqq \left< \psi _{f\mathbf{k}+\mathbf{q}} \right|\hat{V}_{\nu \mathbf{q}}\left| \psi _{i\mathbf{k}} \right> ,
 \end{equation}
-where $\mathbf{k}$ is the initial electron momentum, $\mathbf{q}$ is the phonon momentum, and $\alpha$, $\gamma$, and $\nu$ denote the initial and final electron band indices and the phonon mode, respectively. $\left| \psi_{\alpha \mathbf{k}} \right>$ and $\left| \psi_{\gamma \mathbf{k}+\mathbf{q}} \right>$ are the initial and final states of the electron before and after the phonon-induced Kohn--Sham perturbation potential. Our task is to determin whether \eqref{eq: electron-phonon interaction} is allowed by symmetry or not by using group representation method.
+where $\mathbf{k}$ is the initial electron momentum, $\mathbf{q}$ is the phonon momentum, and $i$, $f$, and $\nu$ denote the initial and final electron band indices and the phonon mode, respectively. $\left| \psi_{i \mathbf{k}} \right>$ and $\left| \psi_{f \mathbf{k}+\mathbf{q}} \right>$ are the initial and final states of the electron before and after the phonon-induced Kohn--Sham perturbation potential. Our task is to determin whether \eqref{eq: electron-phonon interaction} is allowed by symmetry or not by using group representation method.
 
 
 
@@ -64,7 +64,7 @@ where
 \end{equation}
 and the $n$ presents any other quantum numbers, $\hat{T}_{\mathbf{w}}$ is the translation operator of vector $\mathbf{w}$. Due to the electron states in \eqref{eq: electron-phonon interaction} are label by momentum as good quatum numbers, the proper representation space are some $\mathcal{H}_{\mathbf{k}}$'s and thus we need to find out the stabilizer group $G_\mathbf{k}\coloneqq \operatorname{Stab}_{SG}\left(\mathcal{H}_\mathbf{k}\right)$ (called little group) that leave $\mathcal{H}_{\mathbf{k}}$ be $G_\mathbf{k}$-invariant.
 
-The primitive definition of $SG$ naturally involves the group action on real space, but now we need to work under reciprocal space so it urges us to give a natural group action of $G$ on momentum. Let $L\coloneqq \left\{ \left( 1\middle|\mathbf{r} \right) \right\}\lhdeq SG$ be the latiice system in real space and $\widehat{L}\coloneqq \mathrm{Hom}\left( L,U\left(1\right) \right)$ the Pontryagin dual with modulo $2\pi$ equivalence --- physically speaking, the reciprocal space with modulo reciprocal lattice vector, and if you will, any element $\chi\in \widehat{L}$ can be express use Dirac notation of momentum by $\left| \chi \right> =\sqrt{2\pi}\left| \mathbf{k} \right>$, here $\sqrt{2\pi}$ aims to reconcile nomalization --- it is a 3 dimensional torus due to Born--von Karman boundary condition. Define conjugate action of $SG$ on $L$:
+The primitive definition of $SG$ naturally involves the group action on real space, but now we need to work under reciprocal space so it urges us to give a natural group action of $G$ on momentum. Let $L\coloneqq \left\{ \left( 1\middle|\mathbf{r} \right) \right\}\lhdeq SG$ be the latiice system in real space and $\widehat{L}\coloneqq \mathrm{Hom}\left( L,U\left(1\right) \right)$ the Pontryagin dual with modulo $2\pi$ equivalence --- physically speaking, the reciprocal space with modulo reciprocal lattice vector, and if you will, any element $\chi\in \widehat{L}$ can be express use Dirac notation of momentum by $\left| \chi \right> \propto  \left| \mathbf{k} \right>$ --- it is a 3 dimensional torus due to Born--von Karman boundary condition. Define conjugate action of $SG$ on $L$:
 \begin{equation}
     \left( \hat{R} \middle| \mathbf{w} \right) \cdot \left( 1 \middle| \mathbf{r} \right) \coloneqq \left( \hat{R} \middle| \mathbf{w} \right) \left( 1 \middle| \mathbf{r} \right) \left( \hat{R} \middle| \mathbf{w} \right) ^{-1}=\left( 1 \middle| \hat{R}\mathbf{r} \right) ,
 \end{equation}
@@ -80,22 +80,187 @@ and with $g\cdot \left| \mathbf{r} \right> =\left| g\cdot \mathbf{r} \right>$.
 
 As for $V_{\nu\mathbf{q}}$, in order to apply representation theory, we need to interpret it as a element in some linear space, which requires to be clarify by tensor operator concept. Phonons are quasi-particle after second-quantization, so from the moment space perspective, there is no need to distinguish $G_\mathbf{k}$ and $G_{\mathbf{q}}$ in the mathematics. By linear approximation, we can say $V_{\nu \mathbf{q}}$ is a function or functional of $\mathbf{q}$, henceforth we deem $V_{\nu\mathbf{q}}$ as similar as $\left| \psi _{n\mathbf{k}} \right>$ in representation theory level when calculating characters afterwards.
 
-We have got all basic concepts to define our problems rigorously. The \eqref{eq: electron-phonon interaction} is a element in 
+We have got all basic concepts to define our problems rigorously. The \eqref{eq: electron-phonon interaction} is a element in $\mathrm{Hom}_H\left( V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu\mathbf{q}}\otimes V_{i\mathbf{k}},\mathbb{C} \right)$ due to $\left| \psi _{i\mathbf{k}} \right> =V_{i\mathbf{k}}$, $\hat{V}_{\nu \mathbf{q}}\in V_{\nu\mathbf{q}}$ ans so as $\left| \psi _{f\mathbf{k}}+\mathbf{q} \right>$, here $V_{i\mathbf{k}},V_{\nu \mathbf{q}},V_{f\mathbf{k}+\mathbf{q}}$ are all irreducible with the assumption of no accidental degeneracy, and
+\begin{equation}\label{eq: H}
+    H\coloneqq G_{\mathbf{k}+\mathbf{q}}\cap G_{\mathbf{q}}\cap G_{\mathbf{k}}
+\end{equation}
+is the biggest stabilizer group of initial and final electron state and phonon state. By Schur's lemma, if $g_{fi}^{\nu}\left( \mathbf{k},\mathbf{q} \right) \ne 0$, the group theory requires the Hom set is nonempty and then we have equivalence between two representation
+\begin{equation}
+    V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu \mathbf{q}}\otimes V_{i\mathbf{k}}\overset{H}{\sim}\mathbb{C},
+\end{equation}
+with the latter one being trivial representation. Finally, what we means when discussing symmetry permission is that we are asking is there trivial representation contained in $V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu \mathbf{q}}\otimes V_{i\mathbf{k}}$? By character theory, the multiplicity with which trivial representation occurs in is
+\begin{equation}
+    a_1\coloneqq \dim_{\mathbb{C}}\operatorname{Hom}_H\left( V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu \mathbf{q}}\otimes V_{i\mathbf{k}},\mathbb{C} \right),
+\end{equation}
+one can solve this by calculating
+\begin{equation}
+    a_1=\frac{1}{\left| H \right|}\sum_{g\in H}{\overline{\chi _{f\mathbf{k}+\mathbf{q}}\left( h \right) }\chi _{\nu \mathbf{q}}\left( h \right) \chi _{i\mathbf{k}}\left( h \right)}=\begin{cases}
+	0,&		\text{symmetry forbidden},\\
+	\geq 1,&		\text{symmetry allow}.\\
+\end{cases}
+\end{equation}
+Here $\chi _{i\mathbf{k}}\left( h \right)$ is the character of $i$-th irreducible of canonical representation space $\mathcal{H}_\mathbf{k}$, so as $\chi _{f\mathbf{k}+\mathbf{q}}$ and $\chi _{\nu \mathbf{q}}$.
+
+However, generally speaking, the group $H$ is not finite as character theory fails to be applied here. There are 2 ways to tackle this problem:
+\begin{enumerate}
+    \item By projective representation theory. One can use group extension method to study $SG$,
+    \begin{equation}
+        0\rightarrow L\xrightarrow{\iota}SG\xrightarrow{\pi}PG\rightarrow 1,
+    \end{equation}
+    with $L\lhd SG$ be the Abel extension kernel and point group $PG=SG/L$ be the quotient group. We have know that any representations of $L$ correspondens to one counterpart in Pontryain dual and $PG$ is finite group by Bieberbach's theorem and belongs to one of the widely known 32 point groups, which can be studied according to character theory. By synthesizing the representation of $L$ and $PG$ with group cohomology of, one can get those irreducible representations of $SG$ in demand. By some guidance of 2-cohomology group $H^2\left( PG,L \right)$, we can find all the unequivalent way to extend a $SG$ by given $L$ and $PG$, thus irreducible representations.
+    \item The Herring method. By observing the physical meaning of representation, we notice that the unnecessary redundance arise from translational symmetry. We can not just quotient out by $L$ and study $PG$ only because of potential nonsymmorphic symmetry generated by nontrivial extension, described by nontrivial element in $H^2\left( PG,L \right)$ or nontrivial outer action of $PG$ on $L$. The outer action is a homomorphism $c:PG\rightarrow \operatorname{Out}\left( L \right)$. But we can settle for the next best thing by quotient out by the biggest stabilizer group that leaves the 3 wave funtions $\left| \mathbf{k} \right>$, $\left| \mathbf{q} \right>$, $\left| \mathbf{k}+\mathbf{q} \right>$ invariant.
+\end{enumerate}
+
+
+
+\section{The Herring Method}
+
+\begin{definition}\label{def: M}
+    The \textit{compatible sublattice} is defined as the least common multiple of period of $\chi _{\mathbf{k}},\chi _{\mathbf{q}},\chi _{\mathbf{k}+\mathbf{q}}\in \hat{L}$, i.e.
+    \begin{equation}
+        M\coloneqq \mathrm{ker}\chi _{\mathbf{k}}\cap \mathrm{ker}\chi _{\mathbf{q}}\cap \mathrm{ker}\chi _{\mathbf{k}+\mathbf{q}}.
+    \end{equation}
+\end{definition}
+
+% As long as the 3 wave functions take value on rational point in reciprocal space, the 3 waves can the least common period in real space then $\left|M\right|<\infty$. And $M$ is so-called Born--von Karman supercell in solid physics.
+
+Let us look an example to grasp the physical meaning of $M$. Consider a 1 dimensional lattice system $L=\mathbb{Z}$, then $\forall\chi_k\in\widehat{L}=\operatorname{Hom}\left(L, U\left(1\right)\right)$ is $\chi _k\left( n \right) =\mathrm{e}^{-\mathrm{i}2\pi kn}$, and thus $M=\mathrm{ker}\chi _k=\frac{1}{k}\mathbb{Z} \cap L$ and $\left[ L:M \right] <\infty$. When it comes to irrational $k$, $M$ can be a single point set $\left\{0\right\}$ and $\left[ L:M \right] =\infty$.
+
+\begin{proposition}
+    $\left[ L:M \right] <\infty$ if $\mathbf{k}$, $\mathbf{q}$ and $\mathbf{k}+\mathbf{q}$ are all in rational point in reciprocal space.
+\end{proposition}
+\begin{proof}
+    By promoting the example of 1 dimensional to 3 dimensional, one can intuitively accomplish proof.
+\end{proof}
+
+\begin{definition}
+    \textit{The Herring group} is defined as $F\coloneqq H/M$.
+\end{definition}
+
+The Herring group can be interpret as $H$ with quotienting out of those redundant translational symmetry operations. Intuitively this method will not lose any necessary symmetry, both symmorphic and nonsymmorphic. And when we are focusing only on those rational momentum point, the Herring group is finite and hence be appropriate for applying characters.
+
+The final theorem is to prove:
+\begin{theorem}
+    We have
+    \begin{equation}\label{eq: H equl to F}
+        % \boxed{
+            % \operatorname{Hom}_H\left(V,\mathbb{C} \right)
+        % =\operatorname{Hom}_F\left( V,\mathbb{C} \right),
+        \operatorname{Hom}_H\left( V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu \mathbf{q}}\otimes V_{i\mathbf{k}},\mathbb{C} \right) =\operatorname{Hom}_F\left( V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu \mathbf{q}}\otimes V_{i\mathbf{k}},\mathbb{C} \right).
+        %
+    \end{equation}
+    where $F=H/M$.
+\end{theorem}
+\begin{proof}
+    We need to show that for $\sigma: V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu \mathbf{q}}\otimes V_{i\mathbf{k}}\to\mathbb{C}$, %$\forall v^\vee\in V^\vee$,
+    \begin{equation}
+        \left( \forall h\in H:\sigma \phi _V\left( h \right) =\sigma \right) \quad \Longleftrightarrow \quad \left( \forall \bar{h}\in F:\sigma \bar{\phi}_V\left( \bar{h} \right) =\sigma \right) ,
+    \end{equation}
+    % where $\bar{\phi}_V=\phi_V\pi$, and $\phi: H\to F$ is the project.
+    % Firstly, if $\forall h\in H$, $\sigma \phi _V\left( h \right) =\sigma$, then $\forall \bar{h}\in F$, by the surjection, there is at least one $h\in H$ satisfying $\pi\left(h\right)=\bar{h}$.
+    We can obtain this by showing that $M$ acts trivially on $V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu \mathbf{q}}\otimes V_{i\mathbf{k}}$. By definition \ref{def: M}
+\end{proof}
+
+According to \ref{eq: H equl to F}, we can use the latter to calculate $a_1$ by taking dimension
+\begin{align}
+    a_1&=\dim_{\mathbb{C}}\operatorname{Hom}_F\left( V_{f\mathbf{k}+\mathbf{q}}^{*}\otimes V_{\nu \mathbf{q}}\otimes V_{i\mathbf{k}},\mathbb{C} \right)
+    \\
+    \label{eq: F characters inner product}
+    &=\frac{1}{\left| F \right|}\sum_{\bar{h}\in F}{\overline{\chi _{f\mathbf{k}+\mathbf{q}}^{F}\left( \bar{h} \right) }\chi _{\nu \mathbf{q}}^{F}\left( \bar{h} \right) \chi _{i\mathbf{k}}^{F}\left( \bar{h} \right)}.
+\end{align}
+That is the core expression we need to calculate in scheme.
+
+
+However, that is not the end. If we want to calculate the representation of $F$ on $V_{f\mathbf{k}+\mathbf{q}}$, $V_{\nu \mathbf{q}}$, $V_{i\mathbf{k}}$ directly, we need to know the wave functions before and that can be only acquired by solving Kohn--Sham euqation in Density Functional Theory. We do not what to solve differential equation but with only space group information to determin the degeneracy.
+
+To clarify the problem, after obtaining all the irreducible representations of $F$, we are unable to distinguish which ones are corresponding to given momentum label $\mathbf{k}$. When doing \ref{eq: F characters inner product}, we need to know the relation between momenta and irreducible representations.
+
+
+\begin{definition}
+    $N\coloneqq L/M$.
+\end{definition}
+
+Continuing with the previous 1 dimensional example, $N=L/\left( \frac{1}{k}\mathbb{Z} \cap L \right)=\mathbb{Z} /\left( \frac{1}{k}\mathbb{Z} \cap \mathbb{Z} \right)$. If $k=1,2,3,\cdots$, then $N=0$ is a trivial group; if $k=\frac{p}{q}\in\mathbb{Q}$ is a reduced fraction, then $M=q\mathbb{Z}\cong \mathbb{Z}$ and $N=\mathbb{Z}_q$. By the rational fraction case, we can interpret $M$ as the smallest lattice or repetitive unit that contains the complete waveform and $N$ as inequivalent lattice point with respective to waveform in on repetitive unit. And $F$ is the "space group" of $M$, the reduced cell.
+
+$N\lhdeq F$ because $L\lhdeq H$ then we can quotient both side of $M$. Let $\phi$ be a representation of $F$ and $\left.\phi\right|_N$ be the constraint upon $N$. By the completeness of the characters of $N$, we have
+\begin{equation}
+    \left. \phi \right|_N=\bigoplus_{\chi _{\mathbf{p}}\in \widehat{N}}{m_{\mathbf{p}}\chi_\mathbf{p}},
+\end{equation}
+where $\widehat{N}$ is the Pontryagin dual of $N$, $\chi _{\mathbf{p}}$ is the character labled by $\mathbf{p}$ and $m_\mathbf{p}$ is the multiplicity of $\chi_\mathbf{p}$. One can interpret $\mathbf{p}$ as the reduced momentum in reduced lattice $N$.
 
 
 
 
+\begin{theorem}
+    (Clifford, 1937) Let $\phi\in \operatorname{Irr}\left(F\right)$, then there is an common multiplicity $e$ satisfies
+    \begin{equation}
+        \left. \phi \right|_N=e\bigoplus_{\mathbf{p}}{\chi _{\mathbf{p}}},
+    \end{equation}
+    and all the $\mathbf{p}$ belongs to one orbit under the group action of $F$.
+\end{theorem}
+\begin{proof}
+    Let $\phi_\mathbf{p}\in\widehat{N}$ be one component of $\left.\phi\right|$ and $V_\phi$ be the representation space of $\phi$, define
+    \begin{equation}
+        W_{\phi _{\mathbf{p}}}\coloneqq \left\{ v\in V_{\phi}:\phi \left( n \right) v=\phi _{\mathbf{p}}\left( n \right) v,\forall n\in N \right\} .
+    \end{equation}
+    Then $\forall h\in H$,
+    \begin{align}
+        \phi \left( n \right) \phi \left( h \right) v=\phi \left( h \right) \phi \left( h^{-1}nh \right) v=\phi _{\mathbf{p}}\left( h^{-1}nh \right) \phi \left( g \right) v \nonumber
+        \\
+        =\left( h\cdot \phi _{\mathbf{p}} \right) \left( n \right) \phi \left( g \right) v=\left[ \left( h\cdot \phi _{\mathbf{p}} \right) \left( n \right) \right] g\cdot v,
+    \end{align}
+    which means
+    \begin{equation}
+        h\cdot W_{\phi _{\mathbf{p}}}=W_{h\cdot \phi _{\mathbf{p}}}=W_{\phi _{h\cdot \mathbf{p}}}.
+    \end{equation}
+    Thus $\sum_{h\in H}{h\cdot W_{\phi _{\mathbf{p}}}}$ forms a $F$-invariant subspace of $V_\phi$. By the irreducibility of $V_\phi$,
+    \begin{equation}
+        \sum_{h\in H}{h\cdot W_{\phi _{\mathbf{p}}}}=V_\phi.
+    \end{equation}
+    The $h$ transitively permutate these $W_{\phi_\mathbf{p}}$'s, as a result, all of them have the same dimension, denote as $e$.
+\end{proof}
+
+\begin{corollary}
+    Every $\phi\in\operatorname{Irr}\left(F\right)$ lands in one orbit generated by $F$-actions,
+    \begin{equation}
+        \operatorname{Irr}\left( F \right) =\coprod_{\operatorname{Orb}\in \widehat{N}/F}{\operatorname{Irr}_{\operatorname{Orb}}\left( F \right)}.
+    \end{equation}
+\end{corollary}
+
+In our case, by definition \eqref{eq: H}, $F=H/M$ will leave any $\chi_{\mathbf{p}}$ invariant. Hence the orbit of $\chi_{\mathbf{p}}$ is just itself singly.
+
+\begin{definition}
+    \textit{The allowed representation} is defined as
+    \begin{equation}
+        \operatorname{Irr}_{\chi _{\mathbf{p}}}\left( F \right) \coloneqq \left\{ \phi \in \operatorname{Irr}\left( F \right) :\phi \left( n \right) =\chi _{\mathbf{p}}\left( n \right) \cdot \operatorname{id},\forall n\in N \right\} ,
+    \end{equation}
+    which means the $\phi \chi_F\in \operatorname{Irr}_{\chi _{\mathbf{p}}}\left( F \right)$ makes $\phi(h)$ a scalar matrix, $\forall h\in F$.
+\end{definition}
 
 
+And that is exactly what we want --- the $\operatorname{Irr}_{\chi_\mathbf{p}}\left(F\right)$ contains the irreducible characters of $F$ behavior in correspondence with momentum $\mathbf{p}$ when it comes to translational operator in $N$.
 
 
+We have found the irreducible representation of $F$ can be classify according to momentum label $\mathbf{p}$, then how can we do this by using character table?
 
+\begin{lemma}\label{lem: trace saturation}
+    (trace saturation) Let $A$ be a square Hermitian matrix with size $d$, then $\left| \operatorname{tr}A \right|\le d$, equality holds iff $A=\lambda\operatorname{id}$ with $\lambda\in U(1)$.
+\end{lemma}
+\begin{proof}
+    The details are omitted; see the discussion in linear algebra textbooks.
+\end{proof}
 
+According to \ref{lem: trace saturation}, one can find the $\mathbf{p}$ label of $\phi\in\operatorname{Iff}\left(F\right)$ by calculating
+\begin{equation}
+    \frac{\chi _{\phi}\left( \bar{t}_j \right)}{\mathrm{dim}_{\mathbb{C}}\phi}=\mathrm{e}^{-2\pi \mathrm{i}p_j},\qquad j=1,2,3,
+\end{equation}
+where $\bar{t}_j$'s are 3 generators of $N$, and $\mathbf{p}=\left( \begin{matrix}
+	p_1&		p_2&		p_3\\
+\end{matrix} \right) ^{\mathrm{T}}$.
 
-
-
-
-
+% \begin{equation}
+%     \phi \in \operatorname{Irr}_{\chi _{\mathbf{p}}}\left( F \right) \quad \Longleftrightarrow \quad \chi _{\phi}\left( n \right) =\dim_{\mathbb{C}}\phi \cdot {\chi}_\mathbf{p}\left( n \right) ,\qquad \forall n\in N.
+% \end{equation}
 
 
 
