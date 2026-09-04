@@ -9,7 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-To download a formal PDF version of my CV, please visit this Overleaf link: {% include badges/row.html overleaf="https://www.overleaf.com/read/vjvnszxdjqmd#0362c7" %}
+To download a formal PDF version of my CV, please visit this Overleaf link: {% include badges/row.html overleaf="https://www.overleaf.com/read/rgrqqxcrppdm#6b5125" %}
 
 <!-- Education
 ======
