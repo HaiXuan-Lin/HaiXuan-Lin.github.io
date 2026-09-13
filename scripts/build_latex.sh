@@ -50,13 +50,38 @@ for slug in "${targets[@]}"; do
   # outputs -- previously this relied on main.pdf already existing from a
   # separate manual compile, and silently produced a page with no PDF button
   # if that step had been skipped.
+  #
+  # Most sources here are plain amsart papers that pdflatex handles fine; a
+  # source that needs fontspec/unicode-math (e.g. a styled CV) drops a
+  # `.xelatex` marker file in its directory to opt into the xelatex engine
+  # instead.
+  latexmk_engine="-pdf"
+  if [ -f "$src_dir/.xelatex" ]; then
+    latexmk_engine="-xelatex"
+  fi
+
   if [ "$have_latexmk" -eq 1 ]; then
     (
       cd "$src_dir"
-      if ! latexmk -pdf -interaction=nonstopmode -halt-on-error -silent main.tex >latexmk.log 2>&1; then
+      if ! latexmk "$latexmk_engine" -interaction=nonstopmode -halt-on-error -silent main.tex >latexmk.log 2>&1; then
         echo "    warning: latexmk failed to build $slug/main.pdf -- see $src_dir/latexmk.log" >&2
       fi
     )
+  fi
+
+  # Some sources (e.g. a heavily-styled CV using custom fonts/icons via
+  # fontspec+unicode-math) aren't papers and use LaTeX3/font features LaTeXML
+  # can't process -- a `.no-html` marker file skips the HTML conversion and
+  # just publishes the PDF companion.
+  if [ -f "$src_dir/.no-html" ]; then
+    if [ -f "$src_dir/main.pdf" ]; then
+      mkdir -p "$FILES_DIR"
+      cp "$src_dir/main.pdf" "$FILES_DIR/$slug.pdf"
+      echo "    -> $FILES_DIR/$slug.pdf (PDF only, HTML build skipped)"
+    else
+      echo "    warning: $src_dir/main.pdf not found -- nothing to publish" >&2
+    fi
+    continue
   fi
 
   (

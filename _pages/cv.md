@@ -9,7 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-To download a formal PDF version of my CV, please visit this Overleaf link: {% include badges/row.html overleaf="https://www.overleaf.com/read/rgrqqxcrppdm#6b5125" %}
+To download a formal PDF version of my CV, please click here: {% include badges/row.html pdf="/files/United-States-Academic-CV-Haixuan-Lin.pdf" %}
 
 <!-- Education
 ======
