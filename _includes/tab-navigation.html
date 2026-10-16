@@ -4,11 +4,13 @@
 {% for link in site.data.navigation.main %}
   {% if page.url == link.url %}{% assign tab_page = true %}{% endif %}
 {% endfor %}
-{% if tab_page %}
+{% if tab_page or page.author_profile or layout.author_profile %}
   {% assign tab_css = site.static_files | where: 'path', '/assets/css/tab-navigation.css' | first %}
-  {% assign tab_js = site.static_files | where: 'path', '/assets/js/tab-navigation.js' | first %}
-  {% comment %}Version both assets so a new deployment refreshes cached navigation code.{% endcomment %}
+  {% comment %}Share the profile layout with detail pages; only top-level tabs load the scrolling script.{% endcomment %}
   <link rel="stylesheet" href="{{ '/assets/css/tab-navigation.css' | relative_url }}?v={{ tab_css.modified_time | date: '%s' }}">
+{% endif %}
+{% if tab_page %}
+  {% assign tab_js = site.static_files | where: 'path', '/assets/js/tab-navigation.js' | first %}
   <script type="application/json" id="tab-navigation-config">[
     {{ '/' | relative_url | jsonify }}{% for link in site.data.navigation.main %}{% assign first_character = link.url | slice: 0 %}{% if first_character == '/' %},{{ link.url | relative_url | jsonify }}{% endif %}{% endfor %}
   ]</script>
