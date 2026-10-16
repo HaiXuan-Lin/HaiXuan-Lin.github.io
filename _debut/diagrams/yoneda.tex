@@ -1,0 +1,15 @@
+% Welcome-screen diagram; keep this source when replacing the generated SVG.
+\documentclass[border=2pt]{standalone}
+\usepackage{amsmath,amssymb,tikz-cd}
+\begin{document}
+\begin{tikzcd}[column sep=large, row sep=large]
+  \operatorname{id}_S \arrow[mapsto, d] \arrow[phantom, r, description, "\in"]
+    & \operatorname{Hom}_{\mathcal{C}}(S, S) \arrow[r, "\phi_S"] \arrow[d, "f^*"']
+    & A(S) \arrow[d, "A(f)"]
+    & \arrow[phantom, l, description, "\ni"] u_S \arrow[mapsto, d] \\
+  f \arrow[phantom, r, description, "\in"]
+    & \operatorname{Hom}_{\mathcal{C}}(T, S) \arrow[r, "\phi_T"']
+    & A(T)
+    & \arrow[phantom, l, description, "\ni"] \phi_T(f)
+\end{tikzcd}
+\end{document}

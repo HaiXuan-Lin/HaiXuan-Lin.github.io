@@ -1,0 +1,170 @@
+/* All welcome-screen styling stays scoped to this component and its active state. */
+.debut {
+  box-sizing: border-box;
+  display: none;
+}
+
+.debut-active body {
+  /* The site's navigation script also writes this property inline. */
+  padding-top: 0 !important;
+}
+
+.debut-active .debut {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  height: 100svh;
+  min-height: 340px;
+  padding: 32px 24px 112px;
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+}
+
+.debut__figure {
+  display: block;
+  width: min(var(--debut-width, 840px), 100%);
+  margin: 0;
+}
+
+.debut__figure[hidden] {
+  display: none;
+}
+
+.debut__diagram {
+  width: 100%;
+  animation: debut-reveal 1.3s cubic-bezier(.22, 1, .36, 1) .2s both;
+}
+
+.debut__diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 220px);
+  max-height: calc(100svh - 220px);
+  overflow: visible;
+}
+
+.debut__attribution {
+  --debut-opacity: .65;
+  margin: 32px 4px 0;
+  padding: 0;
+  color: inherit;
+  opacity: var(--debut-opacity);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: right;
+  animation: debut-reveal .8s ease 1.3s both;
+}
+
+.debut__enter {
+  position: absolute;
+  bottom: max(30px, env(safe-area-inset-bottom));
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 72px;
+  border-radius: 18px;
+  color: inherit;
+  text-decoration: none;
+  transform: translateX(-50%);
+  animation: debut-arrow-reveal .8s ease 2s both;
+}
+
+.debut__enter:hover {
+  color: inherit;
+}
+
+.debut__enter:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+  animation: none;
+  opacity: 1;
+}
+
+.debut__chevron {
+  animation: debut-breathe 3s ease-in-out 2.8s infinite;
+}
+
+.debut-resume .debut__diagram,
+.debut-resume .debut__attribution,
+.debut-resume .debut__enter {
+  animation: none;
+}
+
+.debut-active .masthead {
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity .45s ease, transform .45s ease, visibility .45s;
+}
+
+.debut-active.debut-content .masthead {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.debut-active #main {
+  /* Short homepages still need enough scroll space to clear the welcome screen. */
+  min-height: calc(100vh - 90px);
+  min-height: calc(100svh - 90px);
+  scroll-margin-top: 90px;
+}
+
+.debut-active .sidebar {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .45s ease, visibility .45s;
+}
+
+.debut-active.debut-content .sidebar {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes debut-reveal {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: var(--debut-opacity, 1); transform: translateY(0); }
+}
+
+@keyframes debut-arrow-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes debut-breathe {
+  0%, 100% { opacity: .35; transform: translateY(0); }
+  50% { opacity: .8; transform: translateY(4px); }
+}
+
+@media (max-width: 600px) {
+  .debut-active .debut {
+    padding: 24px 16px 104px;
+  }
+
+  .debut__attribution {
+    margin-top: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .debut__diagram, .debut__attribution, .debut__enter, .debut__chevron {
+    animation: none;
+  }
+
+  .debut-active .masthead, .debut-active .sidebar {
+    transition: none;
+  }
+}
+
+@media print {
+  .debut-active .debut { display: none; }
+  .debut-active .sidebar { opacity: 1; visibility: visible; }
+  .debut-active #main { min-height: 0; }
+}

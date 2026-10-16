@@ -1,0 +1,89 @@
+/* One fixed profile; only the content rail moves between screens. */
+.tab-navigation #main {
+  --tab-stage-offset: var(--tab-nav-height, 70px);
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 44px;
+  width: 100%;
+  max-width: 1280px;
+  height: calc(100vh - var(--tab-stage-offset));
+  height: calc(100svh - var(--tab-stage-offset));
+  min-height: 0;
+  margin: 0 auto;
+  padding: 36px 18px 24px;
+  animation: none;
+}
+.tab-navigation #main::before,
+.tab-navigation #main::after { display: none; }
+.debut-active.tab-navigation #main { --tab-stage-offset: 90px; min-height: 0; }
+.tab-navigation #main.tab-no-sidebar { grid-template-columns: minmax(0, 1fr); }
+html.tab-secondary { overflow-y: hidden; }
+.tab-navigation #main > .sidebar {
+  position: relative;
+  z-index: 1;
+  float: none;
+  top: auto;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  margin: 0;
+  padding-top: 0 !important;
+  overflow-y: auto;
+}
+.tab-rail {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.tab-rail::-webkit-scrollbar { display: none; }
+.tab-panel {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.tab-page {
+  display: flow-root;
+  min-height: 100%;
+  padding: 0 0 36px;
+}
+.tab-page > .page,
+.tab-page > .archive,
+.tab-page > .container {
+  float: none;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.tab-page > .page { max-width: 820px; }
+.tab-load-error { padding-top: 36px; }
+@media (max-width: 1023px) {
+  .tab-navigation #main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 20px;
+    padding: 24px 16px 16px;
+  }
+  .tab-navigation #main.tab-no-sidebar { grid-template-rows: minmax(0, 1fr); }
+  .tab-navigation #main > .sidebar { max-height: 160px; overflow: visible; }
+}
+@media print {
+  .tab-navigation #main { display: block; height: auto; }
+  .tab-rail { display: block; height: auto; overflow: visible; }
+  .tab-panel { display: none; height: auto; overflow: visible; }
+  .tab-panel[aria-hidden='false'] { display: block; }
+}

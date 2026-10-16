@@ -164,6 +164,12 @@ include:
   - _pages
   - files
 exclude:
+  - _debut/README.md
+  - _debut/diagrams
+  - _debut/__pycache__
+  - "_debut/*.js"
+  - "_debut/*.css"
+  - "_debut/*.py"
   - "*.bak"
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -220,6 +226,8 @@ kramdown:
 
 # These settings control the types of collections used by the template
 collections:
+  debut:
+    output: false
   teaching:
     output: true
     permalink: /:collection/:path/

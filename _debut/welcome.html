@@ -1,0 +1,60 @@
+---
+layout: null
+fragment: welcome
+diagram: diagrams/yoneda.svg
+attribution: "— Yoneda Lemma"
+description: "The Yoneda lemma: the identity of S corresponds to u_S, and naturality sends a morphism f from T to S to phi_T(f)."
+enter_label: "Enter the homepage"
+diagrams:
+  - id: yoneda
+    svg: diagrams/yoneda.svg
+    attribution: "— Yoneda Lemma"
+    description: "The Yoneda lemma: the identity of S corresponds to u_S, and naturality sends f to phi_T(f)."
+    width: 840
+  - id: pentagon
+    svg: diagrams/pentagon.svg
+    attribution: "— Pentagon Axiom"
+    description: "The pentagon axiom: the two composites of associators from (((X tensor Y) tensor Z) tensor W) to X tensor (Y tensor (Z tensor W)) agree."
+    width: 900
+  - id: hexagon
+    svg: diagrams/hexagon.svg
+    attribution: "— Hexagon Axiom"
+    description: "The hexagon axiom drawn as an equality of braids on the three objects X, Y and Z."
+    width: 440
+  - id: yang-baxter
+    svg: diagrams/yang-baxter.svg
+    attribution: "— Yang–Baxter Equation"
+    description: "The Yang–Baxter equation on three strands: s_1 s_2 s_1 equals s_2 s_1 s_2."
+    width: 480
+---
+{% assign homepage = site.pages | where: 'url', '/' | first %}
+{% assign selection = homepage.debut_diagram | default: 'yoneda' %}
+<section class="debut" id="debut" aria-label="Welcome" data-debut-selection="{{ selection | escape }}">
+  {% if selection == 'custom' %}
+  <figure class="debut__figure" data-debut-variant="custom">
+    <div class="debut__diagram" role="img" aria-label="{{ page.description | escape }}">
+      {% include_relative {{ page.diagram }} %}
+    </div>
+    {% if page.attribution and page.attribution != '' %}
+      <figcaption class="debut__attribution">{{ page.attribution | escape }}</figcaption>
+    {% endif %}
+  </figure>
+  {% else %}
+  {% for diagram in page.diagrams %}
+  <figure class="debut__figure" data-debut-variant="{{ diagram.id | escape }}" style="--debut-width: {{ diagram.width }}px"{% unless forloop.first %} hidden{% endunless %}>
+    <div class="debut__diagram" role="img" aria-label="{{ diagram.description | escape }}">
+      {% include_relative {{ diagram.svg }} %}
+    </div>
+    {% if diagram.attribution and diagram.attribution != '' %}
+      <figcaption class="debut__attribution">{{ diagram.attribution | escape }}</figcaption>
+    {% endif %}
+  </figure>
+  {% endfor %}
+  {% endif %}
+  <a class="debut__enter" href="#main" aria-label="{{ page.enter_label | escape }}">
+    <svg class="debut__chevron" viewBox="0 0 72 28" width="72" height="28" fill="none" aria-hidden="true">
+      <path d="M6 5L36 22L66 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</section>
+<script>{% include_relative select-diagram.js %}</script>

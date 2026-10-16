@@ -1,0 +1,13 @@
+{% comment %}Enable gestures only on the homepage and exact top-level navigation pages.{% endcomment %}
+{% assign tab_page = false %}
+{% if page.url == '/' %}{% assign tab_page = true %}{% endif %}
+{% for link in site.data.navigation.main %}
+  {% if page.url == link.url %}{% assign tab_page = true %}{% endif %}
+{% endfor %}
+{% if tab_page %}
+  <link rel="stylesheet" href="{{ '/assets/css/tab-navigation.css' | relative_url }}">
+  <script type="application/json" id="tab-navigation-config">[
+    {{ '/' | relative_url | jsonify }}{% for link in site.data.navigation.main %}{% assign first_character = link.url | slice: 0 %}{% if first_character == '/' %},{{ link.url | relative_url | jsonify }}{% endif %}{% endfor %}
+  ]</script>
+  <script src="{{ '/assets/js/tab-navigation.js' | relative_url }}"></script>
+{% endif %}

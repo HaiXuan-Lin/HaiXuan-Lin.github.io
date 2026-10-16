@@ -1,0 +1,7 @@
+---
+layout: null
+fragment: head
+---
+{% comment %}Inline JavaScript uses block comments to survive HTML compression; welcome colors follow the site theme.{% endcomment %}
+<style>{% include_relative debut.css %}</style>
+<script>window.debutHomePath = {{ '/' | relative_url | jsonify }};{% include_relative boot.js %}</script>

@@ -3,20 +3,41 @@ layout: compress
 ---
 
 {% include base_path %}
+{% assign homepage = site.pages | where: 'url', '/' | first %}
+{% assign debut_enabled = false %}
+{% if homepage.debut %}
+  {% if page.url == '/' %}{% assign debut_enabled = true %}{% endif %}
+  {% for link in site.data.navigation.main %}
+    {% if page.url == link.url %}{% assign debut_enabled = true %}{% endif %}
+  {% endfor %}
+{% endif %}
 
 <!doctype html>
 <html lang="{{ site.locale | slice: 0,2 }}" class="no-js"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
   <head>
     {% include head.html %}
     {% include head/custom.html %}
+    {% if debut_enabled %}
+      {% assign debut_head = site.debut | where: 'fragment', 'head' | first %}
+      {{ debut_head.output }}
+    {% endif %}
   </head>
 
   <body>
 
     {% include browser-upgrade.html %}
+    {% if debut_enabled %}
+      {% assign debut_welcome = site.debut | where: 'fragment', 'welcome' | first %}
+      {{ debut_welcome.output }}
+    {% endif %}
     {% include masthead.html %}
 
     {{ content }}
+
+    {% if debut_enabled %}
+      {% assign debut_script = site.debut | where: 'fragment', 'script' | first %}
+      {{ debut_script.output }}
+    {% endif %}
 
     {% include footer/custom.html %}
 

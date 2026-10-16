@@ -1,5 +1,7 @@
 ---
 permalink: /
+debut: true
+debut_diagram: random
 title: "Haixuan Lin (<ruby>林<rt>Lín</rt>海<rt>Hǎi</rt>轩<rt>Xuān</rt></ruby>)"
 author_profile: true
 redirect_from:

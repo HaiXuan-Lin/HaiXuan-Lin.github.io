@@ -1,15 +1,12 @@
 ---
 layout: archive
 title: "Reports"
+hide_title: true
 permalink: /reports/
 author_profile: true
 ---
 
 {% include base_path %}
-
-<p class="wordwrap">
-  Here I post some of my reports on different topics. Feel free to contact me if you have any questions or suggestions.
-</p>
 
 {% assign reports_posts = site.reports | sort: 'date' | reverse %}
 {% for post in reports_posts %}
