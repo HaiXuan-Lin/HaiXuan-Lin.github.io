@@ -16,6 +16,7 @@ diagrams:
     attribution: "— Pentagon Axiom"
     description: "The pentagon axiom: the two composites of associators from (((X tensor Y) tensor Z) tensor W) to X tensor (Y tensor (Z tensor W)) agree."
     width: 900
+    scale: 0.75
   - id: hexagon
     svg: diagrams/hexagon.svg
     attribution: "— Hexagon Axiom"
@@ -41,7 +42,7 @@ diagrams:
   </figure>
   {% else %}
   {% for diagram in page.diagrams %}
-  <figure class="debut__figure" data-debut-variant="{{ diagram.id | escape }}" style="--debut-width: {{ diagram.width }}px"{% unless forloop.first %} hidden{% endunless %}>
+  <figure class="debut__figure" data-debut-variant="{{ diagram.id | escape }}" style="--debut-width: {{ diagram.width }}px; --debut-scale: {{ diagram.scale | default: 1 }}"{% unless forloop.first %} hidden{% endunless %}>
     <div class="debut__diagram" role="img" aria-label="{{ diagram.description | escape }}">
       {% include_relative {{ diagram.svg }} %}
     </div>
