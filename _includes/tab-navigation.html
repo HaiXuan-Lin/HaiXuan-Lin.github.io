@@ -5,9 +5,12 @@
   {% if page.url == link.url %}{% assign tab_page = true %}{% endif %}
 {% endfor %}
 {% if tab_page %}
-  <link rel="stylesheet" href="{{ '/assets/css/tab-navigation.css' | relative_url }}">
+  {% assign tab_css = site.static_files | where: 'path', '/assets/css/tab-navigation.css' | first %}
+  {% assign tab_js = site.static_files | where: 'path', '/assets/js/tab-navigation.js' | first %}
+  {% comment %}Version both assets so a new deployment refreshes cached navigation code.{% endcomment %}
+  <link rel="stylesheet" href="{{ '/assets/css/tab-navigation.css' | relative_url }}?v={{ tab_css.modified_time | date: '%s' }}">
   <script type="application/json" id="tab-navigation-config">[
     {{ '/' | relative_url | jsonify }}{% for link in site.data.navigation.main %}{% assign first_character = link.url | slice: 0 %}{% if first_character == '/' %},{{ link.url | relative_url | jsonify }}{% endif %}{% endfor %}
   ]</script>
-  <script src="{{ '/assets/js/tab-navigation.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/tab-navigation.js' | relative_url }}?v={{ tab_js.modified_time | date: '%s' }}"></script>
 {% endif %}

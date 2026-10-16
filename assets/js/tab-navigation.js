@@ -45,6 +45,8 @@
     let navigating = false;
     let touching = false;
     let resizePending = false;
+    let lastRailWidth = 0;
+    let destination = null;
     /* Measure actual screen positions so the gap is included in every scroll target. */
     const positionOf = index => panels[index].offsetLeft - panels[0].offsetLeft;
 
@@ -84,8 +86,8 @@
       requests.set(index, request);
       return request;
     };
-    const showStage = () => {
-      if (root.classList.contains('debut-active')) {
+    const showStage = (force = false) => {
+      if (root.classList.contains('debut-active') && (force || !root.classList.contains('debut-content'))) {
         stage.scrollIntoView({ behavior: 'instant', block: 'start' });
       }
     };
@@ -107,8 +109,11 @@
     };
     const finish = () => {
       if (navigating || touching) return;
+      /* A delayed frame or an earlier scrollend must not settle an unfinished navigation. */
+      if (destination !== null && Math.abs(rail.scrollLeft - positionOf(destination)) > 1) return;
       const index = panels.reduce((nearest, panel, n) =>
         Math.abs(positionOf(n) - rail.scrollLeft) < Math.abs(positionOf(nearest) - rail.scrollLeft) ? n : nearest, 0);
+      destination = null;
       mark(index);
       if (normalize(location.href) !== normalize(urls[index])) history.pushState({ siteTab: index }, '', urls[index].pathname);
       load(index);
@@ -118,6 +123,7 @@
       navigating = true;
       await load(index);
       if (intent !== index) return;
+      destination = index;
       showStage();
       /* Unlock all screens while moving so touch input follows the native scroll surface. */
       panels.forEach(panel => panel.removeAttribute('inert'));
@@ -149,6 +155,7 @@
     /* Remove inert before a native drag begins; restore keyboard focus boundaries on settle. */
     rail.addEventListener('touchstart', () => {
       touching = true;
+      destination = null;
       panels.forEach(panel => panel.removeAttribute('inert'));
     }, { passive: true });
     const endTouch = () => {
@@ -159,7 +166,10 @@
     rail.addEventListener('touchend', endTouch, { passive: true });
     rail.addEventListener('touchcancel', endTouch, { passive: true });
     rail.addEventListener('wheel', event => {
-      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) panels.forEach(panel => panel.removeAttribute('inert'));
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+        destination = null;
+        panels.forEach(panel => panel.removeAttribute('inert'));
+      }
     }, { passive: true });
 
     document.addEventListener('click', event => {
@@ -205,7 +215,11 @@
       requestAnimationFrame(() => {
         const height = header ? header.offsetHeight : 70;
         root.style.setProperty('--tab-nav-height', height + 'px');
-        rail.scrollTo({ left: positionOf(active), behavior: 'instant' });
+        /* Header-only changes must not restart or snap the horizontal animation. */
+        if (rail.clientWidth !== lastRailWidth) {
+          lastRailWidth = rail.clientWidth;
+          rail.scrollTo({ left: positionOf(destination === null ? active : destination), behavior: 'instant' });
+        }
         resizePending = false;
       });
     };
@@ -215,7 +229,7 @@
     window.addEventListener('resize', resize);
     window.addEventListener('load', () => panels.forEach(typeset), { once: true });
     resize();
-    if (active !== 0 || root.classList.contains('debut-resume') || location.hash) showStage();
+    if (active !== 0 || root.classList.contains('debut-resume') || location.hash) showStage(true);
     if (location.hash) move(active, 'none', location.hash);
     urls.forEach((url, index) => { if (index !== active) load(index); });
   };

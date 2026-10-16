@@ -1,4 +1,9 @@
 /* One fixed profile; only the content rail moves between screens. */
+html.tab-navigation { scrollbar-gutter: stable; }
+/* Keep the underline's space when selection changes, including during transitions. */
+.tab-navigation .masthead__menu-item:not(.selected) > a {
+  border-bottom: 2px solid transparent;
+}
 .tab-navigation #main {
   --tab-stage-offset: var(--tab-nav-height, 70px);
   display: grid;
