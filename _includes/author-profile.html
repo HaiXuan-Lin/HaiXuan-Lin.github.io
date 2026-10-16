@@ -10,7 +10,10 @@
     {% if author.avatar contains "://" %}
     	<img src="{{ author.avatar }}" alt="{{ author.name }}"  fetchpriority="high" />
     {% else %}
-    	<img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" class="author__avatar" alt="{{ author.name }}"  fetchpriority="high" />
+      {% assign avatar_path = author.avatar | prepend: "/images/" %}
+      {% assign avatar_file = site.static_files | where: "path", avatar_path | first %}
+      {% comment %}Replacing a local avatar changes its URL so cached copies are refreshed.{% endcomment %}
+      <img src="{{ avatar_path | prepend: base_path }}{% if avatar_file %}?v={{ avatar_file.modified_time | date: '%s' }}{% endif %}" class="author__avatar" alt="{{ author.name }}"  fetchpriority="high" />
     {% endif %}
   </div>
 

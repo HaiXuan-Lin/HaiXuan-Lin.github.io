@@ -32,7 +32,10 @@ html.tab-secondary { overflow-y: hidden; }
   overflow-y: auto;
 }
 .tab-rail {
+  --tab-sep: 32px;
+  position: relative;
   display: flex;
+  column-gap: var(--tab-sep);
   min-width: 0;
   min-height: 0;
   width: 100%;
@@ -72,6 +75,7 @@ html.tab-secondary { overflow-y: hidden; }
 .tab-page > .page { max-width: 820px; }
 .tab-load-error { padding-top: 36px; }
 @media (max-width: 1023px) {
+  .tab-rail { --tab-sep: 20px; }
   .tab-navigation #main {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto minmax(0, 1fr);

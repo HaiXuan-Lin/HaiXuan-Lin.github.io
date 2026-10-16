@@ -45,6 +45,8 @@
     let navigating = false;
     let touching = false;
     let resizePending = false;
+    /* Measure actual screen positions so the gap is included in every scroll target. */
+    const positionOf = index => panels[index].offsetLeft - panels[0].offsetLeft;
 
     const typeset = panel => {
       if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([panel]).catch(() => {});
@@ -105,7 +107,8 @@
     };
     const finish = () => {
       if (navigating || touching) return;
-      const index = Math.max(0, Math.min(urls.length - 1, Math.round(rail.scrollLeft / rail.clientWidth)));
+      const index = panels.reduce((nearest, panel, n) =>
+        Math.abs(positionOf(n) - rail.scrollLeft) < Math.abs(positionOf(nearest) - rail.scrollLeft) ? n : nearest, 0);
       mark(index);
       if (normalize(location.href) !== normalize(urls[index])) history.pushState({ siteTab: index }, '', urls[index].pathname);
       load(index);
@@ -121,7 +124,7 @@
       if (historyMode === 'push' && normalize(location.href) !== normalize(urls[index])) {
         history.pushState({ siteTab: index }, '', urls[index].pathname + hash);
       }
-      rail.scrollTo({ left: index * rail.clientWidth, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+      rail.scrollTo({ left: positionOf(index), behavior: reducedMotion.matches ? 'instant' : 'smooth' });
       navigating = false;
       if (hash) {
         const id = decodeURIComponent(hash.slice(1));
@@ -136,7 +139,7 @@
     stage.replaceChildren(...(sidebar ? [sidebar, rail] : [rail]));
     if (!sidebar) stage.classList.add('tab-no-sidebar');
     root.classList.add('tab-navigation');
-    rail.scrollLeft = active * rail.clientWidth;
+    rail.scrollLeft = positionOf(active);
     mark(active);
     rail.addEventListener('scroll', () => {
       clearTimeout(settleTimer);
@@ -202,7 +205,7 @@
       requestAnimationFrame(() => {
         const height = header ? header.offsetHeight : 70;
         root.style.setProperty('--tab-nav-height', height + 'px');
-        rail.scrollTo({ left: active * rail.clientWidth, behavior: 'instant' });
+        rail.scrollTo({ left: positionOf(active), behavior: 'instant' });
         resizePending = false;
       });
     };
