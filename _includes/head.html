@@ -10,6 +10,13 @@
 
 <script>
   document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  /* Apply the local-time default before the first paint on every visit. */
+  (function () {
+    var hour = new Date().getHours();
+    var theme = hour >= 6 && hour < 18 ? 'light' : 'dark';
+    if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+  })();
 </script>
 
 <!-- For all browsers -->

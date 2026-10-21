@@ -115,8 +115,7 @@ for slug in "${targets[@]}"; do
   fi
 
   # Add a top bar (back / PDF / theme toggle) and wire the color theme to the
-  # same localStorage key the main site's toggle uses, so the choice persists
-  # across navigation between the site and this standalone page.
+  # visitor's local time on every visit. Manual changes last for this page only.
   python3 - "$dest_dir/index.html" "$pdf_href" <<'PY'
 import re
 import sys
@@ -126,13 +125,12 @@ with open(path, "r", encoding="utf-8") as f:
     html = f.read()
 
 if "paper-topbar" not in html:
-    # Apply the stored/OS theme before first paint (mirrors assets/js/_main.js).
+    # Apply the local-time theme before first paint (mirrors assets/js/_main.js).
     no_flash_script = (
         '<script>(function(){'
         'var d=document.documentElement;'
-        'var t=localStorage.getItem("theme");'
-        'var theme=(t==="dark"||t==="light")?t:'
-        '((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");'
+        'var hour=new Date().getHours();var theme='
+        '(hour>=6&&hour<18)?"light":"dark";'
         'if(theme==="dark"){d.setAttribute("data-theme","dark");}else{d.removeAttribute("data-theme");}'
         '})();</script>\n'
     )
@@ -190,19 +188,15 @@ if "paper-topbar" not in html:
         'if(btn){btn.addEventListener("click",function(){'
         'var d=document.documentElement;'
         'var next=d.getAttribute("data-theme")==="dark"?"light":"dark";'
-        'localStorage.setItem("theme",next);'
         'if(next==="dark"){d.setAttribute("data-theme","dark");}else{d.removeAttribute("data-theme");}'
         'sync();'
         '});}'
-        # Re-sync when this page is restored from the back-forward cache (e.g.
-        # navigating forward again after the theme was toggled elsewhere while
-        # this page was cached) - bfcache restores the DOM as it was on unload.
+        # Restore the local-time default when returning through the back-forward cache.
         'window.addEventListener("pageshow",function(e){'
         'if(!e.persisted){return;}'
         'var d=document.documentElement;'
-        'var t=localStorage.getItem("theme");'
-        'var theme=(t==="dark"||t==="light")?t:'
-        '((window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light");'
+        'var hour=new Date().getHours();var theme='
+        '(hour>=6&&hour<18)?"light":"dark";'
         'if(theme==="dark"){d.setAttribute("data-theme","dark");}else{d.removeAttribute("data-theme");}'
         'sync();'
         '});'
