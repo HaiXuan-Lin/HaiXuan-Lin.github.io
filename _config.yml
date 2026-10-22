@@ -268,7 +268,7 @@ defaults:
       author_profile: true
       read_time: true
       comments: true
-      share: true
+      share: false
       related: true
   # _pages
   - scope:
@@ -284,7 +284,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: true
   # _publications
   - scope:
@@ -293,7 +293,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: true
   # _portfolio
   - scope:
@@ -302,7 +302,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comment: true
   # _talks
   - scope:
@@ -311,7 +311,7 @@ defaults:
     values:
       layout: talk
       author_profile: true
-      share: true
+      share: false
   # _projects (creative work, software, shared resources — not publications)
   - scope:
       path: ""
@@ -319,7 +319,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: false
   # _reports
   - scope:
@@ -328,7 +328,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: false
   # _blogs
   - scope:
@@ -337,7 +337,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: false
       toc: true
   # _toolkits
@@ -347,7 +347,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: false
       toc: true
   # _gadgets
@@ -357,7 +357,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: false
       toc: true
 
