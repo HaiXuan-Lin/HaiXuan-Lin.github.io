@@ -37,7 +37,7 @@ debut 控制是否启用欢迎区；debut_diagram 控制选图：
 
 也可以在 welcome.html 的 diagrams 列表中新增一个带独立 id、svg 路径、
 attribution、description 和 width 的条目；新条目自动加入随机选图范围。
-可选的 scale 控制图形的整体缩放，默认 1；pentagon 和 calabi-yau 当前设为 0.75，桌面和手机均保持居中缩小。
+可选的 scale 控制图形的整体缩放，默认 1；pentagon、hexagon、yang-baxter 和 calabi-yau 当前设为 0.75，桌面和手机均保持居中缩小。
 三维渲染图可用 image 替代 svg，填写站点图片路径；Calabi–Yau 使用 /images/debut/calabi-yau.png。
 
 SVG 应带有 viewBox，且不依赖外部字体。单色图建议使用 currentColor 作为填充和描边颜色，自动适配明暗主题。原本带颜色的 SVG 会保留颜色。SVG 会内嵌到首页，建议使用专属 ID，避免与页面中的其他图形冲突。空 attribution 会隐藏署名，不保留其间距。
@@ -67,6 +67,7 @@ Calabi–Yau 的源文件使用 Asymptote。安装 pdfLaTeX、Asymptote 和 Popp
 - 渐入时间在 debut.css 开头的 .debut 中调整：--debut-diagram-delay 为开始前的等待时间（默认 .5s），--debut-diagram-duration 为渐入持续时间（默认 3s，越大越慢）。署名、箭头及呼吸动画会随这两个参数自动顺延。
 - 欢迎区底色、公式颜色跟随网站当前主题，与个人主页保持一致。
 - 点击箭头或向下滚动进入正常主页，顶部导航随之出现。
+- 手机滑动时先让外层页面完整进入主页，再开放正文内部滚动；主页高度跟随地址栏展开、收起后的当前可视高度。
 - 进入正文后，本标签页记住访问状态，返回或刷新首页直接展示正文；欢迎区仍保留在上方，可向上滚动返回。
 - 指向正文锚点的链接直接进入对应位置；欢迎区仍可向上滚动访问。
 - 系统要求减少动态效果时显示静态首屏，并取消平滑滚动。

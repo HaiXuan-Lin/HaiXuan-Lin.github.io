@@ -1,0 +1,43 @@
+---
+layout: null
+permalink: /mobile-preview.html
+sitemap: false
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>手机布局预览</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 24px;
+        background: #e4e4e7;
+        font: 15px system-ui;
+        color: #27272a;
+      }
+
+      main {
+        width: 390px;
+        max-width: 100%;
+        margin: auto;
+      }
+
+      iframe {
+        display: block;
+        width: 390px;
+        height: 844px;
+        border: 0;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px #0002;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <iframe src="{{ '/' | relative_url }}" title="手机尺寸的网站预览"></iframe>
+    </main>
+  </body>
+</html>

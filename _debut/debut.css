@@ -132,6 +132,18 @@ html[data-theme="dark"] .debut__diagram--rendered {
   scroll-margin-top: 90px;
 }
 
+@media screen {
+  .debut-active.tab-navigation #main {
+    /* Follow mobile browser chrome so the full stage can reach its entry offset. */
+    height: calc(100dvh - var(--tab-stage-offset, 90px));
+  }
+
+  .debut-active:not(.debut-content) .tab-panel {
+    /* Finish scrolling the document into view before the nested page takes over. */
+    overflow-y: hidden;
+  }
+}
+
 .debut-active .sidebar {
   opacity: 0;
   visibility: hidden;
