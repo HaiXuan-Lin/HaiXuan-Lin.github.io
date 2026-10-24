@@ -1,0 +1,67 @@
+% Compile in this order:
+% pdflatex calabi-yau.tex
+% asy calabi-yau-1.asy
+% pdflatex calabi-yau.tex
+
+\documentclass[border=2pt]{standalone}
+\usepackage{asymptote}
+
+\begin{document}
+\begin{asy}[width=10cm,height=10cm]
+settings.prc=false;
+settings.render=8;
+settings.twosided=true;
+import graph3;
+
+size3(200);
+currentprojection=orthographic(3,3,2);
+
+// Main light plus weaker fill lights, all strictly grayscale.
+// Fill lights reveal curvature on faces pointing away from the main light.
+currentlight=light(
+  diffuse=new pen[] {
+    gray(0.75), gray(0.35), gray(0.22), gray(0.18)
+  },
+  position=new triple[] {
+    (8,10,2), (-6,3,5), (-4,-6,2), (2,-2,-6)
+  }
+);
+currentlight.background=white;
+
+// Soft satin finish: lift deep shadows while retaining local highlights.
+material satin=material(
+  diffusepen=gray(0.85),
+  emissivepen=gray(0.21),
+  specularpen=gray(0.65),
+  shininess=0.50,
+  fresnel0=0.08
+);
+
+int k1,k2,n=5;
+real alpha=0.3*pi;
+
+triple cy(pair z) {
+  pair z1,z2;
+  if(z==(0,0)) {
+    z1=exp(2*pi*I*k1/n);
+    z2=0;
+  } else {
+    z1=exp(2*pi*I*k1/n)*exp(log(cos(I*z))*2/n);
+    z2=exp(2*pi*I*k2/n)*exp(log(-I*sin(I*z))*2/n);
+  }
+  return (
+    z2.x,
+    cos(alpha)*z1.y+sin(alpha)*z2.y,
+    z1.x
+  );
+}
+
+// Denser sampling reduces visible faceting without spline overshoot.
+for(k1=0;k1<n;++k1) {
+  for(k2=0;k2<n;++k2) {
+    surface s=surface(cy,(-1,0),(1,0.5*pi),60,60);
+    draw(s,surfacepen=satin,meshpen=nullpen);
+  }
+}
+\end{asy}
+\end{document}

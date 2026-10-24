@@ -27,6 +27,12 @@ diagrams:
     attribution: "— Yang–Baxter Equation"
     description: "The Yang–Baxter equation on three strands: s_1 s_2 s_1 equals s_2 s_1 s_2."
     width: 480
+  - id: calabi-yau
+    image: /images/debut/calabi-yau.png
+    attribution: "— Calabi–Yau Manifold"
+    description: "A grayscale visualization of a Calabi–Yau manifold, projected into three dimensions."
+    width: 560
+    scale: 0.75
 ---
 {% assign homepage = site.pages | where: 'url', '/' | first %}
 {% assign selection = homepage.debut_diagram | default: 'yoneda' %}
@@ -43,8 +49,12 @@ diagrams:
   {% else %}
   {% for diagram in page.diagrams %}
   <figure class="debut__figure" data-debut-variant="{{ diagram.id | escape }}" style="--debut-width: {{ diagram.width }}px; --debut-scale: {{ diagram.scale | default: 1 }}"{% unless forloop.first %} hidden{% endunless %}>
-    <div class="debut__diagram" role="img" aria-label="{{ diagram.description | escape }}">
+    <div class="debut__diagram{% if diagram.image %} debut__diagram--rendered{% endif %}" role="img" aria-label="{{ diagram.description | escape }}">
+      {% if diagram.image %}
+      <img src="{{ diagram.image | relative_url }}" width="1600" height="1600" alt="" loading="lazy" decoding="async">
+      {% else %}
       {% include_relative {{ diagram.svg }} %}
+      {% endif %}
     </div>
     {% if diagram.attribution and diagram.attribution != '' %}
       <figcaption class="debut__attribution">{{ diagram.attribution | escape }}</figcaption>

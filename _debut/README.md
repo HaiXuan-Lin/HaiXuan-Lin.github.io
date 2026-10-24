@@ -17,7 +17,8 @@ debut 控制是否启用欢迎区；debut_diagram 控制选图：
 | pentagon | Pentagon Axiom（五边形公理） |
 | hexagon | Hexagon Axiom（六边形公理的编织图） |
 | yang-baxter | Yang–Baxter Equation |
-| random | 每次加载首页时，从上述四幅图中随机选一幅 |
+| calabi-yau | Calabi–Yau Manifold（灰阶三维曲面） |
+| random | 每次加载首页时，从上述五幅图中随机选一幅 |
 | custom | 使用 welcome.html 顶部的自定义 SVG 配置 |
 
 当前默认设为 random；不填写此键时使用 yoneda。
@@ -36,7 +37,8 @@ debut 控制是否启用欢迎区；debut_diagram 控制选图：
 
 也可以在 welcome.html 的 diagrams 列表中新增一个带独立 id、svg 路径、
 attribution、description 和 width 的条目；新条目自动加入随机选图范围。
-可选的 scale 控制 SVG 的整体缩放，默认 1；pentagon 当前设为 0.75，桌面和手机均保持居中缩小。
+可选的 scale 控制图形的整体缩放，默认 1；pentagon 和 calabi-yau 当前设为 0.75，桌面和手机均保持居中缩小。
+三维渲染图可用 image 替代 svg，填写站点图片路径；Calabi–Yau 使用 /images/debut/calabi-yau.png。
 
 SVG 应带有 viewBox，且不依赖外部字体。单色图建议使用 currentColor 作为填充和描边颜色，自动适配明暗主题。原本带颜色的 SVG 会保留颜色。SVG 会内嵌到首页，建议使用专属 ID，避免与页面中的其他图形冲突。空 attribution 会隐藏署名，不保留其间距。
 
@@ -51,6 +53,12 @@ SVG 应带有 viewBox，且不依赖外部字体。单色图建议使用 current
     python3 _debut/build-diagram.py _debut/diagrams/another-diagram.tex
 
 脚本将字体转为路径，适配单色主题并为 SVG 的 ID 添加 debut-文件名- 前缀，避免多幅图共存时的 ID 冲突。编织图的白色遮挡也会替换为网站当前底色，适配深色主题。所有中间编译文件写入临时目录，只在 diagrams/ 保留源文件和 SVG。网站构建直接使用已提交的 SVG，访客和 GitHub Pages 均无需安装 LaTeX。
+
+Calabi–Yau 的源文件使用 Asymptote。安装 pdfLaTeX、Asymptote 和 Poppler（pdftoppm）后运行：
+
+    python3 _debut/build-diagram.py _debut/diagrams/calabi-yau.tex
+
+脚本按 pdfLaTeX → Asymptote → pdfLaTeX 的顺序编译，再将结果导出为 images/debut/calabi-yau.png（1600 × 1600）。源文件保留原来的灰阶灯光、材质和视角；网页通过混合模式融入当前背景，深色主题同时反转灰阶。图片沿用欢迎区的缩放和淡入效果，仅在选中时加载；网站部署直接使用 PNG，无需运行 Asymptote。
 
 ## 显示和交互
 

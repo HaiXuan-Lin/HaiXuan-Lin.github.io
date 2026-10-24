@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile a standalone TikZ diagram to a theme-aware, font-independent SVG."""
+"""Compile standalone TikZ to SVG, or an Asymptote scene to a rendered PNG."""
 import argparse
 from pathlib import Path
 import re
@@ -41,9 +41,27 @@ def main():
                         default=Path(__file__).parent / 'diagrams' / 'yoneda.tex')
     args = parser.parse_args()
     source = args.source.resolve()
+    asymptote = re.search(r'\\usepackage(?:\[[^\]]*\])?\{asymptote\}',
+                         source.read_text(encoding='utf-8')) is not None
     with tempfile.TemporaryDirectory(prefix='debut-tex-') as directory:
-        subprocess.run(['lualatex', '-halt-on-error', '-interaction=nonstopmode',
-                        '-output-directory=' + directory, str(source)], check=True)
+        compile_command = ['pdflatex' if asymptote else 'lualatex',
+                           '-halt-on-error', '-interaction=nonstopmode',
+                           '-output-directory=' + directory, str(source)]
+        subprocess.run(compile_command, cwd=directory, check=True)
+        if asymptote:
+            scenes = sorted(Path(directory).glob(source.stem + '-*.asy'))
+            if not scenes:
+                raise RuntimeError('LaTeX did not generate an Asymptote scene.')
+            for scene in scenes:
+                subprocess.run(['asy', '-noView', scene.name], cwd=directory, check=True)
+            subprocess.run(compile_command, cwd=directory, check=True)
+            destination = Path(__file__).resolve().parent.parent / 'images' / 'debut' / (source.stem + '.png')
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            subprocess.run(['pdftoppm', '-png', '-singlefile', '-scale-to', '1600',
+                            str(Path(directory) / (source.stem + '.pdf')),
+                            str(destination.with_suffix(''))], check=True)
+            print('Generated ' + str(destination))
+            return
         svg = Path(directory) / (source.stem + '.svg')
         subprocess.run(['dvisvgm', '--pdf', '--no-fonts', '--exact',
                         '--output=' + str(svg), str(svg.with_suffix('.pdf'))], check=True)

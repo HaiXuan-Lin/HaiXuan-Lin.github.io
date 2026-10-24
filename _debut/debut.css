@@ -39,7 +39,8 @@
   animation: debut-reveal var(--debut-diagram-duration) ease-in-out var(--debut-diagram-delay) both;
 }
 
-.debut__diagram svg {
+.debut__diagram svg,
+.debut__diagram img {
   display: block;
   width: calc(100% * var(--debut-scale, 1));
   height: auto;
@@ -47,6 +48,16 @@
   max-height: calc((100svh - 220px) * var(--debut-scale, 1));
   margin-inline: auto;
   overflow: visible;
+}
+
+/* Blend the rendered white canvas into the current welcome-screen background. */
+.debut__diagram--rendered {
+  mix-blend-mode: multiply;
+}
+
+html[data-theme="dark"] .debut__diagram--rendered {
+  filter: invert(1);
+  mix-blend-mode: screen;
 }
 
 .debut__attribution {

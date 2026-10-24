@@ -46,7 +46,9 @@ assert.deepEqual(bootState({ hash: '#about-me' }), { active: true, resume: true 
 assert.deepEqual(bootState({ blocked: true }), { active: true, resume: false },
   'Blocked storage must not disable the welcome screen.');
 
-function selectedDiagram(mode, random = 0, ids = ['yoneda', 'pentagon', 'hexagon', 'yang-baxter']) {
+const diagramIds = Array.from(html.matchAll(/data-debut-variant="([^"]+)"/g), match => match[1]);
+assert(diagramIds.length, 'The generated homepage must contain diagram variants.');
+function selectedDiagram(mode, random = 0, ids = diagramIds) {
   const figures = ids.map(id => ({ dataset: { debutVariant: id }, hidden: true }));
   const debut = { dataset: { debutSelection: mode }, querySelectorAll: () => figures };
   new vm.Script(selector).runInNewContext({
@@ -57,9 +59,9 @@ function selectedDiagram(mode, random = 0, ids = ['yoneda', 'pentagon', 'hexagon
     'Exactly one diagram must be visible.');
   return debut.dataset.debutDiagram;
 }
-['yoneda', 'pentagon', 'hexagon', 'yang-baxter'].forEach((id, index) => {
+diagramIds.forEach((id, index) => {
   assert.equal(selectedDiagram(id), id);
-  assert.equal(selectedDiagram('random', (index + .5) / 4), id);
+  assert.equal(selectedDiagram('random', (index + .5) / diagramIds.length), id);
 });
 assert.equal(selectedDiagram('unknown'), 'yoneda');
 assert.equal(selectedDiagram('custom', 0, ['custom']), 'custom');
