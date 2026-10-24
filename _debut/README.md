@@ -54,11 +54,11 @@ SVG 应带有 viewBox，且不依赖外部字体。单色图建议使用 current
 
 脚本将字体转为路径，适配单色主题并为 SVG 的 ID 添加 debut-文件名- 前缀，避免多幅图共存时的 ID 冲突。编织图的白色遮挡也会替换为网站当前底色，适配深色主题。所有中间编译文件写入临时目录，只在 diagrams/ 保留源文件和 SVG。网站构建直接使用已提交的 SVG，访客和 GitHub Pages 均无需安装 LaTeX。
 
-Calabi–Yau 的源文件使用 Asymptote。安装 pdfLaTeX、Asymptote 和 Poppler（pdftoppm）后运行：
+Calabi–Yau 的源文件使用 Asymptote。安装 pdfLaTeX、Asymptote 和 Pillow（`python3 -m pip install Pillow`）后运行：
 
     python3 _debut/build-diagram.py _debut/diagrams/calabi-yau.tex
 
-脚本按 pdfLaTeX → Asymptote → pdfLaTeX 的顺序编译，再将结果导出为 images/debut/calabi-yau.png（1600 × 1600）。源文件保留原来的灰阶灯光、材质和视角；网页通过混合模式融入当前背景，深色主题同时反转灰阶。图片沿用欢迎区的缩放和淡入效果，仅在选中时加载；网站部署直接使用 PNG，无需运行 Asymptote。
+脚本先用 pdfLaTeX 提取场景，再用 Asymptote 分别导出黑底、白底的无损渲染，由两次渲染恢复真实透明通道和抗锯齿边缘，保存为 images/debut/calabi-yau.png（1600 × 1600，RGBA）。网页直接显示透明 PNG，深浅主题均保留原来的灰阶灯光、材质和视角，无需混合模式或颜色反转。图片沿用欢迎区的缩放和淡入效果，仅在选中时加载；图片 URL 带修改时间以更新浏览器缓存，网站部署直接使用 PNG，无需运行 Asymptote。多场景源文件仍按原来的 PDF 流程导出，需要 Poppler（pdftoppm）。
 
 ## 显示和交互
 

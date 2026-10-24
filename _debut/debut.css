@@ -50,16 +50,6 @@
   overflow: visible;
 }
 
-/* Blend the rendered white canvas into the current welcome-screen background. */
-.debut__diagram--rendered {
-  mix-blend-mode: multiply;
-}
-
-html[data-theme="dark"] .debut__diagram--rendered {
-  filter: invert(1);
-  mix-blend-mode: screen;
-}
-
 .debut__attribution {
   --debut-opacity: .65;
   margin: 32px 4px 0;

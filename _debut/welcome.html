@@ -51,9 +51,10 @@ diagrams:
   {% else %}
   {% for diagram in page.diagrams %}
   <figure class="debut__figure" data-debut-variant="{{ diagram.id | escape }}" style="--debut-width: {{ diagram.width }}px; --debut-scale: {{ diagram.scale | default: 1 }}"{% unless forloop.first %} hidden{% endunless %}>
-    <div class="debut__diagram{% if diagram.image %} debut__diagram--rendered{% endif %}" role="img" aria-label="{{ diagram.description | escape }}">
+    <div class="debut__diagram" role="img" aria-label="{{ diagram.description | escape }}">
       {% if diagram.image %}
-      <img src="{{ diagram.image | relative_url }}" width="1600" height="1600" alt="" loading="lazy" decoding="async">
+      {% assign image_file = site.static_files | where: 'path', diagram.image | first %}
+      <img src="{{ diagram.image | relative_url }}?v={{ image_file.modified_time | date: '%s' }}" width="1600" height="1600" alt="" loading="lazy" decoding="async">
       {% else %}
       {% include_relative {{ diagram.svg }} %}
       {% endif %}
