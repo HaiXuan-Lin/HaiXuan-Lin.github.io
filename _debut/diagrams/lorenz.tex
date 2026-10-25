@@ -1,0 +1,50 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\pagestyle{empty}
+\pgfplotsset{compat=1.18}
+
+% Compile with LuaLaTeX. No shell escape is needed.
+% RK4 integration; transient t < 10 is discarded.
+\directlua{
+local sigma, rho, beta = 10, 28, 8/3
+local x, y, z = 1, 1, 1
+local h, steps = 0.005, 16000
+local filename = tex.jobname .. "-lorenz.dat"
+local file = assert(io.open(filename, "w"))
+file:write("x y z", string.char(10))
+
+local function f(x, y, z)
+  return sigma*(y-x), x*(rho-z)-y, x*y-beta*z
+end
+
+for n = 1, steps do
+  local a1, b1, c1 = f(x, y, z)
+  local a2, b2, c2 = f(x+h*a1/2, y+h*b1/2, z+h*c1/2)
+  local a3, b3, c3 = f(x+h*a2/2, y+h*b2/2, z+h*c2/2)
+  local a4, b4, c4 = f(x+h*a3, y+h*b3, z+h*c3)
+  x = x+h*(a1+2*a2+2*a3+a4)/6
+  y = y+h*(b1+2*b2+2*b3+b4)/6
+  z = z+h*(c1+2*c2+2*c3+c4)/6
+  if n >= 2000 and math.fmod(n,2) == 0 then
+    file:write(x, " ", y, " ", z, string.char(10))
+  end
+end
+file:close()
+}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}
+  \begin{axis}[
+    width=11cm,
+    height=9cm,
+    view={35}{25},
+    hide axis,
+  ]
+    \addplot3[
+      line width=0.22pt,
+      no marks
+    ] table[x=x, y=y, z=z] {\jobname-lorenz.dat};
+  \end{axis}
+\end{tikzpicture}
+\end{document}

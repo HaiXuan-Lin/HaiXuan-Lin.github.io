@@ -35,6 +35,12 @@ diagrams:
     description: "A grayscale visualization of a Calabi–Yau manifold, projected into three dimensions."
     width: 560
     scale: 0.75
+  - id: lorenz
+    svg: diagrams/lorenz.svg
+    attribution: "— Lorenz System"
+    description: "The butterfly-shaped Lorenz attractor with sigma = 10, rho = 28 and beta = 8/3, projected into three dimensions."
+    width: 560
+    scale: 0.75
 ---
 {% assign homepage = site.pages | where: 'url', '/' | first %}
 {% assign selection = homepage.debut_diagram | default: 'yoneda' %}
