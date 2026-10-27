@@ -187,6 +187,15 @@
     &:hover {
       color: var(--global-masthead-link-color-hover);
     }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 4px;
+    }
   }
 
   button {

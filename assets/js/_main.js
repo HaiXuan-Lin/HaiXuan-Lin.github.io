@@ -2,10 +2,15 @@
    Various functions that we want to use within the template
    ========================================================================== */
 
-// Use the visitor's local time on every visit (06:00–18:00 is light).
+// The head script applies and remembers the first visit's local-time default.
 let determineComputedTheme = () => {
-  const hour = new Date().getHours();
-  return hour >= 6 && hour < 18 ? "light" : "dark";
+  try {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+  } catch (_) {
+    // Keep the current theme when browser storage is unavailable.
+  }
+  return document.documentElement.getAttribute('data-theme') === "dark" ? "dark" : "light";
 };
 
 // Set the theme on page load or when explicitly called
@@ -21,11 +26,16 @@ let setTheme = (theme) => {
   }
 };
 
-// Toggle the theme for the current page without saving a preference.
+// Remember manual changes across refreshes and page visits.
 var toggleTheme = () => {
   const current_theme = $("html").attr("data-theme");
   const new_theme = current_theme === "dark" ? "light" : "dark";
   setTheme(new_theme);
+  try {
+    localStorage.setItem('theme', new_theme);
+  } catch (_) {
+    // Theme switching still works when browser storage is unavailable.
+  }
 };
 
 /* ==========================================================================
@@ -212,10 +222,10 @@ $(document).ready(function () {
   const scssLarge = 925;          // pixels, from /_sass/_themes.scss
   const scssMastheadHeight = 70;  // pixels, from the current theme (e.g., /_sass/theme/_default.scss)
 
-  // Start each visit with the local-time default.
+  // Keep the saved theme and synchronize its icon.
   setTheme();
 
-  // Restore the local-time default when returning through the back-forward cache.
+  // Restore the saved theme when returning through the back-forward cache.
   window.addEventListener("pageshow", (e) => {
     if (e.persisted) {
       setTheme();
