@@ -2,10 +2,10 @@
    Various functions that we want to use within the template
    ========================================================================== */
 
-// The head script applies and remembers the first visit's local-time default.
+// The head script applies the local-time default when this tab's session starts.
 let determineComputedTheme = () => {
   try {
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = sessionStorage.getItem('theme');
     if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
   } catch (_) {
     // Keep the current theme when browser storage is unavailable.
@@ -26,13 +26,13 @@ let setTheme = (theme) => {
   }
 };
 
-// Remember manual changes across refreshes and page visits.
+// Remember manual changes across refreshes and page visits until this tab closes.
 var toggleTheme = () => {
   const current_theme = $("html").attr("data-theme");
   const new_theme = current_theme === "dark" ? "light" : "dark";
   setTheme(new_theme);
   try {
-    localStorage.setItem('theme', new_theme);
+    sessionStorage.setItem('theme', new_theme);
   } catch (_) {
     // Theme switching still works when browser storage is unavailable.
   }

@@ -10,14 +10,14 @@
 
 <script>
   document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
-  /* Restore the saved theme before the first paint; use local time only for the first visit. */
+  /* Keep this tab's theme before the first paint; a newly opened tab starts from local time. */
   (function () {
     var theme;
-    try { theme = localStorage.getItem('theme'); } catch (_) {}
+    try { theme = sessionStorage.getItem('theme'); } catch (_) {}
     if (theme !== 'light' && theme !== 'dark') {
       var hour = new Date().getHours();
       theme = hour >= 6 && hour < 18 ? 'light' : 'dark';
-      try { localStorage.setItem('theme', theme); } catch (_) {}
+      try { sessionStorage.setItem('theme', theme); } catch (_) {}
     }
     if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
     else document.documentElement.removeAttribute('data-theme');
