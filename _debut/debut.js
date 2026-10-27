@@ -13,9 +13,9 @@
     if (resumeAtContent) main.scrollIntoView({ behavior: 'instant', block: 'start' });
   };
 
-  const rememberEntry = () => {
+  const rememberPosition = inContent => {
     try {
-      sessionStorage.setItem('debut:entered', 'true');
+      sessionStorage.setItem('debut:entered', String(inContent));
     } catch (_) {
       /* The screen remains usable when storage is disabled. */
     }
@@ -28,7 +28,7 @@
     const inContent = main.getBoundingClientRect().top <= Math.max(headerHeight + 8, offset) + 1;
     root.classList.toggle('debut-content', inContent);
     debut.toggleAttribute('inert', inContent);
-    if (inContent) rememberEntry();
+    rememberPosition(inContent);
   };
 
   enter.addEventListener('click', event => {
@@ -36,7 +36,7 @@
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    rememberEntry();
+    rememberPosition(true);
     main.focus({ preventScroll: true });
     main.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start' });
   });
@@ -44,7 +44,7 @@
   /* Once the user tabs past the welcome screen, bring focused homepage links into view. */
   document.addEventListener('focusin', event => {
     if (event.target !== main && main.contains(event.target) && !root.classList.contains('debut-content')) {
-      rememberEntry();
+      rememberPosition(true);
       main.scrollIntoView({ behavior: 'instant', block: 'start' });
     }
   });
@@ -60,6 +60,8 @@
   };
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
   window.addEventListener('resize', scheduleUpdate);
+  /* Flush the actual position even if a refresh arrives before the queued scroll frame. */
+  window.addEventListener('pagehide', updateNavigation);
   window.addEventListener('pageshow', event => {
     /* Let back/forward cache keep the user's position; new visits resume at the homepage. */
     if (!event.persisted) restoreContent();
